@@ -5,7 +5,9 @@ from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Length
 from werkzeug.security import check_password_hash,generate_password_hash
 from flask_sqlalchemy import SQLAlchemy
-from flask_rbac import RBAC
+from sqlalchemy import create_engine
+from flask_rbac import RBAC, UserMixin, RoleMixin
+
 #from flask_jwt_extended import JWTManager
 
 
@@ -19,24 +21,41 @@ app.debug = True
 
 #DB info
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ivbustqhsmsaps:7a8951928430c500e432dbf97728f42f5033648c052a5befce59295cabd987c5@ec2-23-21-216-174.compute-1.amazonaws.com:5432/d9t2kdqh5u8ekk'
-
+engine = create_engine('postgres://ivbustqhsmsaps:7a8951928430c500e432dbf97728f42f5033648c052a5befce59295cabd987c5@ec2-23-21-216-174.compute-1.amazonaws.com:5432/d9t2kdqh5u8ekk', echo=True)
 #Modification Kristalys
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+class Role(RoleMixin):
+    pass
+#anonymous = Role('anonymous')
+
+class User(UserMixin):
+    pass
+#a_user = User()
+
+
 #jwt = JWTManager(app)
 
 from RumboEx.model.role import Role
 from RumboEx.model.user import User
 
+#esta es la parte donde se hace la jerarquia de los roles...
 rbac = RBAC(app)
-rbac.set_user_loader(lambda : current_user)
+rbac.set_user_loader(lambda: current_user)
 rbac.set_user_model(User)
 rbac.set_role_model(Role)
+
+
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+
+#User.metadata.create_all(engine)
+#Role.metadata.create_all(engine)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -55,6 +74,7 @@ logged_role.add_parent(everyone)
 anonymous = User(roles=[everyone])
 normal_user = User(roles=[logged_role])
 
+
 current_user = anonymous
 
 
@@ -66,12 +86,13 @@ class UserLoginForm(Form):
     remenber = BooleanField('remenber me')
 
 @app.route('/')
+@rbac.allow(roles=['everyone'], methods=['GET','POST'])
 def hello_world():
     return 'Bienvenidos a RumboEx ToDo'
 
 
 @app.route('/login', methods=['GET', 'POST'])
-@rbac.allow(roles=['everyone'], methods=['GET','POST'])
+#@rbac.allow(roles=['everyone'], methods=['GET','POST'])
 def login():
     form = UserLoginForm()
     error = None
@@ -111,3 +132,5 @@ def flash_errors(form):
                 error
             ))
 
+if __name__ == "__main__":
+    app.run()
