@@ -8,12 +8,20 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_rbac import RBAC
 #from flask_jwt_extended import JWTManager
 
+
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
 app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
 #app.config['RBAC_USE_WHITE'] = True
+
 app.debug = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@localhost/rumboex'
+
+#DB info
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ivbustqhsmsaps:7a8951928430c500e432dbf97728f42f5033648c052a5befce59295cabd987c5@ec2-23-21-216-174.compute-1.amazonaws.com:5432/d9t2kdqh5u8ekk'
+
+#Modification Kristalys
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 #jwt = JWTManager(app)
 
@@ -102,3 +110,4 @@ def flash_errors(form):
                 getattr(form, field).label.text,
                 error
             ))
+
