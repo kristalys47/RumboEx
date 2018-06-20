@@ -121,6 +121,7 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/calendar')
+@rbac.allow(roles=['everyone'], methods=['GET','POST'], with_children=False)
 def calendar():
     return render_template('calendar.html')
 
