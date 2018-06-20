@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Length
 from werkzeug.security import check_password_hash,generate_password_hash
@@ -80,31 +80,31 @@ current_user = anonymous
 
 
 
-class UserLoginForm(Form):
+class UserLoginForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), Length(min=4, max=25)])
     password = PasswordField('Password', validators=[InputRequired(), Length(min=4, max=200)])
-    remenber = BooleanField('remenber me')
+    remember = BooleanField('remenber me')
+
 
 @app.route('/')
-@rbac.allow(roles=['everyone'], methods=['GET','POST'])
+@rbac.allow(roles=['everyone'], methods=['GET','POST'], with_children=False)
 def hello_world():
     return 'Bienvenidos a RumboEx ToDo'
 
 
 @app.route('/login', methods=['GET', 'POST'])
-#@rbac.allow(roles=['everyone'], methods=['GET','POST'])
+@rbac.allow(roles=['everyone'], methods=['GET','POST'], with_children=False)
 def login():
     form = UserLoginForm()
     error = None
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data.lower()).first()
         if user:
-            hashed_password = generate_password_hash(form.password.data, method='sha256')
-            print(hashed_password)
-            if check_password_hash(user.password, form.password.data):
+            hashed_password = generate_password_hash(user.password, method='sha256')
+            if check_password_hash(hashed_password, form.password.data):
                 print("AQUI 2")
                 app.logger.debug('Logged in user %s', user.username)
-                login_user(user, remember=form.remenber.data)
+                login_user(user, remember=form.remember.data)
                 return redirect(url_for('calendar'))
         error = 'Invalid username or password.'
     elif request.method == "POST":
