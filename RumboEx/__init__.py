@@ -10,35 +10,30 @@ from flask_rbac import RBAC, UserMixin, RoleMixin
 
 #from flask_jwt_extended import JWTManager
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
-app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
-#app.config['RBAC_USE_WHITE'] = True
+# This code must be un once two create the tables in the DataBase
+# User.metadata.create_all(engine)
+# Role.metadata.create_all(engine)
 
+# Staring Flask
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret'
+app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
+# app.config['RBAC_USE_WHITE'] = True
 app.debug = True
 
-#DB info
+# DB info
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ivbustqhsmsaps:7a8951928430c500e432dbf97728f42f5033648c052a5befce59295cabd987c5@ec2-23-21-216-174.compute-1.amazonaws.com:5432/d9t2kdqh5u8ekk'
 engine = create_engine('postgres://ivbustqhsmsaps:7a8951928430c500e432dbf97728f42f5033648c052a5befce59295cabd987c5@ec2-23-21-216-174.compute-1.amazonaws.com:5432/d9t2kdqh5u8ekk', echo=True)
-#Modification Kristalys
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-class Role(RoleMixin):
-    pass
-#anonymous = Role('anonymous')
-
-class User(UserMixin):
-    pass
-#a_user = User()
-
-
-#jwt = JWTManager(app)
-
+# If this imports are done before a circle dependency is created and the app will not run.
 from RumboEx.model.role import Role
 from RumboEx.model.user import User
 
-#esta es la parte donde se hace la jerarquia de los roles...
+# NPI
+# jwt = JWTManager(app)
+
 rbac = RBAC(app)
 rbac.set_user_loader(lambda: current_user)
 rbac.set_user_model(User)
@@ -48,9 +43,10 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-
-# User.metadata.create_all(engine)
-# Role.metadata.create_all(engine)
+# Esto esta super hardwire
+start = Role('start')
+anonymous = User(roles=[start])
+current_user = anonymous
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -60,15 +56,6 @@ def load_user(user_id):
 def get_current_user():
     with app.request_context():
         return current_user
-
-
-everyone = Role('everyone')
-logged_role = Role('logged_role')
-logged_role.add_parent(everyone)
-
-anonymous = User(roles=[everyone, logged_role])
-normal_user = User(roles=[logged_role])
-current_user = anonymous
 
 class UserLoginForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), Length(min=4, max=25)])
@@ -80,9 +67,8 @@ class UserLoginForm(FlaskForm):
 def hello_world():
     return 'Bienvenidos a RumboEx ToDo'
 
-
 @app.route('/login', methods=['GET', 'POST'])
-@rbac.allow(roles=['everyone'], methods=['GET','POST'], with_children=False)
+@rbac.allow(['everyone'], ['GET'], with_children=False)
 def login():
     form = UserLoginForm()
     error = None
@@ -94,14 +80,19 @@ def login():
                 print("AQUI 2")
                 app.logger.debug('Logged in user %s', user.username)
                 login_user(user, remember=form.remember.data)
+                print(get_current_user())
                 return redirect(url_for('calendar'))
         error = 'Invalid username or password.'
     elif request.method == "POST":
         flash_errors(form)
-
     return render_template('login.html', form=form, error=error)
 
-#hashed_password = generate_password_hash(form.password.data, method='sha56')
+
+
+
+
+# NPI
+# hashed_password = generate_password_hash(form.password.data, method='sha56')
 
 @app.route('/logout', methods=['GET'])
 @login_required
@@ -110,6 +101,7 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/calendar')
+@login_required
 @rbac.allow(['everyone'], ['GET'], with_children=False)
 def calendar():
     return render_template('calendar.html')
