@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, current_app, g
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_wtf import Form
 from wtforms import StringField, PasswordField, BooleanField
@@ -9,8 +9,6 @@ from sqlalchemy import create_engine
 from flask_rbac import RBAC, UserMixin, RoleMixin
 
 #from flask_jwt_extended import JWTManager
-
-
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
@@ -40,22 +38,21 @@ class User(UserMixin):
 from RumboEx.model.role import Role
 from RumboEx.model.user import User
 
+
 #esta es la parte donde se hace la jerarquia de los roles...
 rbac = RBAC(app)
 rbac.set_user_loader(lambda: current_user)
 rbac.set_user_model(User)
 rbac.set_role_model(Role)
 
-
-
-
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 
-#User.metadata.create_all(engine)
-#Role.metadata.create_all(engine)
+# User.metadata.create_all(engine)
+
+# Role.metadata.create_all(engine)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -66,34 +63,43 @@ def get_current_user():
     with app.request_context():
         return current_user
 
+def get_name():
+    return "name"
 
-everyone = Role('everyone')
+
+everyone = Role('hola')
 logged_role = Role('logged_role')
 logged_role.add_parent(everyone)
 
-anonymous = User(roles=[everyone])
+anonymous = User(roles=[everyone, logged_role])
 normal_user = User(roles=[logged_role])
-
-
 current_user = anonymous
 
+print(everyone.get_name())
+# esto no funciona
+# print(current_user.get_name())
 
-
+print(current_user.get_roles())
+print(current_user.roles)
 
 class UserLoginForm(Form):
     username = StringField('Username', validators=[InputRequired(), Length(min=4, max=25)])
     password = PasswordField('Password', validators=[InputRequired(), Length(min=4, max=200)])
     remenber = BooleanField('remenber me')
 
+
+
 @app.route('/')
-@rbac.allow(roles=['everyone'], methods=['GET','POST'])
+@rbac.exempt
 def hello_world():
-    return 'Bienvenidos a RumboEx ToDo'
+    return 'Bienvenidos a RumboEx ToDo' + get_current_user()
 
 
 @app.route('/login', methods=['GET', 'POST'])
-#@rbac.allow(roles=['everyone'], methods=['GET','POST'])
+@rbac.allow(['everyone'], ['GET'], with_children=False)
 def login():
+    #current_user = anonymous
+
     form = UserLoginForm()
     error = None
     if form.validate_on_submit():
@@ -121,7 +127,9 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/calendar')
+@rbac.allow(['everyone'], ['GET'], with_children=False)
 def calendar():
+    #current_user = anonymous
     return render_template('calendar.html')
 
 def flash_errors(form):

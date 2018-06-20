@@ -38,7 +38,3 @@ class Role(db.Model, RoleMixin):
 
     def __repr__(self):
         return '<Role %s>' % self.name
-
-    def get_children(self):
-        result = db.engine.execute("select* from role;")
-        return result
