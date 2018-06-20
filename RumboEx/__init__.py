@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, current_app, g
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Length
 from werkzeug.security import check_password_hash,generate_password_hash
@@ -38,7 +38,6 @@ class User(UserMixin):
 from RumboEx.model.role import Role
 from RumboEx.model.user import User
 
-
 #esta es la parte donde se hace la jerarquia de los roles...
 rbac = RBAC(app)
 rbac.set_user_loader(lambda: current_user)
@@ -51,7 +50,6 @@ login_manager.login_view = 'login'
 
 
 # User.metadata.create_all(engine)
-
 # Role.metadata.create_all(engine)
 
 @login_manager.user_loader
@@ -63,11 +61,8 @@ def get_current_user():
     with app.request_context():
         return current_user
 
-def get_name():
-    return "name"
 
-
-everyone = Role('hola')
+everyone = Role('everyone')
 logged_role = Role('logged_role')
 logged_role.add_parent(everyone)
 
@@ -75,42 +70,30 @@ anonymous = User(roles=[everyone, logged_role])
 normal_user = User(roles=[logged_role])
 current_user = anonymous
 
-print(everyone.get_name())
-# esto no funciona
-# print(current_user.get_name())
-
-print(current_user.get_roles())
-print(current_user.roles)
-
-class UserLoginForm(Form):
+class UserLoginForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), Length(min=4, max=25)])
     password = PasswordField('Password', validators=[InputRequired(), Length(min=4, max=200)])
-    remenber = BooleanField('remenber me')
-
-
+    remember = BooleanField('remenber me')
 
 @app.route('/')
 @rbac.exempt
 def hello_world():
-    return 'Bienvenidos a RumboEx ToDo' + get_current_user()
+    return 'Bienvenidos a RumboEx ToDo'
 
 
 @app.route('/login', methods=['GET', 'POST'])
-@rbac.allow(['everyone'], ['GET'], with_children=False)
+@rbac.allow(roles=['everyone'], methods=['GET','POST'], with_children=False)
 def login():
-    #current_user = anonymous
-
     form = UserLoginForm()
     error = None
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data.lower()).first()
         if user:
-            hashed_password = generate_password_hash(form.password.data, method='sha256')
-            print(hashed_password)
-            if check_password_hash(user.password, form.password.data):
+            hashed_password = generate_password_hash(user.password, method='sha256')
+            if check_password_hash(hashed_password, form.password.data):
                 print("AQUI 2")
                 app.logger.debug('Logged in user %s', user.username)
-                login_user(user, remember=form.remenber.data)
+                login_user(user, remember=form.remember.data)
                 return redirect(url_for('calendar'))
         error = 'Invalid username or password.'
     elif request.method == "POST":
@@ -129,7 +112,6 @@ def logout():
 @app.route('/calendar')
 @rbac.allow(['everyone'], ['GET'], with_children=False)
 def calendar():
-    #current_user = anonymous
     return render_template('calendar.html')
 
 def flash_errors(form):
