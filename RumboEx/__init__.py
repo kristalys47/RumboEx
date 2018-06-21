@@ -1,22 +1,25 @@
 from flask import Flask, request, render_template, redirect, url_for, current_app, g
-from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user, fresh_login_required
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Length
 from werkzeug.security import check_password_hash,generate_password_hash
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, and_, ForeignKey
+from sqlalchemy.orm import sessionmaker, relationships
 from flask_rbac import RBAC, UserMixin, RoleMixin
+from flask_cors import CORS
 
 #from flask_jwt_extended import JWTManager
 
 # This code must be un once two create the tables in the DataBase
 # User.metadata.create_all(engine)
 # Role.metadata.create_all(engine)
+# db.create.all()
 
 # Staring Flask
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret'
+app.config['SECRET_KEY'] = 'secret!'
 app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
 # app.config['RBAC_USE_WHITE'] = True
 app.debug = True
@@ -26,6 +29,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ivbustqhsmsaps:7a8951928430c
 engine = create_engine('postgres://ivbustqhsmsaps:7a8951928430c500e432dbf97728f42f5033648c052a5befce59295cabd987c5@ec2-23-21-216-174.compute-1.amazonaws.com:5432/d9t2kdqh5u8ekk', echo=True)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+Session = sessionmaker(bind=engine)
+Session.configure(bind=engine)
+session = Session()
+
 
 # If this imports are done before a circle dependency is created and the app will not run.
 from RumboEx.model.role import Role
@@ -43,11 +50,6 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-# Esto esta super hardwire
-start = Role('start')
-anonymous = User(roles=[start])
-current_user = anonymous
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -57,13 +59,20 @@ def get_current_user():
     with app.request_context():
         return current_user
 
+# Esto esta super hardwire
+start = Role('start')
+hello = User(roles=[start])
+current_user = hello
+
+
 class UserLoginForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), Length(min=4, max=25)])
     password = PasswordField('Password', validators=[InputRequired(), Length(min=4, max=200)])
     remember = BooleanField('remenber me')
 
 @app.route('/')
-@rbac.exempt
+@fresh_login_required
+@rbac.allow(['student'], ['GET'])
 def hello_world():
     return 'Bienvenidos a RumboEx ToDo'
 
@@ -80,19 +89,16 @@ def login():
                 print("AQUI 2")
                 app.logger.debug('Logged in user %s', user.username)
                 login_user(user, remember=form.remember.data)
-                print(get_current_user())
+                q = User.query.filter_by(username=form.username.data.lower()).filter(User.roles.any()).first()
+                print(q)
                 return redirect(url_for('calendar'))
         error = 'Invalid username or password.'
     elif request.method == "POST":
         flash_errors(form)
     return render_template('login.html', form=form, error=error)
-
-
-
-
-
 # NPI
 # hashed_password = generate_password_hash(form.password.data, method='sha56')
+
 
 @app.route('/logout', methods=['GET'])
 @login_required
@@ -100,11 +106,13 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
+
 @app.route('/calendar')
+@rbac.deny(['counselor'], ['GET'])
 @login_required
-@rbac.allow(['everyone'], ['GET'], with_children=False)
 def calendar():
     return render_template('calendar.html')
+
 
 def flash_errors(form):
     for field, errors in form.errors.items():
@@ -113,6 +121,3 @@ def flash_errors(form):
                 getattr(form, field).label.text,
                 error
             ))
-
-if __name__ == "__main__":
-    app.run()
