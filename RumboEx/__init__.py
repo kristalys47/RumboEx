@@ -56,11 +56,11 @@ login_manager.login_view = '/login'
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# Esto esta super hardwire
+# Initial role for RBAC to work
 start = Role('check')
 hello = User(roles=[start])
 
-# Esta variable es la global no es a la que se refiere el import.
+# To use this variable write global before the name in the methods
 current_user = hello
 
 
