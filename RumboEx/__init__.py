@@ -10,6 +10,7 @@ from sqlalchemy.orm import sessionmaker, relationships
 from flask_rbac import RBAC, UserMixin, RoleMixin
 from flask_cors import CORS
 
+
 #from flask_jwt_extended import JWTManager
 
 # This code must be un once two create the tables in the DataBase
@@ -48,19 +49,15 @@ rbac.set_role_model(Role)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'login'
+login_manager.login_view = '/login'
+
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-
-def get_current_user():
-    with app.request_context():
-        return current_user
-
 # Esto esta super hardwire
-start = Role('start')
+start = Role('check')
 hello = User(roles=[start])
 current_user = hello
 
@@ -71,33 +68,31 @@ class UserLoginForm(FlaskForm):
     remember = BooleanField('remenber me')
 
 @app.route('/')
-@fresh_login_required
+@login_required
 @rbac.allow(['student'], ['GET'])
 def hello_world():
     return 'Bienvenidos a RumboEx ToDo'
 
 @app.route('/login', methods=['GET', 'POST'])
-@rbac.allow(['everyone'], ['GET'], with_children=False)
 def login():
     form = UserLoginForm()
     error = None
+    global current_user
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data.lower()).first()
         if user:
             hashed_password = generate_password_hash(user.password, method='sha256')
             if check_password_hash(hashed_password, form.password.data):
                 print("AQUI 2")
+                print(user.roles)
                 app.logger.debug('Logged in user %s', user.username)
                 login_user(user, remember=form.remember.data)
-                q = User.query.filter_by(username=form.username.data.lower()).filter(User.roles.any()).first()
-                print(q)
+                current_user = user
                 return redirect(url_for('calendar'))
         error = 'Invalid username or password.'
     elif request.method == "POST":
         flash_errors(form)
     return render_template('login.html', form=form, error=error)
-# NPI
-# hashed_password = generate_password_hash(form.password.data, method='sha56')
 
 
 @app.route('/logout', methods=['GET'])
@@ -111,6 +106,8 @@ def logout():
 @rbac.deny(['counselor'], ['GET'])
 @login_required
 def calendar():
+    global current_user
+    print(current_user.roles)
     return render_template('calendar.html')
 
 
