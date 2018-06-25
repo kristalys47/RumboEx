@@ -59,6 +59,8 @@ def load_user(user_id):
 # Esto esta super hardwire
 start = Role('check')
 hello = User(roles=[start])
+
+# Esta variable es la global no es a la que se refiere el import.
 current_user = hello
 
 
