@@ -57,11 +57,11 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 # Initial role for RBAC to work
-start = Role('check')
-hello = User(roles=[start])
+start = Role('DUMMY')
+rbacDummy = User(roles=[start])
 
 # To use this variable write global before the name in the methods
-current_user = hello
+current_user = rbacDummy
 
 
 class UserLoginForm(FlaskForm):
@@ -95,6 +95,31 @@ def login():
     elif request.method == "POST":
         flash_errors(form)
     return render_template('login.html', form=form, error=error)
+
+# Routes to test the identification of a user
+# @app.route('/loginStudent', methods=['GET'], )
+# @rbac.allow(['Student'], ['GET'])
+# def confirmStudent():
+#     return "Hi: This programs tells me that you are a Student"
+#
+#
+# @app.route('/loginMentor', methods=['GET'])
+# @rbac.allow(['Mentor'], ['GET'])
+# def confirmMentor():
+#     return "Hi: This programs tells me that you are a Mentor"
+#
+#
+# @app.route('/loginCounselor', methods=['GET'])
+# @rbac.allow(['Counselor'], ['GET'])
+# def confirmCounselor():
+#     return "Hi: This programs tells me that you are a Counselor"
+#
+#
+# @app.route('/loginAdmin', methods=['GET'])
+# @rbac.allow(['Admin'], ['GET'])
+# def confirmAdmin():
+#     return "Hi: This programs tells me that you are a Admin"
+
 
 
 @app.route('/logout', methods=['GET'])
