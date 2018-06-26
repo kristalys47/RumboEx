@@ -9,6 +9,7 @@ from sqlalchemy import create_engine, and_, ForeignKey
 from sqlalchemy.orm import sessionmaker, relationships
 from flask_rbac import RBAC, UserMixin, RoleMixin
 from flask_cors import CORS
+from RumboEx.dao.StudentDAO import StudentDAO
 
 
 #from flask_jwt_extended import JWTManager
@@ -71,9 +72,27 @@ class UserLoginForm(FlaskForm):
 
 @app.route('/')
 @login_required
-@rbac.allow(['student'], ['GET'])
+@rbac.exempt
 def hello_world():
     return 'Bienvenidos a RumboEx ToDo'
+
+
+@app.route('/current')
+@login_required
+@rbac.exempt
+def current():
+    global current_user
+    print(current_user)
+    return "esta en al pantalla de python el current user"
+
+
+@app.route('/createuser/<string:username>/<string:email>/<string:password>/<string:name>/<string:lastname>/<int:program>/<int:student_num>', methods=['GET'])
+@rbac.deny(['counselor', 'student', 'everyone'], ['GET'], with_children=False)
+@login_required
+def createStudent(username, email, password, name, lastname, program, student_num):
+    student = StudentDAO()
+    return student.insertStudent(username, email, password, name, lastname, program, student_num)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -119,7 +138,6 @@ def login():
 # @rbac.allow(['Admin'], ['GET'])
 # def confirmAdmin():
 #     return "Hi: This programs tells me that you are a Admin"
-
 
 
 @app.route('/logout', methods=['GET'])
