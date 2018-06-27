@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, current_app, g
+from flask import Flask, request, render_template, redirect, url_for, current_app, g, jsonify
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user, fresh_login_required
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
@@ -10,6 +10,7 @@ from sqlalchemy.orm import sessionmaker
 from flask_rbac import RBAC
 from flask_cors import CORS, cross_origin
 from RumboEx.handler.StudentHandler import StudentHandler
+
 
 
 #from flask_jwt_extended import JWTManager
@@ -105,10 +106,23 @@ def createStudent(username, email, password, name, lastname, program, student_nu
 @app.route('/login', methods=['GET', 'POST'])
 @rbac.exempt
 def login():
-    print(request.get_data())
     if request.method == 'POST':
-        global current_user
-    return "is working"
+        credential = request.get_json()
+        print(credential)
+        user = User.query.filter_by(username=credential['username']).first()
+        if user:
+            global current_user
+            hashed_password = generate_password_hash(user.password, method='sha256')
+            if check_password_hash(hashed_password, credential['password']):
+                print(user.roles)
+                login_user(user, True)
+                current_user = user
+                return jsonify(Result="Successful"), 200
+            else:
+                return jsonify(Result="Not same password"), 400
+        return jsonify(Result="This user does not exist in the data base"), 400
+    return jsonify(Result="is not a Post method, but returns"), 200
+
 
 # Routes to test the identification of a user
 # @app.route('/loginStudent', methods=['GET'], )
