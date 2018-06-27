@@ -1,0 +1,77 @@
+from flask import jsonify, request
+from RumboEx.dao.taskDao import TaskDAO
+
+class TaskHandler():
+
+
+    def get_all_tasks(self):
+        dao = TaskDAO()
+        result = dao.get_all_tasks()
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        mapped_result = []
+        for r in result:
+            mapped_result.append(self.mapToTaskDict(r))
+        return jsonify(Tasks=mapped_result)
+
+
+    def get_personal_task_by_student_id(self, student_id):
+        dao = TaskDAO()
+        result = dao.get_personal_tasks_by_student_id(student_id)
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        mapped_result = []
+        for r in result:
+            mapped_result.append(self.mapToTaskDict(r))
+        return jsonify(PersonalTasks=mapped_result)
+
+
+    def get_study_task_by_student_id(self, student_id):
+        dao = TaskDAO()
+        result = dao.get_study_tasks_by_student_id(student_id)
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        mapped_result = []
+        for r in result:
+            mapped_result.append(self.mapToTaskDict(r))
+        return jsonify(StudyTasks=mapped_result)
+
+
+    def get_course_task_by_student_id(self, student_id):
+        dao = TaskDAO()
+        result = dao.get_course_tasks_by_student_id(student_id)
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        mapped_result = []
+        for r in result:
+            mapped_result.append(self.mapToTaskDict(r))
+        return jsonify(CourseTasks=mapped_result)
+
+
+    def insert_personal_task(self, form):
+        print(form)
+        if len(form) != 1:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            task_name = form['task_name']
+            task_description = form['task_description']
+            start_time = form['start_time']
+            end_time = form['end_time']
+            finished = form['finished']
+            if task_name and start_time and end_time and finished:
+                dao = TaskDAO()
+                task_id = dao.add_personal_task(task_name, task_description, start_time, end_time, finished)
+                result = self.mapToTaskDict([task_id, task_name, task_description, start_time, end_time, finished])
+                return jsonify(PersonalTasks=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+
+    def mapToTaskDict(self, row):
+        # Verificar orden de atributos en la tabla
+        return {'task_id' : row[0],
+                'name': row[2],
+                'description': row[3],
+                'start_time': row[1],
+                'end_time': row[4],
+                'finished': row[5]}

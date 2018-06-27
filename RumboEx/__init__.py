@@ -10,6 +10,8 @@ from sqlalchemy.orm import sessionmaker, relationships
 from flask_rbac import RBAC, UserMixin, RoleMixin
 from flask_cors import CORS
 
+from RumboEx.handler.taskHandler import TaskHandler
+
 
 #from flask_jwt_extended import JWTManager
 
@@ -54,6 +56,12 @@ login_manager.login_view = '/login'
 
 @login_manager.user_loader
 def load_user(user_id):
+    print("current user id: " + str(user_id))
+    print("current username: " + str(User.query.get(int(user_id)).username))
+    print("current user roles: " + str(User.query.get(int(user_id)).roles))
+    print(login_manager)
+    # print(login_manager.current_user)
+    print(current_user)
     return User.query.get(int(user_id))
 
 # Initial role for RBAC to work
@@ -67,7 +75,7 @@ current_user = rbacDummy
 class UserLoginForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), Length(min=4, max=25)])
     password = PasswordField('Password', validators=[InputRequired(), Length(min=4, max=200)])
-    remember = BooleanField('remenber me')
+    remember = BooleanField('remember me')
 
 @app.route('/')
 @login_required
@@ -85,7 +93,6 @@ def login():
         if user:
             hashed_password = generate_password_hash(user.password, method='sha256')
             if check_password_hash(hashed_password, form.password.data):
-                print("AQUI 2")
                 print(user.roles)
                 app.logger.debug('Logged in user %s', user.username)
                 login_user(user, remember=form.remember.data)
@@ -145,3 +152,23 @@ def flash_errors(form):
                 getattr(form, field).label.text,
                 error
             ))
+
+
+@app.route('/personal_task/<int:student_id>')
+def get_personal_tasks(student_id):
+    if request.method == 'GET':
+        return TaskHandler().get_personal_task_by_student_id(student_id)
+    elif request.method == 'POST':
+        return TaskHandler().insert_personal_task(request.get_json())
+
+@app.route('/study_task/<int:student_id>')
+def get_study_tasks(student_id):
+    return TaskHandler().get_study_task_by_student_id(student_id)
+
+@app.route('/course_task/<int:student_id>')
+def get_course_tasks(student_id):
+    return TaskHandler().get_course_task_by_student_id(student_id)
+
+@app.route('/task')
+def get_all_tasks():
+    return TaskHandler().get_all_tasks()
