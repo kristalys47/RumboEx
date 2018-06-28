@@ -10,6 +10,7 @@ from sqlalchemy.orm import sessionmaker, relationships
 from flask_rbac import RBAC, UserMixin, RoleMixin
 from flask_cors import CORS
 from RumboEx.dao.StudentDAO import StudentDAO
+from RumboEx.dao.taskDao import TaskDAO
 
 from RumboEx.handler.taskHandler import TaskHandler
 
@@ -27,6 +28,7 @@ app.config['SECRET_KEY'] = 'secret!'
 app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
 # app.config['RBAC_USE_WHITE'] = True
 app.debug = True
+CORS(app)
 
 # DB info
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ivbustqhsmsaps:7a8951928430c500e432dbf97728f42f5033648c052a5befce59295cabd987c5@ec2-23-21-216-174.compute-1.amazonaws.com:5432/d9t2kdqh5u8ekk'
@@ -172,20 +174,26 @@ def flash_errors(form):
             ))
 
 
-@app.route('/personal_task/<int:student_id>')
+@app.route('/task/personal/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def get_personal_tasks(student_id):
     if request.method == 'GET':
+        print("llega")
+        print("prueba: ")
+        print(TaskHandler().get_personal_task_by_student_id(student_id).get_data())
         return TaskHandler().get_personal_task_by_student_id(student_id)
     elif request.method == 'POST':
         return TaskHandler().insert_personal_task(request.get_json())
 
-@app.route('/study_task/<int:student_id>')
+
+@app.route('/task/study/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def get_study_tasks(student_id):
     return TaskHandler().get_study_task_by_student_id(student_id)
 
-@app.route('/course_task/<int:student_id>')
+
+@app.route('/task/course/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def get_course_tasks(student_id):
     return TaskHandler().get_course_task_by_student_id(student_id)
+
 
 @app.route('/task')
 def get_all_tasks():
