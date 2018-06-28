@@ -24,6 +24,7 @@ from RumboEx.handler.StudentHandler import StudentHandler
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
+# Set RBAC to negative logic(All roles are block unless allowed or exempt)
 app.config['RBAC_USE_WHITE'] = True
 app.debug = True
 
@@ -115,7 +116,12 @@ def login():
             hashed_password = generate_password_hash(user.password, method='sha256')
             if check_password_hash(hashed_password, credential['password']):
                 print(user.roles)
-                login_user(user, True)
+                try:
+                    remember = credential['remenber']
+                except:
+                    remember = False
+                print("was set to: ", remember)
+                login_user(user, remember)
                 current_user = user
                 return jsonify(Result="Successful"), 200
             else:
@@ -149,12 +155,13 @@ def login():
 #     return "Hi: This programs tells me that you are a Admin"
 
 
-@app.route('/logout', methods=['GET'])
+@app.route('/logout', methods=['GET', 'POST'])
 @rbac.exempt
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return jsonify(Result="Successful"), 200
+    # return redirect(url_for('login'))
 
 
 @app.route('/calendar')
