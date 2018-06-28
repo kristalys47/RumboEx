@@ -38,3 +38,6 @@ class Role(db.Model, RoleMixin):
 
     def __repr__(self):
         return '<Role %s>' % self.name
+
+    def object(self):
+        return self.name

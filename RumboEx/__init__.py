@@ -68,6 +68,7 @@ rbacDummy = User(roles=[start])
 current_user = rbacDummy
 
 
+
 class UserLoginForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), Length(min=4, max=25)])
     password = PasswordField('Password', validators=[InputRequired(), Length(min=4, max=200)])
@@ -85,7 +86,7 @@ def hello_world():
 @login_required
 def current():
     global current_user
-    print(current_user)
+    print(current_user.object())
     return "esta en al pantalla de python el current user"
 
 @app.route('/users')
@@ -115,15 +116,14 @@ def login():
             global current_user
             hashed_password = generate_password_hash(user.password, method='sha256')
             if check_password_hash(hashed_password, credential['password']):
-                print(user.roles)
+                print(user.object())
                 try:
                     remember = credential['remenber']
                 except:
                     remember = False
-                print("was set to: ", remember)
                 login_user(user, remember)
                 current_user = user
-                return jsonify(Result="Successful"), 200
+                return jsonify(Result=user.object()), 200
             else:
                 return jsonify(Result="Not same password"), 400
         return jsonify(Result="This user does not exist in the data base"), 400
@@ -170,7 +170,7 @@ def logout():
 @login_required
 def calendar():
     global current_user
-    print(current_user.roles)
+    print(current_user.object())
     return render_template('calendar.html')
 
 
