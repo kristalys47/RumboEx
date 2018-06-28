@@ -164,6 +164,7 @@ def logout():
     # return redirect(url_for('login'))
 
 
+
 @app.route('/calendar')
 @rbac.allow(['student'], ['GET'])
 @login_required
