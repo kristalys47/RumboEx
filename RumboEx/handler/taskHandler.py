@@ -12,7 +12,8 @@ class TaskHandler():
         mapped_result = []
         for r in result:
             mapped_result.append(self.mapToTaskDict(r))
-        return jsonify(Tasks=mapped_result)
+            print(r)
+        return jsonify(mapped_result)
 
 
     def get_personal_task_by_student_id(self, student_id):
@@ -23,7 +24,7 @@ class TaskHandler():
         mapped_result = []
         for r in result:
             mapped_result.append(self.mapToTaskDict(r))
-        return jsonify(PersonalTasks=mapped_result)
+        return jsonify(mapped_result)
 
 
     def get_study_task_by_student_id(self, student_id):
@@ -34,7 +35,7 @@ class TaskHandler():
         mapped_result = []
         for r in result:
             mapped_result.append(self.mapToTaskDict(r))
-        return jsonify(StudyTasks=mapped_result)
+        return jsonify(mapped_result)
 
 
     def get_course_task_by_student_id(self, student_id):
@@ -45,12 +46,12 @@ class TaskHandler():
         mapped_result = []
         for r in result:
             mapped_result.append(self.mapToTaskDict(r))
-        return jsonify(CourseTasks=mapped_result)
+        return jsonify(mapped_result)
 
 
     def insert_personal_task(self, form):
         print(form)
-        if len(form) != 1:
+        if len(form) != 5:
             return jsonify(Error="Malformed post request"), 400
         else:
             task_name = form['task_name']
@@ -62,16 +63,18 @@ class TaskHandler():
                 dao = TaskDAO()
                 task_id = dao.add_personal_task(task_name, task_description, start_time, end_time, finished)
                 result = self.mapToTaskDict([task_id, task_name, task_description, start_time, end_time, finished])
-                return jsonify(PersonalTasks=result), 201
+                return jsonify(result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
 
     def mapToTaskDict(self, row):
         # Verificar orden de atributos en la tabla
-        return {'task_id' : row[0],
-                'name': row[2],
-                'description': row[3],
-                'start_time': row[1],
-                'end_time': row[4],
-                'finished': row[5]}
+        return {
+            'task_id' : row[0],
+            'title': row[2],
+            'description': row[3],
+            'start': row[1],
+            'end': row[4],
+            'finished': row[5]
+            }
