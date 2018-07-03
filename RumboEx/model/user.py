@@ -33,6 +33,11 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return '<User %s>' % self.roles
 
+    def object(self):
+        result = []
+        for role in self.roles:
+            result.append(role.object())
+        return {'username': self.username, 'userid': self.id, 'roles': result, 'email': self.email}
 
     @property
     def is_active(self):

@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, current_app, g
+from flask import Flask, request, render_template, redirect, url_for, current_app, g, jsonify
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user, fresh_login_required
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
@@ -14,8 +14,13 @@ from RumboEx.dao.taskDao import TaskDAO
 
 from RumboEx.handler.taskHandler import TaskHandler
 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from flask_rbac import RBAC
+from flask_cors import CORS, cross_origin
+from RumboEx.handler.StudentHandler import StudentHandler
 
-#from flask_jwt_extended import JWTManager
+# from flask_jwt_extended import JWTManager
 
 # This code must be un once two create the tables in the DataBase
 # User.metadata.create_all(engine)
@@ -26,7 +31,8 @@ from RumboEx.handler.taskHandler import TaskHandler
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
-# app.config['RBAC_USE_WHITE'] = True
+# Set RBAC to negative logic(All roles are block unless allowed or exempt)
+app.config['RBAC_USE_WHITE'] = True
 app.debug = True
 CORS(app)
 
@@ -81,87 +87,87 @@ class UserLoginForm(FlaskForm):
     remember = BooleanField('remember me')
 
 @app.route('/')
-@login_required
 @rbac.exempt
 def hello_world():
     return 'Bienvenidos a RumboEx ToDo'
 
 
 @app.route('/current')
-@login_required
-@rbac.exempt
+@rbac.allow(['admin'], ['GET'], with_children=False)
 def current():
     global current_user
-    print(current_user)
+    print(current_user.object())
     return "esta en al pantalla de python el current user"
 
-
-@app.route('/createuser/<string:username>/<string:email>/<string:password>/<string:name>/<string:lastname>/<int:program>/<int:student_num>', methods=['GET'])
-@rbac.deny(['counselor', 'student', 'everyone'], ['GET'], with_children=False)
+@app.route('/users')
+@rbac.allow(['admin'], ['GET'], with_children=False)
 @login_required
-def createStudent(username, email, password, name, lastname, program, student_num):
-    student = StudentDAO()
-    return student.insertStudent(username, email, password, name, lastname, program, student_num)
+def getallusers():
+    handler = StudentHandler()
+    return handler.getallusers()
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/register', methods=['POST', 'GET'])
+@rbac.allow(['admin'], ['POST', 'GET'], with_children=False)
+def createStudent():
+    if request.method == 'POST':
+        cred = request.get_json()
+        print(cred)
+        username = cred['email'].split('@')[0]
+        email = cred['email']
+        name = cred['name']
+        lastname = cred['lastname']
+        program = cred['program']
+        password = cred['password']
+        student_num = cred['student_num']
+        student = StudentHandler()
+        return student.insertStudent(username, email, password, name, lastname, program, student_num)
+    return jsonify(result="is not a Post method, but returns"), 200
+
+
+# This will be the standard login
+@app.route('/login', methods=['POST', 'GET'])
+@rbac.exempt
 def login():
-    form = UserLoginForm()
-    error = None
-    global current_user
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data.lower()).first()
+    if request.method == 'POST':
+        credential = request.get_json()
+        print(credential)
+        user = User.query.filter_by(username=credential['username']).first()
         if user:
+            global current_user
             hashed_password = generate_password_hash(user.password, method='sha256')
-            if check_password_hash(hashed_password, form.password.data):
-                print(user.roles)
-                app.logger.debug('Logged in user %s', user.username)
-                login_user(user, remember=form.remember.data)
+            if check_password_hash(hashed_password, credential['password']):
+                print(user.object())
+                try:
+                    remember = credential['remenber']
+                except:
+                    remember = False
+                ret = login_user(user, remember)
+                print(ret)
                 current_user = user
-                return redirect(url_for('calendar'))
-        error = 'Invalid username or password.'
-    elif request.method == "POST":
-        flash_errors(form)
-    return render_template('login.html', form=form, error=error)
-
-# Routes to test the identification of a user
-# @app.route('/loginStudent', methods=['GET'], )
-# @rbac.allow(['Student'], ['GET'])
-# def confirmStudent():
-#     return "Hi: This programs tells me that you are a Student"
-#
-#
-# @app.route('/loginMentor', methods=['GET'])
-# @rbac.allow(['Mentor'], ['GET'])
-# def confirmMentor():
-#     return "Hi: This programs tells me that you are a Mentor"
-#
-#
-# @app.route('/loginCounselor', methods=['GET'])
-# @rbac.allow(['Counselor'], ['GET'])
-# def confirmCounselor():
-#     return "Hi: This programs tells me that you are a Counselor"
-#
-#
-# @app.route('/loginAdmin', methods=['GET'])
-# @rbac.allow(['Admin'], ['GET'])
-# def confirmAdmin():
-#     return "Hi: This programs tells me that you are a Admin"
+                return jsonify(result=user.object()), 200
+            else:
+                return jsonify(result="There is an error"), 401
+        return jsonify(result="There is an error"), 401
+    return jsonify(result="is not a Post method, but returns"), 200
 
 
-@app.route('/logout', methods=['GET'])
-@login_required
+@app.route('/logout', methods=['GET', 'POST'])
+@rbac.exempt
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return jsonify(result="Successful"), 200
+    # return redirect(url_for('login'))
 
 
 @app.route('/calendar')
-@rbac.deny(['counselor'], ['GET'])
+@rbac.allow(['student'], ['GET'])
 @login_required
 def calendar():
     global current_user
-    print(current_user.roles)
+    global rbacDummy
+    print(current_user.object())
+    current_user = rbacDummy
     return render_template('calendar.html')
 
 
