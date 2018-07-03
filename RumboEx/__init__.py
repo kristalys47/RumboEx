@@ -1,14 +1,10 @@
-from flask import Flask, request, render_template, redirect, url_for, current_app, g, jsonify
-from flask_login import LoginManager, login_user, logout_user, login_required, current_user, fresh_login_required
+from flask import Flask, request, render_template, jsonify
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Length
 from werkzeug.security import check_password_hash,generate_password_hash
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine, and_, ForeignKey
-from sqlalchemy.orm import sessionmaker, relationships
-from flask_rbac import RBAC, UserMixin, RoleMixin
-from flask_cors import CORS
 from RumboEx.dao.StudentDAO import StudentDAO
 from RumboEx.dao.taskDao import TaskDAO
 
