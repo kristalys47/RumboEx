@@ -11,9 +11,7 @@ from flask_rbac import RBAC
 from flask_cors import CORS, cross_origin
 from RumboEx.handler.StudentHandler import StudentHandler
 
-
-
-#from flask_jwt_extended import JWTManager
+# from flask_jwt_extended import JWTManager
 
 # This code must be un once two create the tables in the DataBase
 # User.metadata.create_all(engine)
