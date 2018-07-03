@@ -208,9 +208,7 @@ def mentorlogin():
         return jsonify(Result="There is an error"), 401
     return jsonify(Result="is not a Post method, but returns"), 200
 
-
-
-
+# This will be the standard login
 @app.route('/login', methods=['GET', 'POST'])
 @rbac.exempt
 def login():
