@@ -26,6 +26,7 @@ app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
 app.config['RBAC_USE_WHITE'] = True
 app.debug = True
 
+
 CORS(app)
 # DB info
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ivbustqhsmsaps:7a8951928430c500e432dbf97728f42f5033648c052a5befce59295cabd987c5@ec2-23-21-216-174.compute-1.amazonaws.com:5432/d9t2kdqh5u8ekk'
@@ -80,8 +81,7 @@ def hello_world():
 
 
 @app.route('/current')
-@rbac.exempt
-@login_required
+@rbac.allow(['admin'], ['GET'], with_children=False)
 def current():
     global current_user
     print(current_user.object())
@@ -95,119 +95,26 @@ def getallusers():
     return handler.getallusers()
 
 
-@app.route('/createuser/<string:username>/<string:email>/<string:password>/<string:name>/<string:lastname>/<int:program>/<int:student_num>', methods=['GET'])
-@rbac.allow(['admin'], ['GET'], with_children=False)
-@login_required
-def createStudent(username, email, password, name, lastname, program, student_num):
-    student = StudentHandler()
-    return student.insertStudent(username, email, password, name, lastname, program, student_num)
-
-@app.route('/adminlogin', methods=['GET', 'POST'])
-@rbac.exempt
-def adminlogin():
+@app.route('/register', methods=['POST', 'GET'])
+@rbac.allow(['admin'], ['POST', 'GET'], with_children=False)
+def createStudent():
     if request.method == 'POST':
-        credential = request.get_json()
-        print(credential)
-        user = User.query.filter_by(username=credential['username']).first()
-        if user:
-            if user.roles.index('admin') != -1:
-                global current_user
-                hashed_password = generate_password_hash(user.password, method='sha256')
-                if check_password_hash(hashed_password, credential['password']):
-                    print(user.object())
-                    try:
-                        remember = credential['remenber']
-                    except:
-                        remember = False
-                    login_user(user, remember)
-                    current_user = user
-                    return jsonify(Result=user.object()), 200
-                else:
-                    return jsonify(Result="There is an error"), 401
-            return jsonify(Result="You don;t have the role necessary"), 403
-        return jsonify(Result="There is an error"), 401
-    return jsonify(Result="is not a Post method, but returns"), 200
+        cred = request.get_json()
+        print(cred)
+        username = cred['email'].split('@')[0]
+        email = cred['email']
+        name = cred['name']
+        lastname = cred['lastname']
+        program = cred['program']
+        password = cred['password']
+        student_num = cred['student_num']
+        student = StudentHandler()
+        return student.insertStudent(username, email, password, name, lastname, program, student_num)
+    return jsonify(result="is not a Post method, but returns"), 200
 
-@app.route('/studentlogin', methods=['GET', 'POST'])
-@rbac.exempt
-def studentlogin():
-    if request.method == 'POST':
-        credential = request.get_json()
-        print(credential)
-        user = User.query.filter_by(username=credential['username']).first()
-        if user:
-            if user.roles.index('student') != -1:
-                global current_user
-                hashed_password = generate_password_hash(user.password, method='sha256')
-                if check_password_hash(hashed_password, credential['password']):
-                    print(user.object())
-                    try:
-                        remember = credential['remenber']
-                    except:
-                        remember = False
-                    login_user(user, remember)
-                    current_user = user
-                    return jsonify(Result=user.object()), 200
-                else:
-                    return jsonify(Result="There is an error"), 401
-            return jsonify(Result="You don;t have the role necessary"), 403
-        return jsonify(Result="There is an error"), 401
-    return jsonify(Result="is not a Post method, but returns"), 200
-
-@app.route('/counselorlogin', methods=['GET', 'POST'])
-@rbac.exempt
-def counselorlogin():
-    if request.method == 'POST':
-        credential = request.get_json()
-        print(credential)
-        user = User.query.filter_by(username=credential['username']).first()
-        if user:
-            if user.roles.index('counselor') != -1:
-                global current_user
-                hashed_password = generate_password_hash(user.password, method='sha256')
-                if check_password_hash(hashed_password, credential['password']):
-                    print(user.object())
-                    try:
-                        remember = credential['remenber']
-                    except:
-                        remember = False
-                    login_user(user, remember)
-                    current_user = user
-                    return jsonify(Result=user.object()), 200
-                else:
-                    return jsonify(Result="There is an error"), 401
-            return jsonify(Result="You don't have the role necessary"), 403
-        return jsonify(Result="There is an error"), 401
-    return jsonify(Result="is not a Post method, but returns"), 200
-
-@app.route('/mentorlogin', methods=['GET', 'POST'])
-@rbac.exempt
-def mentorlogin():
-    if request.method == 'POST':
-        credential = request.get_json()
-        print(credential)
-        user = User.query.filter_by(username=credential['username']).first()
-        if user:
-            if user.roles.index('mentor') != -1:
-                global current_user
-                hashed_password = generate_password_hash(user.password, method='sha256')
-                if check_password_hash(hashed_password, credential['password']):
-                    print(user.object())
-                    try:
-                        remember = credential['remenber']
-                    except:
-                        remember = False
-                    login_user(user, remember)
-                    current_user = user
-                    return jsonify(Result=user.object()), 200
-                else:
-                    return jsonify(Result="There is an error"), 401
-            return jsonify(Result="You don't have the role necessary"), 403
-        return jsonify(Result="There is an error"), 401
-    return jsonify(Result="is not a Post method, but returns"), 200
 
 # This will be the standard login
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['POST', 'GET'])
 @rbac.exempt
 def login():
     if request.method == 'POST':
@@ -223,48 +130,22 @@ def login():
                     remember = credential['remenber']
                 except:
                     remember = False
-                login_user(user, remember)
+                ret = login_user(user, remember)
+                print(ret)
                 current_user = user
-                return jsonify(Result=user.object()), 200
+                return jsonify(result=user.object()), 200
             else:
-                return jsonify(Result="There is an error"), 401
-        return jsonify(Result="There is an error"), 401
-    return jsonify(Result="is not a Post method, but returns"), 200
-
-
-# Routes to test the identification of a user
-# @app.route('/loginStudent', methods=['GET'], )
-# @rbac.allow(['Student'], ['GET'])
-# def confirmStudent():
-#     return "Hi: This programs tells me that you are a Student"
-#
-#
-# @app.route('/loginMentor', methods=['GET'])
-# @rbac.allow(['Mentor'], ['GET'])
-# def confirmMentor():
-#     return "Hi: This programs tells me that you are a Mentor"
-#
-#
-# @app.route('/loginCounselor', methods=['GET'])
-# @rbac.allow(['Counselor'], ['GET'])
-# def confirmCounselor():
-#     return "Hi: This programs tells me that you are a Counselor"
-#
-#
-# @app.route('/loginAdmin', methods=['GET'])
-# @rbac.allow(['Admin'], ['GET'])
-# def confirmAdmin():
-#     return "Hi: This programs tells me that you are a Admin"
+                return jsonify(result="There is an error"), 401
+        return jsonify(result="There is an error"), 401
+    return jsonify(result="is not a Post method, but returns"), 200
 
 
 @app.route('/logout', methods=['GET', 'POST'])
 @rbac.exempt
-@login_required
 def logout():
     logout_user()
-    return jsonify(Result="Successful"), 200
+    return jsonify(result="Successful"), 200
     # return redirect(url_for('login'))
-
 
 
 @app.route('/calendar')
@@ -272,7 +153,9 @@ def logout():
 @login_required
 def calendar():
     global current_user
+    global rbacDummy
     print(current_user.object())
+    current_user = rbacDummy
     return render_template('calendar.html')
 
 

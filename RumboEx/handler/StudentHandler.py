@@ -8,6 +8,7 @@ class StudentHandler:
 
     def insertStudent(self, username, email, password, name, lastname, program, student_num):
         calltoInsert = StudentDAO().insertStudent(username, email, password, name, lastname, program, student_num)
+        return jsonify(result=calltoInsert), 200
 
 
     def getallusers(self):
