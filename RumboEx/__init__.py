@@ -91,7 +91,6 @@ def current():
 
 @app.route('/users')
 @rbac.allow(['admin'], ['GET'], with_children=False)
-@login_required
 def getallusers():
     handler = StudentHandler()
     return handler.getallusers()
@@ -326,7 +325,6 @@ def logout():
 
 @app.route('/calendar')
 @rbac.allow(['student'], ['GET'])
-@login_required
 def calendar():
     global current_user
     print(current_user.object())
