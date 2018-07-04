@@ -61,12 +61,6 @@ login_manager.login_view = '/login'
 
 @login_manager.user_loader
 def load_user(user_id):
-    print("current user id: " + str(user_id))
-    print("current username: " + str(User.query.get(int(user_id)).username))
-    print("current user roles: " + str(User.query.get(int(user_id)).roles))
-    print(login_manager)
-    # print(login_manager.current_user)
-    print(current_user)
     return User.query.get(int(user_id))
 
 # Initial role for RBAC to work
@@ -148,6 +142,145 @@ def adminlogin():
     return jsonify(result="is not a Post method, but returns"), 200
 
 
+@app.route('/studentlogin', methods=['POST', 'GET'])
+@rbac.exempt
+def studentlogin():
+    if request.method == 'POST':
+        credential = request.get_json()
+        print(credential)
+        user = User.query.filter_by(username=credential['username']).first()
+        if user:
+            if user.object()['roles'][0] == 'student':
+                global current_user
+                hashed_password = generate_password_hash(user.password, method='sha256')
+                if check_password_hash(hashed_password, credential['password']):
+                    print(user.object())
+                    try:
+                        remember = credential['remenber']
+                    except:
+                        remember = False
+                    ret = login_user(user, remember)
+                    print(ret)
+                    current_user = user
+                    return jsonify(result=user.object()), 200
+                else:
+                    return jsonify(result="There is an error"), 401
+            return jsonify(result="There is an error"), 401
+        return jsonify(result="There is an error"), 401
+    return jsonify(result="is not a Post method, but returns"), 200
+
+
+@app.route('/counselorlogin', methods=['POST', 'GET'])
+@rbac.exempt
+def counselorlogin():
+    if request.method == 'POST':
+        credential = request.get_json()
+        print(credential)
+        user = User.query.filter_by(username=credential['username']).first()
+        if user:
+            if user.object()['roles'][0] == 'counselor':
+                global current_user
+                hashed_password = generate_password_hash(user.password, method='sha256')
+                if check_password_hash(hashed_password, credential['password']):
+                    print(user.object())
+                    try:
+                        remember = credential['remenber']
+                    except:
+                        remember = False
+                    ret = login_user(user, remember)
+                    print(ret)
+                    current_user = user
+                    return jsonify(result=user.object()), 200
+                else:
+                    return jsonify(result="There is an error"), 401
+            return jsonify(result="There is an error"), 401
+        return jsonify(result="There is an error"), 401
+    return jsonify(result="is not a Post method, but returns"), 200
+
+
+@app.route('/mentorlogin', methods=['POST', 'GET'])
+@rbac.exempt
+def mentorlogin():
+    if request.method == 'POST':
+        credential = request.get_json()
+        print(credential)
+        user = User.query.filter_by(username=credential['username']).first()
+        if user:
+            if user.object()['roles'][0] == 'mentor':
+                global current_user
+                hashed_password = generate_password_hash(user.password, method='sha256')
+                if check_password_hash(hashed_password, credential['password']):
+                    print(user.object())
+                    try:
+                        remember = credential['remenber']
+                    except:
+                        remember = False
+                    ret = login_user(user, remember)
+                    print(ret)
+                    current_user = user
+                    return jsonify(result=user.object()), 200
+                else:
+                    return jsonify(result="There is an error"), 401
+            return jsonify(result="There is an error"), 401
+        return jsonify(result="There is an error"), 401
+    return jsonify(result="is not a Post method, but returns"), 200
+
+
+@app.route('/professorlogin', methods=['POST', 'GET'])
+@rbac.exempt
+def professorlogin():
+    if request.method == 'POST':
+        credential = request.get_json()
+        print(credential)
+        user = User.query.filter_by(username=credential['username']).first()
+        if user:
+            if user.object()['roles'][0] == 'professor':
+                global current_user
+                hashed_password = generate_password_hash(user.password, method='sha256')
+                if check_password_hash(hashed_password, credential['password']):
+                    print(user.object())
+                    try:
+                        remember = credential['remenber']
+                    except:
+                        remember = False
+                    ret = login_user(user, remember)
+                    print(ret)
+                    current_user = user
+                    return jsonify(result=user.object()), 200
+                else:
+                    return jsonify(result="There is an error"), 401
+            return jsonify(result="There is an error"), 401
+        return jsonify(result="There is an error"), 401
+    return jsonify(result="is not a Post method, but returns"), 200
+
+
+@app.route('/advisorlogin', methods=['POST', 'GET'])
+@rbac.exempt
+def advisorlogin():
+    if request.method == 'POST':
+        credential = request.get_json()
+        print(credential)
+        user = User.query.filter_by(username=credential['username']).first()
+        if user:
+            if user.object()['roles'][0] == 'advisor':
+                global current_user
+                hashed_password = generate_password_hash(user.password, method='sha256')
+                if check_password_hash(hashed_password, credential['password']):
+                    print(user.object())
+                    try:
+                        remember = credential['remenber']
+                    except:
+                        remember = False
+                    ret = login_user(user, remember)
+                    print(ret)
+                    current_user = user
+                    return jsonify(result=user.object()), 200
+                else:
+                    return jsonify(result="There is an error"), 401
+            return jsonify(result="There is an error"), 401
+        return jsonify(result="There is an error"), 401
+    return jsonify(result="is not a Post method, but returns"), 200
+
 
 # This will be the standard login
 @app.route('/login', methods=['POST', 'GET'])
@@ -189,7 +322,6 @@ def logout():
 @login_required
 def calendar():
     global current_user
-    global rbacDummy
     print(current_user.object())
     current_user = rbacDummy
     return render_template('calendar.html')
