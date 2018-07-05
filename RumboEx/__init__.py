@@ -15,6 +15,7 @@ from sqlalchemy.orm import sessionmaker
 from flask_rbac import RBAC
 from flask_cors import CORS, cross_origin
 from RumboEx.handler.StudentHandler import StudentHandler
+from flask_crossdomain import *
 
 # from flask_jwt_extended import JWTManager
 
@@ -30,7 +31,7 @@ app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
 # Set RBAC to negative logic(All roles are block unless allowed or exempt)
 app.config['RBAC_USE_WHITE'] = True
 app.debug = True
-CORS(app)
+CORS(app, resources=r'*')
 
 # DB info
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ivbustqhsmsaps:7a8951928430c500e432dbf97728f42f5033648c052a5befce59295cabd987c5@ec2-23-21-216-174.compute-1.amazonaws.com:5432/d9t2kdqh5u8ekk'
@@ -83,7 +84,7 @@ def hello_world():
 
 
 @app.route('/current')
-@rbac.allow(['admin'], ['GET'], with_children=False)
+@rbac.allow(['admin'], ['GET', 'POST'], with_children=False)
 def current():
     global current_user
     print(current_user.object())
@@ -95,16 +96,16 @@ def getallusers():
     handler = StudentHandler()
     return handler.getallusers()
 
-@app.route('/student')
-@rbac.exempt
-# @rbac.allow(['admin', 'counselor', 'advisor'], ['GET'], with_children=False)
+@app.route('/student', methods=['POST', 'GET'])
+@rbac.allow(['admin', 'counselor', 'advisor'], ['GET'], with_children=False)
 def getallstudents():
     handler = StudentHandler()
     return handler.getallstudent()
 
 
-@app.route('/register', methods=['POST', 'GET'])
-@rbac.allow(['admin'], ['POST', 'GET'], with_children=False)
+@app.route('/register', methods=['POST', 'GET', 'OPTION'])
+@cross_origin(allow_headers=['Content-Type'])
+@rbac.allow(['admin'], ['GET', 'POST', 'OPTION'], with_children=False)
 def createStudent():
     if request.method == 'POST':
         cred = request.get_json()
@@ -117,7 +118,9 @@ def createStudent():
         password = cred['password']
         student_num = cred['student_num']
         student = StudentHandler()
+        print("Entra a la ruta")
         return student.insertStudent(username, email, password, name, lastname, program, student_num)
+    print("Entra a la ruta")
     return jsonify(result="is not a Post method, but returns"), 200
 
 @app.route('/adminlogin', methods=['POST', 'GET'])
@@ -125,6 +128,7 @@ def createStudent():
 def adminlogin():
     if request.method == 'POST':
         credential = request.get_json()
+        print(request)
         print(credential)
         user = User.query.filter_by(username=credential['username']).first()
         if user:
