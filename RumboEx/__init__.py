@@ -65,7 +65,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 # Initial role for RBAC to work
-start = Role('admin')
+start = Role('DUMMY')
 rbacDummy = User(roles=[start])
 
 # To use this variable write global before the name in the methods
