@@ -3,7 +3,7 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Length
-from werkzeug.security import check_password_hash,generate_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from RumboEx.dao.StudentDAO import StudentDAO
 from RumboEx.dao.taskDao import TaskDAO
@@ -61,12 +61,6 @@ login_manager.login_view = '/login'
 
 @login_manager.user_loader
 def load_user(user_id):
-    print("current user id: " + str(user_id))
-    print("current username: " + str(User.query.get(int(user_id)).username))
-    print("current user roles: " + str(User.query.get(int(user_id)).roles))
-    print(login_manager)
-    # print(login_manager.current_user)
-    print(current_user)
     return User.query.get(int(user_id))
 
 # Initial role for RBAC to work
@@ -107,7 +101,7 @@ def getallusers():
 @rbac.allow(['admin'], ['POST', 'GET'], with_children=False)
 def createStudent():
     if request.method == 'POST':
-        cred = request.get_json()
+        cred = request.form
         print(cred)
         username = cred['email'].split('@')[0]
         email = cred['email']
@@ -135,7 +129,7 @@ def login():
             if check_password_hash(hashed_password, credential['password']):
                 print(user.object())
                 try:
-                    remember = credential['remenber']
+                    remember = credential['remember']
                 except:
                     remember = False
                 ret = login_user(user, remember)
@@ -177,24 +171,31 @@ def flash_errors(form):
 
 
 @app.route('/task/personal/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
+@rbac.allow(['student'], ['POST', 'GET'], with_children=False)
 def get_personal_tasks(student_id):
+    global current_user
     if request.method == 'GET':
-        print("llega")
-        print("prueba: ")
-        print(TaskHandler().get_personal_task_by_student_id(student_id).get_data())
-        return TaskHandler().get_personal_task_by_student_id(student_id)
+        return TaskHandler().get_personal_task_by_user_id(student_id)
     elif request.method == 'POST':
-        return TaskHandler().insert_personal_task(request.get_json())
+        return TaskHandler().insert_personal_task(request.form)
 
 
 @app.route('/task/study/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
+@rbac.allow(['student'], ['POST', 'GET'], with_children=False)
 def get_study_tasks(student_id):
-    return TaskHandler().get_study_task_by_student_id(student_id)
+    return TaskHandler().get_study_task_by_user_id(student_id)
 
 
 @app.route('/task/course/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
+@rbac.allow(['student'], ['POST', 'GET'], with_children=False)
 def get_course_tasks(student_id):
-    return TaskHandler().get_course_task_by_student_id(student_id)
+    return TaskHandler().get_course_task_by_user_id(student_id)
+
+
+@app.route('/task/appointment/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
+@rbac.allow(['student'], ['POST', 'GET'], with_children=False)
+def get_appointment_tasks(student_id):
+    return TaskHandler().get_appointment_tasks_by_user_id(student_id)
 
 
 @app.route('/task')

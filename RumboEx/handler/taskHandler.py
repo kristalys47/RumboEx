@@ -16,9 +16,9 @@ class TaskHandler():
         return jsonify(mapped_result)
 
 
-    def get_personal_task_by_student_id(self, student_id):
+    def get_personal_task_by_user_id(self, user_id):
         dao = TaskDAO()
-        result = dao.get_personal_tasks_by_student_id(student_id)
+        result = dao.get_personal_tasks_by_user_id(user_id)
         if not result:
             return jsonify(Error="NOT FOUND"), 404
         mapped_result = []
@@ -27,9 +27,9 @@ class TaskHandler():
         return jsonify(mapped_result)
 
 
-    def get_study_task_by_student_id(self, student_id):
+    def get_study_task_by_user_id(self, user_id):
         dao = TaskDAO()
-        result = dao.get_study_tasks_by_student_id(student_id)
+        result = dao.get_study_tasks_by_user_id(user_id)
         if not result:
             return jsonify(Error="NOT FOUND"), 404
         mapped_result = []
@@ -38,9 +38,20 @@ class TaskHandler():
         return jsonify(mapped_result)
 
 
-    def get_course_task_by_student_id(self, student_id):
+    def get_course_task_by_user_id(self, user_id):
         dao = TaskDAO()
-        result = dao.get_course_tasks_by_student_id(student_id)
+        result = dao.get_course_tasks_by_user_id(user_id)
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        mapped_result = []
+        for r in result:
+            mapped_result.append(self.mapToTaskDict(r))
+        return jsonify(mapped_result)
+
+
+    def get_appointment_tasks_by_user_id(self, user_id):
+        dao = TaskDAO()
+        result = dao.get_appointment_tasks_by_user_id(user_id)
         if not result:
             return jsonify(Error="NOT FOUND"), 404
         mapped_result = []
@@ -71,7 +82,7 @@ class TaskHandler():
     def mapToTaskDict(self, row):
         # Verificar orden de atributos en la tabla
         return {
-            'task_id' : row[0],
+            'task_id': row[0],
             'title': row[2],
             'description': row[3],
             'start': row[1],
