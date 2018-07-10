@@ -31,7 +31,7 @@ app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
 # Set RBAC to negative logic(All roles are block unless allowed or exempt)
 app.config['RBAC_USE_WHITE'] = True
 app.debug = True
-CORS(app, resources=r'*')
+CORS(app)
 
 # DB info
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ivbustqhsmsaps:7a8951928430c500e432dbf97728f42f5033648c052a5befce59295cabd987c5@ec2-23-21-216-174.compute-1.amazonaws.com:5432/d9t2kdqh5u8ekk'
@@ -65,7 +65,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 # Initial role for RBAC to work
-start = Role('DUMMY')
+start = Role('admin')
 rbacDummy = User(roles=[start])
 
 # To use this variable write global before the name in the methods
@@ -103,9 +103,8 @@ def getallstudents():
     return handler.getallstudent()
 
 
-@app.route('/register', methods=['POST', 'GET', 'OPTION'])
-@cross_origin(allow_headers=['Content-Type'])
-@rbac.allow(['admin'], ['GET', 'POST', 'OPTION'], with_children=False)
+@app.route('/register', methods=['POST', 'GET', 'OPTIONS'])
+@rbac.allow(['admin'], ['GET', 'POST', 'OPTIONS'], with_children=False)
 def createStudent():
     if request.method == 'POST':
         cred = request.get_json()
