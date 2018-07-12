@@ -342,6 +342,7 @@ def flash_errors(form):
             ))
 
 
+
 @app.route('/task/personal/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 @rbac.allow(['student'], ['POST', 'GET'], with_children=False)
 def get_personal_tasks(student_id):
