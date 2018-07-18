@@ -12,7 +12,6 @@ class TaskHandler():
         mapped_result = []
         for r in result:
             mapped_result.append(self.mapToTaskDict(r))
-            print(r)
         return jsonify(mapped_result)
 
 
@@ -61,7 +60,6 @@ class TaskHandler():
 
 
     def insert_personal_task(self, form):
-        print(form)
         if len(form) != 5:
             return jsonify(Error="Malformed post request"), 400
         else:

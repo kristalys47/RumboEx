@@ -83,10 +83,11 @@ def hello_world():
 
 
 @app.route('/current')
-@rbac.allow(['admin'], ['GET'], with_children=False)
+# @rbac.allow(['admin'], ['GET'], with_children=False)
+@rbac.exempt
 def current():
     global current_user
-    print(current_user.object())
+    return jsonify(current_user.object())
     return "esta en al pantalla de python el current user"
 
 @app.route('/users')
@@ -170,30 +171,30 @@ def flash_errors(form):
             ))
 
 
-@app.route('/task/personal/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
-@rbac.allow(['student'], ['POST', 'GET'], with_children=False)
+@app.route('/task/personal/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
+@rbac.allow(['student'], ['OPTIONS', 'POST', 'GET'], with_children=False)
 def get_personal_tasks(student_id):
     global current_user
     if request.method == 'GET':
         return TaskHandler().get_personal_task_by_user_id(student_id)
     elif request.method == 'POST':
-        return TaskHandler().insert_personal_task(request.form)
+        return TaskHandler().insert_personal_task(request.get_json())
 
 
-@app.route('/task/study/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
-@rbac.allow(['student'], ['POST', 'GET'], with_children=False)
+@app.route('/task/study/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
+@rbac.allow(['student'], ['OPTIONS', 'POST', 'GET'], with_children=False)
 def get_study_tasks(student_id):
     return TaskHandler().get_study_task_by_user_id(student_id)
 
 
-@app.route('/task/course/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
-@rbac.allow(['student'], ['POST', 'GET'], with_children=False)
+@app.route('/task/course/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
+@rbac.allow(['student'], ['OPTIONS', 'POST', 'GET'], with_children=False)
 def get_course_tasks(student_id):
     return TaskHandler().get_course_task_by_user_id(student_id)
 
 
-@app.route('/task/appointment/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
-@rbac.allow(['student'], ['POST', 'GET'], with_children=False)
+@app.route('/task/appointment/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
+@rbac.allow(['student'], ['OPTIONS', 'POST', 'GET'], with_children=False)
 def get_appointment_tasks(student_id):
     return TaskHandler().get_appointment_tasks_by_user_id(student_id)
 
