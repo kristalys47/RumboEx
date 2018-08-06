@@ -363,6 +363,7 @@ def get_study_tasks(student_id):
 @rbac.allow(['student'], ['POST', 'GET'], with_children=False)
 def get_course_tasks(student_id):
     return TaskHandler().get_course_task_by_user_id(student_id)
+    #
 
 
 @app.route('/task/appointment/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
@@ -372,5 +373,11 @@ def get_appointment_tasks(student_id):
 
 
 @app.route('/task')
+@rbac.allow(['student'], ['POST', 'GET'], with_children=False)
 def get_all_tasks():
     return TaskHandler().get_all_tasks()
+
+@app.route('/course/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
+@rbac.allow(['student'], ['POST', 'GET'], with_children=False)
+def getcourses(student_id):
+    return TaskHandler().get_courses(student_id)
