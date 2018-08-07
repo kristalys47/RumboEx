@@ -126,7 +126,7 @@ class TaskDAO:
 
     def get_all_courses(self):
         cursor = self.conn.cursor()
-        query = 'select course.name from course;'
+        query = 'select name, codification, section from course;'
         cursor.execute(query)
         result = []
         for row in cursor:

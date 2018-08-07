@@ -68,6 +68,8 @@ class TaskHandler():
         mapped_result = []
         for r in result:
             mapped_result.append(self.mapCourseName(r))
+
+        print(mapped_result)
         return jsonify(mapped_result)
 
 
@@ -103,4 +105,4 @@ class TaskHandler():
             }
 
     def mapCourseName(selfself, row):
-        return{'name': row[0]}
+        return{'name': row[0], 'codification': row[1], 'section': row[2]}
