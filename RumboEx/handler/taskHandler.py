@@ -58,6 +58,20 @@ class TaskHandler():
             mapped_result.append(self.mapToTaskDict(r))
         return jsonify(mapped_result)
 
+    def get_courses(self, user_id):
+        dao = TaskDAO()
+        #just trying it make it work pero se que esta mal
+        result = dao.get_all_courses()
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        mapped_result = []
+        for r in result:
+            mapped_result.append(self.mapCourseName(r))
+
+        print(mapped_result)
+        return jsonify(mapped_result)
+
+
 
     def insert_personal_task(self, user_id, form):
         print('form', form)
@@ -90,3 +104,6 @@ class TaskHandler():
             'end': row[4],
             'finished': row[5]
             }
+
+    def mapCourseName(selfself, row):
+        return{'name': row[0], 'codification': row[1], 'section': row[2]}

@@ -18,6 +18,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from flask_rbac import RBAC
 from flask_cors import CORS, cross_origin
+from RumboEx.handler.StudentHandler import StudentHandler
 # from flask_jwt_extended import JWTManager
 
 # This code must be un once two create the tables in the DataBase
@@ -387,3 +388,8 @@ def get_student_courses(student_id):
 @rbac.exempt
 def get_all_tasks():
     return TaskHandler().get_all_tasks()
+
+@app.route('/course/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
+@rbac.allow(['student'], ['POST', 'GET'], with_children=False)
+def getcourses(student_id):
+    return TaskHandler().get_courses(student_id)
