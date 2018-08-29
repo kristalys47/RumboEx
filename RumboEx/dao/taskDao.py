@@ -151,3 +151,10 @@ class TaskDAO:
         query = "insert into appointment_task(task_id) values (%s);"
         cursor.execute(query, (task_id,))
         return task_id
+
+    def add_task_to_user(self, user_id, task_id):
+        cursor = self.conn.cursor()
+        query = "insert into student_tasks(user_id, task_id) values (%s, %s) returning primary;"
+        cursor.execute(query, (user_id, task_id,))
+        primary_key = cursor.fetchone()
+        return primary_key

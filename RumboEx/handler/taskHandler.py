@@ -59,18 +59,21 @@ class TaskHandler():
         return jsonify(mapped_result)
 
 
-    def insert_personal_task(self, form):
-        if len(form) != 5:
+    def insert_personal_task(self, user_id, form):
+        print('form', form)
+        if len(form) != 4:
             return jsonify(Error="Malformed post request"), 400
         else:
+            print('form', form)
             task_name = form['task_name']
             task_description = form['task_description']
             start_time = form['start_time']
             end_time = form['end_time']
-            finished = form['finished']
+            finished = False
             if task_name and start_time and end_time and finished:
                 dao = TaskDAO()
                 task_id = dao.add_personal_task(task_name, task_description, start_time, end_time, finished)
+                dao.add_task_to_user(user_id, task_id)
                 result = self.mapToTaskDict([task_id, task_name, task_description, start_time, end_time, finished])
                 return jsonify(result), 201
             else:

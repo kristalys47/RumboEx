@@ -3,6 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/RumboEx.iml" filepath="$PROJECT_DIR$/.idea/RumboEx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../RumboEx-Ionic/.idea/RumboEx-Ionic.iml" filepath="$PROJECT_DIR$/../RumboEx-Ionic/.idea/RumboEx-Ionic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../RumboExAngular/.idea/RumboExAngular.iml" filepath="$PROJECT_DIR$/../RumboExAngular/.idea/RumboExAngular.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Watric-Server/.idea/WatricServer.iml" filepath="$PROJECT_DIR$/../Watric-Server/.idea/WatricServer.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/share/.idea/share.iml" filepath="$USER_HOME$/Downloads/share/.idea/share.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../thisisatest/.idea/thisisatest.iml" filepath="$PROJECT_DIR$/../thisisatest/.idea/thisisatest.iml" />
     </modules>
   </component>
 </project>

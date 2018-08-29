@@ -5,16 +5,19 @@ from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Length
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_sqlalchemy import SQLAlchemy
+
 from RumboEx.dao.StudentDAO import StudentDAO
 from RumboEx.dao.taskDao import TaskDAO
+from RumboEx.dao.CourseDao import CourseDAO
 
 from RumboEx.handler.taskHandler import TaskHandler
+from RumboEx.handler.StudentHandler import StudentHandler
+from RumboEx.handler.CourseHandler import CourseHandler
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from flask_rbac import RBAC
 from flask_cors import CORS, cross_origin
-from RumboEx.handler.StudentHandler import StudentHandler
 # from flask_jwt_extended import JWTManager
 
 # This code must be un once two create the tables in the DataBase
@@ -347,11 +350,14 @@ def flash_errors(form):
 @app.route('/task/personal/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
 @rbac.allow(['student'], ['OPTIONS', 'POST', 'GET'], with_children=False)
 def get_personal_tasks(student_id):
+    print(request)
     global current_user
     if request.method == 'GET':
         return TaskHandler().get_personal_task_by_user_id(student_id)
-    elif request.method == 'POST':
-        return TaskHandler().insert_personal_task(request.get_json())
+    # why do i have to put options instead of post
+    elif request.method == 'OPTIONS':
+        print('request', request, request.data, request.form, request.get_json())
+        return TaskHandler().insert_personal_task(student_id, request.data)
 
 
 @app.route('/task/study/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
@@ -371,7 +377,13 @@ def get_course_tasks(student_id):
 def get_appointment_tasks(student_id):
     return TaskHandler().get_appointment_tasks_by_user_id(student_id)
 
+@app.route('/course/<int:student_id>', methods=['GET'])
+@rbac.allow(['student'], ['GET'], with_children=False)
+def get_student_courses(student_id):
+    return CourseHandler().get_courses_by_student_id(student_id)
 
-@app.route('/task')
+
+@app.route('/task', methods=['GET'])
+@rbac.exempt
 def get_all_tasks():
     return TaskHandler().get_all_tasks()
