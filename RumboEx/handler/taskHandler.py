@@ -58,6 +58,16 @@ class TaskHandler():
             mapped_result.append(self.mapToTaskDict(r))
         return jsonify(mapped_result)
 
+    def get_study_task_by_user_id_and_course_id(self, user_id, course_id):
+        dao = TaskDAO()
+        result = dao.get_study_tasks_by_user_id_and_course_id(user_id, course_id)
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        mapped_result = []
+        for r in result:
+            mapped_result.append(self.mapToTaskDict(r))
+        return jsonify(mapped_result)
+
     def get_courses(self, user_id):
         dao = TaskDAO()
         #just trying it make it work pero se que esta mal

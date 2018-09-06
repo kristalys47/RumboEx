@@ -23,3 +23,12 @@ class CourseDAO:
         if not result:
             return None
         return result
+
+    def get_course_by_course_id(self, course_id):
+        cursor = self.conn.cursor()
+        query = "select * from course where codification = %s;"
+        cursor.execute(query, (course_id,))
+        result = cursor.fetchone()
+        if not result:
+            return None
+        return result

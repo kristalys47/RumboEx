@@ -378,10 +378,15 @@ def get_course_tasks(student_id):
 def get_appointment_tasks(student_id):
     return TaskHandler().get_appointment_tasks_by_user_id(student_id)
 
-@app.route('/course/<int:student_id>', methods=['GET'])
+@app.route('/courses/<int:student_id>', methods=['GET'])
 @rbac.allow(['student'], ['GET'], with_children=False)
 def get_student_courses(student_id):
     return CourseHandler().get_courses_by_student_id(student_id)
+
+@app.route('/task/study/<int:student_id>/<int:course_id>', methods=['GET'])
+@rbac.allow(['student'], ['GET'], with_children=False)
+def get_study_tasks_by_course_id(student_id, course_id):
+    return TaskHandler().get_study_task_by_user_id_and_course_id(student_id, course_id)
 
 
 @app.route('/task', methods=['GET'])
@@ -389,7 +394,14 @@ def get_student_courses(student_id):
 def get_all_tasks():
     return TaskHandler().get_all_tasks()
 
-@app.route('/course/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
-@rbac.allow(['student'], ['POST', 'GET'], with_children=False)
-def getcourses(student_id):
-    return TaskHandler().get_courses(student_id)
+@app.route('/course/<int:course_id>', methods=['GET'])
+@rbac.allow(['student'], ['GET'], with_children=False)
+def get_course(course_id):
+    return CourseHandler().get_course_by_course_id(course_id)
+
+# why we have duplicate
+
+# @app.route('/course/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])
+# @rbac.allow(['student'], ['POST', 'GET'], with_children=False)
+# def getcourses(student_id):
+#     return TaskHandler().get_courses(student_id)
