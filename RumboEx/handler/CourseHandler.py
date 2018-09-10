@@ -20,6 +20,16 @@ class CourseHandler():
             return jsonify(Error="NOT FOUND"), 404
         return jsonify(self.mapToIndividualCourseDict(result))
 
+    def get_grades_by_course_id(self, course_id):
+        dao = CourseDAO()
+        result = dao.get_grades_by_course_id(course_id)
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        mapped_result = []
+        for r in result:
+            mapped_result.append(self.mapToGradeDict(r))
+        return jsonify(mapped_result)
+
 
     def mapToCourseDict(self, row):
         # check how the order is returned
@@ -37,4 +47,12 @@ class CourseHandler():
             'course_name': row[1],
             'professor_id': row[2],
             'section': row[3]
+        }
+
+    def mapToGradeDict(self, row):
+        return {
+            'evaluation': row[6],
+            'grade': row[7],
+            'total': row[10],
+            'weight': row[8]
         }

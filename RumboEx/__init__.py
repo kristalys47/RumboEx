@@ -399,6 +399,13 @@ def get_all_tasks():
 def get_course(course_id):
     return CourseHandler().get_course_by_course_id(course_id)
 
+@app.route('/course/<int:course_id>/grades', methods=['GET'])
+@rbac.allow(['student'], ['GET'], with_children=False)
+def get_grades_by_course_id(course_id):
+    print(course_id)
+    return CourseHandler().get_grades_by_course_id(course_id)
+
+
 # why we have duplicate
 
 # @app.route('/course/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])

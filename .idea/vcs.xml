@@ -5,11 +5,6 @@
     <mapping directory="$USER_HOME$/AngularTest/test-app" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../RumboEx-Ionic" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../RumboExAngular" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../Watric-Server" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../ionic-tutorial" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../mobiscroll-test" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../rumboEx-Ionic" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../test-app" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../thisisatest" vcs="Git" />
   </component>
 </project>

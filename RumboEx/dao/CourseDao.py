@@ -32,3 +32,14 @@ class CourseDAO:
         if not result:
             return None
         return result
+
+    def get_grades_by_course_id(self, course_id):
+        cursor = self.conn.cursor()
+        query = "select * from course, grades where codification = course_id and course_id = %s;"
+        cursor.execute(query, (course_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        if not result:
+            return None
+        return result
