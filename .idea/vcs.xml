@@ -2,9 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$USER_HOME$/AngularTest/test-app" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../RumboEx-Ionic" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../RumboExAngular" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../thisisatest" vcs="Git" />
   </component>
 </project>
