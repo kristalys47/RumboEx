@@ -326,12 +326,13 @@ def login():
 def logout():
     logout_user()
     return jsonify(result="Successful"), 200
-    # return redirect(url_for('login'))
+    return redirect(url_for('login'))
 
 
 @app.route('/calendar')
 @rbac.allow(['student'], ['GET'])
 @login_required
+
 def calendar():
     global current_user
     print(current_user.object())
@@ -405,7 +406,35 @@ def get_grades_by_course_id(course_id):
     print(course_id)
     return CourseHandler().get_grades_by_course_id(course_id)
 
+#Aqui van las rutas que dan los conteos de tasks por usuario
 
+@app.route('/task/study/count/<int:student_id>', methods=['GET'])
+@rbac.allow(['student'], ['GET'], with_children = False)
+def get_study_task_count_by_user_id(student_id):
+    print(student_id)
+    return TaskHandler().get_study_task_count_by_user_id(student_id)
+
+
+@app.route('/task/personal/count/<int:student_id>', methods=['GET'])
+@rbac.allow(['student'],['GET'], with_children = False)
+def get_personal_task_count_by_user_id(student_id):
+    print(student_id)
+    return TaskHandler().get_personal_task_count_by_user_id(student_id)
+
+
+@app.route('/task/appointment/count/<int:student_id>', methods=['GET'])
+@rbac.allow(['student'],['GET'], with_children = False)
+def get_appointment_task_count_by_user_id(student_id):
+    print(student_id)
+    return TaskHandler().get_appointment_task_count_by_user_id(student_id)
+
+
+@app.route('/task/course/count/<int:student_id>', methods=['GET'])
+@rbac.allow(['student'],['GET'], with_children = False)
+def get_course_task_count_by_user_id(student_id):
+    print(student_id)
+    return TaskHandler().get_course_task_count_by_user_id(student_id)
+#--------------------------------------------------------
 # why we have duplicate
 
 # @app.route('/course/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE'])

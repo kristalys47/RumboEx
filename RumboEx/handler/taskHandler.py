@@ -81,7 +81,35 @@ class TaskHandler():
         print(mapped_result)
         return jsonify(mapped_result)
 
+    def get_study_task_count_by_user_id(self,user_id):
+        dao = TaskDAO()
+        result = dao.get_study_task_count_by_user_id(user_id)
+        if not result:
+            return jsonify(Error= "NOT FOUND"),404
+        print(result)
+        return jsonify(result)
 
+    def get_personal_task_count_by_user_id(self,user_id):
+        dao = TaskDAO()
+        result = dao.get_personal_task_count_by_user_id(user_id)
+        if not result:
+            return jsonify(Error="NOT FOUND"), 404
+        print(result)
+        return result
+    def get_appointment_task_count_by_user_id(self,user_id):
+        dao=TaskDAO()
+        result = dao.get_appointment_task_count_by_user_id(user_id)
+        if not result:
+            return jsonify(Error = "NOT FOUND"),404
+        print(result)
+        return result
+    def get_course_task_count_by_user_id(self,user_id):
+        dao = TaskDAO()
+        result = dao.get_course_task_count_by_user_id(user_id)
+        if not result:
+            return jsonify(Error = "NOT FOUND"),404
+        print(result)
+        return result
 
     def insert_personal_task(self, user_id, form):
         print('form', form)

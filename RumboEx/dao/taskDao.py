@@ -146,7 +146,49 @@ class TaskDAO:
             return None
         return result
 
+    def get_study_task_count_by_user_id(self, user_id):
+        cursor = self.conn.cursor()
+        query = "select count(*) from study_task natural inner join student_tasks where user_id = %s;"
+        cursor.execute(query, (user_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        if not result:
+           return None
+        return result
    
+    def get_personal_task_count_by_user_id(self,user_id):
+        cursor = self.conn.cursor()
+        query = "select count(*) from personal_task natural inner join student_tasks where user_id = %s;"
+        cursor.execute(query,(user_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        if not result:
+           return None
+        return result
+    
+    def get_appointment_task_count_by_user_id(self,user_id):
+        cursor = self.conn.cursor()
+        query = "select count(*) from appointment_task natural inner join student_task where user_id = %s;"
+        cursor.execute(query, (user_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        if not result:
+           return None
+        return result
+    
+    def get_course_task_count_by_user_id(self, user_id):
+        cursor = self.conn.cursor()
+        query = "select count(*) from course_task natural inner join student_task where user_id = %s;"
+        cursor.execute(query,(user_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        if not result:
+           return None
+        return result
 
     # POST Methods
 
@@ -192,3 +234,4 @@ class TaskDAO:
         cursor.execute(query, (user_id, task_id,))
         primary_key = cursor.fetchone()
         return primary_key
+
