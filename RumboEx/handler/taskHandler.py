@@ -95,21 +95,23 @@ class TaskHandler():
         if not result:
             return jsonify(Error="NOT FOUND"), 404
         print(result)
-        return result
+        return jsonify(result)
+
     def get_appointment_task_count_by_user_id(self,user_id):
         dao=TaskDAO()
         result = dao.get_appointment_task_count_by_user_id(user_id)
         if not result:
             return jsonify(Error = "NOT FOUND"),404
         print(result)
-        return result
+        return jsonify(result)
+
     def get_course_task_count_by_user_id(self,user_id):
         dao = TaskDAO()
         result = dao.get_course_task_count_by_user_id(user_id)
         if not result:
             return jsonify(Error = "NOT FOUND"),404
         print(result)
-        return result
+        return jsonify(result)
 
     def insert_personal_task(self, user_id, form):
         print('form', form)
