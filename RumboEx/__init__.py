@@ -300,7 +300,7 @@ def advisorlogin():
 def login():
     if request.method == 'POST':
         credential = request.get_json()
-        print(credential)
+        print('credential is: ',credential)
         user = User.query.filter_by(username=credential['username']).first()
         if user:
             global current_user
