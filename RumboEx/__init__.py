@@ -100,7 +100,7 @@ def getallusers():
     return handler.getallusers()
 
 @app.route('/student', methods=['POST', 'GET'])
-@rbac.allow(['admin', 'counselor', 'advisor'], ['GET'], with_children=False)
+@rbac.allow(['admin', 'counselor', 'advisor','psychologist'], ['GET'], with_children=False)
 def getallstudents():
     handler = StudentHandler()
     return handler.getallstudent()
@@ -275,6 +275,33 @@ def advisorlogin():
         user = User.query.filter_by(username=credential['username']).first()
         if user:
             if user.object()['roles'][0] == 'advisor':
+                global current_user
+                hashed_password = generate_password_hash(user.password, method='sha256')
+                if check_password_hash(hashed_password, credential['password']):
+                    print(user.object())
+                    try:
+                        remember = credential['remenber']
+                    except:
+                        remember = False
+                    ret = login_user(user, remember)
+                    print(ret)
+                    current_user = user
+                    return jsonify(result=user.object()), 200
+                else:
+                    return jsonify(result="There is an error"), 401
+            return jsonify(result="There is an error"), 401
+        return jsonify(result="There is an error"), 401
+    return jsonify(result="is not a Post method, but returns"), 200
+
+@app.route('/psychologistlogin', methods=['POST', 'GET'])
+@rbac.exempt
+def psychologistlogin():
+    if request.method == 'POST':
+        credential = request.get_json()
+        print(credential)
+        user = User.query.filter_by(username=credential['username']).first()
+        if user:
+            if user.object()['roles'][0] == 'psychologist':
                 global current_user
                 hashed_password = generate_password_hash(user.password, method='sha256')
                 if check_password_hash(hashed_password, credential['password']):
