@@ -1,4 +1,7 @@
 from RumboEx.dao.StudentDAO import StudentDAO
+from RumboEx.dao.CourseDao import CourseDAO
+from RumboEx.dao.taskDao import TaskDAO
+from RumboEx.handler.CourseHandler import CourseHandler
 from flask import jsonify
 
 class StudentHandler:
@@ -25,8 +28,34 @@ class StudentHandler:
 
     def getallstudent(self):
         students = StudentDAO().getallstudent()
+        if not students:
+            return jsonify(Error='NOT FOUND'), 404
         result = []
         for student in students:
             result.append(self.dicStudent(student))
         return jsonify(Users=result), 200
 
+    def get_students_with_courses_and_tasks(self):
+        dao = StudentDAO()
+        students = dao.getallstudent()
+        if not students:
+            return jsonify(Error='NOT FOUND'), 404
+        mapped_result = []
+        for s in students:
+            student = self.dicStudent(s)
+            courses = CourseHandler().get_courses_with_grades_by_student_id(student['user_id'])
+            print(courses)
+            if courses.response is 200:
+                print(courses.status_code)
+                student['courses'] = courses.status_code
+            # student['tasks'] = TaskDAO().get
+            mapped_result.append(student)
+        print(mapped_result)
+        return jsonify(mapped_result), 200
+
+
+    def getStudent(self, user_id):
+        student = StudentDAO().getStudent(user_id)
+        if not student:
+            return jsonify(Error='NOT FOUND'), 404
+        return jsonify(self.dicStudent(student)), 200

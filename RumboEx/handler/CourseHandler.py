@@ -13,6 +13,22 @@ class CourseHandler():
             mapped_result.append(self.mapToCourseDict(r))
         return jsonify(mapped_result)
 
+    def get_courses_with_grades_by_student_id(self, student_id):
+        dao = CourseDAO()
+        courses = dao.get_courses_by_student_id(student_id)
+        if not courses:
+            return jsonify(Error="NOT FOUND"), 404
+        mapped_result = []
+        for c in courses:
+            course = self.mapToCourseDict(c)
+            course['grades'] = []
+            grades = dao.get_grades_by_course_id(course['codification'])
+            if grades:
+                for g in grades:
+                    course['grades'].append(self.mapToGradeDict(g))
+            mapped_result.append(course)
+        return jsonify(mapped_result), 200
+
     def get_course_by_course_id(self, course_id):
         dao = CourseDAO()
         result = dao.get_course_by_course_id(course_id)
