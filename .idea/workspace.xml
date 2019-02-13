@@ -1,0 +1,1429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4d1d2948-75c8-4801-9adb-524cb490fd34" name="Default" comment="changed side bar to have hidden tabs">
+      <change afterPath="$PROJECT_DIR$/RumboEx/dao/ProgramDao.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RumboEx/handler/ProgramHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/RumboEx.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/RumboEx.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/Blueprints/student_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/Blueprints/student_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/Blueprints/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/Blueprints/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/config/dbconfig.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/config/dbconfig.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/handler/StudentHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/handler/StudentHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/handler/taskHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/handler/taskHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/static/js/lib/calendar-2/moment.latest.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/static/js/lib/calendar-2/moment.latest.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/static/js/lib/calendar-2/semantic.ui.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/static/js/lib/calendar-2/semantic.ui.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/static/js/lib/calendar/fullcalendar-init.js" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/static/js/lib/calendar/fullcalendar-init.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/static/js/lib/calendar/fullcalendar.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/static/js/lib/calendar/fullcalendar.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/static/js/lib/chart-amchart/amcharts.js" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/static/js/lib/chart-amchart/amcharts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/static/js/lib/chart-amchart/ammap.js" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/static/js/lib/chart-amchart/ammap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/static/js/lib/chart-amchart/export.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/static/js/lib/chart-amchart/export.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/static/js/lib/chart-js/Chart.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/static/js/lib/chart-js/Chart.bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/static/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/static/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/static/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/static/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/static/js/lib/html5-editor/wysihtml5-0.3.0.js" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/static/js/lib/html5-editor/wysihtml5-0.3.0.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/static/js/lib/moment/moment.js" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/static/js/lib/moment/moment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/static/js/lib/rangeSlider/moment-with-locales.js" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/static/js/lib/rangeSlider/moment-with-locales.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/static/js/lib/rangeSlider/moment.js" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/static/js/lib/rangeSlider/moment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RumboExAngular/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../RumboExAngular/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RumboExAngular/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../RumboExAngular/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RumboExAngular/src/app/components/loginmenu/loginmenu.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../RumboExAngular/src/app/components/loginmenu/loginmenu.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/advisorlogin/advisorlogin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/advisorlogin/advisorlogin.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/counselorlogin/counselorlogin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/counselorlogin/counselorlogin.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/psychologistlogin/psychologistlogin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/psychologistlogin/psychologistlogin.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/studentlogin/studentlogin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/studentlogin/studentlogin.component.html" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/RumboEx$manage.coverage" NAME="manage Coverage Results" MODIFIED="1531763646335" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RumboEx$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1531232380177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/RumboEx" />
+    <SUITE FILE_PATH="coverage/RumboEx$RumboEx.coverage" NAME="RumboEx Coverage Results" MODIFIED="1530812746999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1735957198">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="19" />
+          <entry key="project.open.time.10" value="5" />
+          <entry key="project.open.time.11" value="2" />
+          <entry key="project.open.time.12" value="2" />
+          <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.open.time.8" value="3" />
+          <entry key="project.open.time.9" value="8" />
+          <entry key="project.opened" value="23" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts">
+        <counts>
+          <entry key="Angular2LanguageService" value="7" />
+          <entry key="TypeScriptServerServiceImpl" value="14" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="css" value="108" />
+          <entry key="html" value="5154" />
+          <entry key="py" value="4691" />
+          <entry key="ts" value="17022" />
+          <entry key="txt" value="1435" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="CSS" value="108" />
+          <entry key="HTML" value="5154" />
+          <entry key="PLAIN_TEXT" value="1435" />
+          <entry key="Python" value="4688" />
+          <entry key="SQL" value="3" />
+          <entry key="TypeScript" value="17022" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="css" value="9" />
+          <entry key="html" value="97" />
+          <entry key="iml" value="1" />
+          <entry key="json" value="2" />
+          <entry key="less" value="2" />
+          <entry key="md" value="1" />
+          <entry key="py" value="44" />
+          <entry key="ts" value="163" />
+          <entry key="txt" value="1" />
+          <entry key="xml" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CSS" value="9" />
+          <entry key="HTML" value="97" />
+          <entry key="IDEA_MODULE" value="1" />
+          <entry key="JSON" value="2" />
+          <entry key="Less" value="2" />
+          <entry key="Markdown" value="1" />
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="Python" value="44" />
+          <entry key="TypeScript" value="163" />
+          <entry key="XML" value="2" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/RumboEx/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="530">
+              <caret line="155" column="20" selection-start-line="155" selection-start-column="20" selection-end-line="155" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="courses.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/courses.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#27#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="student_page.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/student_page.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="196">
+              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StudentHandler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RumboEx/handler/StudentHandler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="246" selection-start-line="12" selection-start-column="246" selection-end-line="12" selection-end-column="246" />
+              <folding>
+                <element signature="e#0#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProgramHandler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RumboEx/handler/ProgramHandler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="25" column="62" lean-forward="true" selection-start-line="25" selection-start-column="62" selection-end-line="25" selection-end-column="62" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProgramDao.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RumboEx/dao/ProgramDao.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="30" column="44" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
+              <folding>
+                <element signature="e#0#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CourseDao.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RumboEx/dao/CourseDao.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" lean-forward="true" selection-end-line="45" />
+              <folding>
+                <element signature="e#0#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="taskDao.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RumboEx/dao/taskDao.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="tasks.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/tasks.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="logins.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/logins.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="TypeScript File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="SYNC" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/models/grade.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/models/task.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/individual-course/individual-course.component.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/modal/modal.component.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/actions/student.action.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/reducers/student.reducer.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/app-routing.module.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/studentlogin/studentlogin.component.html" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/professorlogin/professorlogin.component.html" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/mentorlogin/mentorlogin.component.html" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/login/login.component.html" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/counselorlogin/counselorlogin.component.html" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/advisorlogin/advisorlogin.component.html" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/adminlogin/adminlogin.component.html" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/daily-schedule/daily-schedule.component.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/profile/profile.component.html" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/models/student.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/calendar/calendar.component.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/models/user.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/store/actions/student.action.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/app.state.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/store/effects/student.effect.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/package.json" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/store/effects/student.effect.effects.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/store/actions/student.actions.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/services/student.service.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/store/effects/student.effects.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/models/course.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/store/reducers/index.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/store/actions/course.actions.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/store/reducers/course.reducer.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/mains/psychologistmain/psychologistmain.component.html" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/messages/messages.component.html" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/mains/main/main.component.html" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/store/reducers/student.reducer.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/profile/profile.component.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/store/effects/course.effects.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/app.module.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/studentlogin/studentlogin.component.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/store/actions/task.actions.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/store/reducers/task.reducer.ts" />
+        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/store/effects/task.effects.ts" />
+        <option value="$PROJECT_DIR$/Dockerfile" />
+        <option value="$PROJECT_DIR$/RumboEx/handler/taskHandler.py" />
+        <option value="$PROJECT_DIR$/RumboEx/Blueprints/tasks.py" />
+        <option value="$PROJECT_DIR$/RumboEx/Blueprints/student_page.py" />
+        <option value="$PROJECT_DIR$/RumboEx/dao/StudentDAO.py" />
+        <option value="$PROJECT_DIR$/RumboEx/handler/StudentHandler.py" />
+        <option value="$PROJECT_DIR$/RumboEx/dao/ProgramDao.py" />
+        <option value="$PROJECT_DIR$/RumboEx/handler/ProgramHandler.py" />
+        <option value="$PROJECT_DIR$/RumboEx/__init__.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="928" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="RumboEx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RumboEx" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RumboEx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RumboEx" type="462c0819:PsiDirectoryNode" />
+              <item name="RumboEx" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RumboEx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RumboEx" type="462c0819:PsiDirectoryNode" />
+              <item name="RumboEx" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RumboEx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RumboEx" type="462c0819:PsiDirectoryNode" />
+              <item name="RumboEx" type="462c0819:PsiDirectoryNode" />
+              <item name="handler" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///home/irixa/PycharmProjects/RumboExAngular/src/app/models/task.ts" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../RumboExAngular" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/../RumboExAngular/node_modules/typescript/lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../RumboExAngular/src/app/components/daily-schedule" />
+      <recent name="$PROJECT_DIR$/../RumboExAngular/src" />
+      <recent name="$PROJECT_DIR$/../RumboExAngular/src/app/models" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../RumboExAngular/src/app/store/effects" />
+      <recent name="$PROJECT_DIR$/../RumboExAngular/src/app/store" />
+      <recent name="$PROJECT_DIR$/../RumboExAngular/src/app/components/individual-course" />
+      <recent name="$PROJECT_DIR$/../RumboExAngular/src/app/components" />
+      <recent name="$PROJECT_DIR$/../RumboExAngular/src/app" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.manage">
+    <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
+      <module name="RumboExAngular" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <module name="RumboExAngular" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+    </configuration>
+    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
+      <module name="RumboExAngular" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+    </configuration>
+    <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RumboEx" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/RumboEx" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RumboEx/__init__.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="manage" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RumboEx" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="RumboEx" type="Python.FlaskServer" factoryName="Flask server">
+      <module name="RumboEx" />
+      <option name="target" value="$PROJECT_DIR$/RumboEx/__init__.py" />
+      <option name="targetType" value="PATH" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="RumboExAngular" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <module name="RumboExAngular" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <module name="RumboExAngular" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_regexPattern" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Twisted Trial">
+      <module name="RumboExAngular" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <module name="RumboExAngular" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <module name="RumboExAngular" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
+    <list>
+      <item itemvalue="Flask server.RumboEx" />
+      <item itemvalue="Python.__init__" />
+      <item itemvalue="Python.manage" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.manage" />
+        <item itemvalue="Python.__init__" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4d1d2948-75c8-4801-9adb-524cb490fd34" name="Default" comment="" />
+      <created>1529587280967</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1529587280967</updated>
+    </task>
+    <task id="LOCAL-00001" summary="added tasks dao, handler and routes">
+      <created>1530116383088</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1530116383088</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Changed the calendar default date to current date. Updated service to fetch data from server.&#10;&#10;Still need to add the data to the calendar.">
+      <created>1530226086803</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1530226086803</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Changed the calendar default date to current date. Updated service to fetch data from server.&#10;&#10;Still need to add the data to the calendar.">
+      <created>1530226138441</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1530226138441</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added CORS">
+      <created>1530227128557</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1530227128557</updated>
+    </task>
+    <task id="LOCAL-00005" summary="rbac roles work for GET and POST methods">
+      <created>1531237891796</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1531237891796</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Cleaning code">
+      <created>1531916478842</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1531916478842</updated>
+    </task>
+    <task id="LOCAL-00007" summary="adding an app-routing module">
+      <created>1532116217709</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1532116217710</updated>
+    </task>
+    <task id="LOCAL-00008" summary="adding mobiscroll components to ui">
+      <created>1532116336974</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1532116336974</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fixed app-routing module: it had to be in the same folder as app.module">
+      <created>1532287263007</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1532287263007</updated>
+    </task>
+    <task id="LOCAL-00010" summary="added new task form and widget components">
+      <created>1532300351051</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1532300351051</updated>
+    </task>
+    <task id="LOCAL-00011" summary="post tasks">
+      <created>1532631419595</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1532631419595</updated>
+    </task>
+    <task id="LOCAL-00012" summary="changed code to have recycled functions">
+      <created>1532720487298</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1532720487298</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Router WORKS! Application is now SPA">
+      <created>1532963531329</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1532963531329</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Added course service to fetch the current student's courses">
+      <created>1532969174458</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1532969174458</updated>
+    </task>
+    <task id="LOCAL-00015" summary="moving what we did in ionic... again">
+      <created>1532974203686</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1532974203686</updated>
+    </task>
+    <task id="LOCAL-00016" summary="modal and popover services">
+      <created>1533047296095</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1533047296095</updated>
+    </task>
+    <task id="LOCAL-00017" summary="modal and popover components">
+      <created>1533048318333</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1533048318333</updated>
+    </task>
+    <task id="LOCAL-00018" summary="added route to get student's courses">
+      <created>1535551784246</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1535551784246</updated>
+    </task>
+    <task id="LOCAL-00019" summary="added Angular Material components to project">
+      <created>1535917776455</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1535917776455</updated>
+    </task>
+    <task id="LOCAL-00020" summary="working on individual course content">
+      <created>1535919615699</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1535919615699</updated>
+    </task>
+    <task id="LOCAL-00021" summary="added functions to services&#10;&#10;course service: get specific course&#10;task service: get tasks from specific course">
+      <created>1536196300725</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1536196300725</updated>
+    </task>
+    <task id="LOCAL-00022" summary="courses now show real data and task can be divided by done and not done">
+      <created>1536196374522</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1536196374522</updated>
+    </task>
+    <task id="LOCAL-00023" summary="added routes to get tasks by student id and course id">
+      <created>1536196451352</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1536196451352</updated>
+    </task>
+    <task id="LOCAL-00024" summary="added dashboard and grades">
+      <created>1536326197351</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1536326197351</updated>
+    </task>
+    <task id="LOCAL-00025" summary="users can click a class in dashboard to navigate to that course page">
+      <created>1536615101128</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1536615101128</updated>
+    </task>
+    <task id="LOCAL-00026" summary="get real grades and calculate progress of a course">
+      <created>1536615154257</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1536615154257</updated>
+    </task>
+    <task id="LOCAL-00027" summary="get grades by course id">
+      <created>1536615290878</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1536615290878</updated>
+    </task>
+    <task id="LOCAL-00028" summary="added requirements.txt">
+      <created>1536765210146</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1536765210146</updated>
+    </task>
+    <task id="LOCAL-00029" summary="added button and dialog form to create a new task">
+      <created>1537998279889</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1537998279889</updated>
+    </task>
+    <task id="LOCAL-00030" summary="changed side bar to have hidden tabs">
+      <created>1538422750444</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1538422750444</updated>
+    </task>
+    <task id="LOCAL-00031" summary="added pie chart">
+      <created>1538430306463</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1538430306463</updated>
+    </task>
+    <task id="LOCAL-00032" summary="saved tasks data in a variable to avoid using a get every time a page is loaded">
+      <created>1538430485770</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1538430485770</updated>
+    </task>
+    <task id="LOCAL-00033" summary="added a cacheable decorator to avoid fetching same data">
+      <created>1538510788598</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1538510788599</updated>
+    </task>
+    <task id="LOCAL-00034" summary=".">
+      <created>1538510812651</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1538510812651</updated>
+    </task>
+    <task id="LOCAL-00035" summary="merge">
+      <created>1538510906749</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1538510906749</updated>
+    </task>
+    <task id="LOCAL-00036" summary="added a cacheable decorator to avoid fetching same data">
+      <created>1538511692601</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1538511692601</updated>
+    </task>
+    <task id="LOCAL-00037" summary="added gauges from google charts to show class progress">
+      <created>1538683658329</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1538683658329</updated>
+    </task>
+    <task id="LOCAL-00038" summary="trying to show actual grades on dashboard">
+      <created>1538683716465</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1538683716465</updated>
+    </task>
+    <task id="LOCAL-00039" summary="task post does not work">
+      <created>1538686459917</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1538686459917</updated>
+    </task>
+    <task id="LOCAL-00040" summary="demo">
+      <created>1539177953091</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1539177953091</updated>
+    </task>
+    <task id="LOCAL-00041" summary="added user profile component">
+      <created>1540763322588</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1540763322588</updated>
+    </task>
+    <task id="LOCAL-00042" summary="ok ngrx store works... now need to figure out how to connect it to db">
+      <created>1540938168417</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1540938168417</updated>
+    </task>
+    <task id="LOCAL-00043" summary=".">
+      <created>1540958688386</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1540958688386</updated>
+    </task>
+    <task id="LOCAL-00044" summary="set a default path when URL is empty or unknown">
+      <created>1541457227826</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1541457227826</updated>
+    </task>
+    <task id="LOCAL-00045" summary="fixed typo">
+      <created>1541461752612</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1541461752612</updated>
+    </task>
+    <task id="LOCAL-00046" summary="fixed ngrx store (had to change ngrx version)">
+      <created>1542797471875</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1542797471875</updated>
+    </task>
+    <task id="LOCAL-00047" summary=".">
+      <created>1542810460007</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1542810460007</updated>
+    </task>
+    <task id="LOCAL-00048" summary="fixed student routes">
+      <created>1550010208267</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1550010208267</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.48488122" side_tool="true" weight="0.4364035" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5536388" weight="0.24487706" />
+      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.5124378" weight="0.27405858" />
+      <window_info anchor="bottom" id="Python Console" order="14" weight="0.3294979" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.5151188" visible="true" weight="0.27911857" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1840796" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="TypeScript" order="9" weight="0.3294979" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" order="13" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4954178" weight="0.32894737" />
+    </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16804865" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.5124378" weight="0.27405858" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TypeScript" order="9" weight="0.3294979" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5536388" weight="0.24487706" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4954178" weight="0.32894737" />
+      <window_info anchor="bottom" id="Python Console" order="14" weight="0.3294979" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.5151188" visible="true" weight="0.2224554" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.48488122" side_tool="true" weight="0.4364035" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Messages" order="13" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/../Watric-Server" />
+      <path value="$PROJECT_DIR$/../ionic-tutorial" />
+      <path value="$PROJECT_DIR$/../mobiscroll-test" />
+      <path value="$PROJECT_DIR$/../rumboEx-Ionic" />
+      <path value="$PROJECT_DIR$/../test-app" />
+    </ignored-roots>
+    <MESSAGE value="added functions to services&#10;&#10;course service: get specific course&#10;task service: get tasks from specific course" />
+    <MESSAGE value="courses now show real data and task can be divided by done and not done" />
+    <MESSAGE value="added routes to get tasks by student id and course id" />
+    <MESSAGE value="added dashboard and grades" />
+    <MESSAGE value="users can click a class in dashboard to navigate to that course page" />
+    <MESSAGE value="get real grades and calculate progress of a course" />
+    <MESSAGE value="get grades by course id" />
+    <MESSAGE value="added requirements.txt" />
+    <MESSAGE value="added button and dialog form to create a new task" />
+    <MESSAGE value="changed side bar to have hidden tabs" />
+    <MESSAGE value="added pie chart" />
+    <MESSAGE value="saved tasks data in a variable to avoid using a get every time a page is loaded" />
+    <MESSAGE value="merge" />
+    <MESSAGE value="added a cacheable decorator to avoid fetching same data" />
+    <MESSAGE value="added gauges from google charts to show class progress" />
+    <MESSAGE value="trying to show actual grades on dashboard" />
+    <MESSAGE value="task post does not work" />
+    <MESSAGE value="demo" />
+    <MESSAGE value="added user profile component" />
+    <MESSAGE value="ok ngrx store works... now need to figure out how to connect it to db" />
+    <MESSAGE value="set a default path when URL is empty or unknown" />
+    <MESSAGE value="fixed typo" />
+    <MESSAGE value="fixed ngrx store (had to change ngrx version)" />
+    <MESSAGE value="." />
+    <MESSAGE value="fixed student routes" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed student routes" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../django_tutorial/django_tutorial/urls.py</url>
+          <line>15</line>
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/components/schedule/daily-schedule/daily-schedule.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="44" column="9" lean-forward="true" selection-start-line="38" selection-start-column="16" selection-end-line="44" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/node_modules/@angular/common/http/src/client.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3006">
+          <caret line="810" column="4" selection-start-line="810" selection-start-column="4" selection-end-line="810" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/services/task/task.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/app.state.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/components/schedule/calendar/calendar.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="40" column="36" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/components/profile/profile.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="34" column="28" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/store2/reducers/student.reducer.ts" />
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="40" column="31" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/store2/actions/student.action.ts" />
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/services/student/student.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/components/mains/main/main.component.ts" />
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/store2/effects/student.effect.ts" />
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/components/studentPages/course-detail/course-detail.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="101" column="5" selection-start-line="97" selection-start-column="4" selection-end-line="101" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/store/reducers/course.reducer.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="81" selection-start-line="13" selection-start-column="81" selection-end-line="13" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/components/mains/psychologistmain/psychologistmain.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/components/mains/counselormain/counselormain.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-270">
+          <caret line="99" column="26" selection-start-line="99" selection-start-column="26" selection-end-line="99" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/components/messages/messages.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="44" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/store/actions/course.actions.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/models/task.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/models/user.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/models/course.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/components/mains/main/main.component.html" />
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/components/profile/profile.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="148" column="69" selection-start-line="148" selection-start-column="69" selection-end-line="148" selection-end-column="69" />
+          <folding>
+            <element signature="e#1309#1356#0" expanded="true" />
+            <element signature="e#4831#4890#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/store/reducers/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/studentlogin/studentlogin.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="48" column="32" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#348#400#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/store/actions/student.actions.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/models/student.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/store/actions/task.actions.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/store/reducers/student.reducer.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/store/reducers/task.reducer.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="25" column="46" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/store/effects/student.effects.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="22" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/store/effects/course.effects.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="e#46#89#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RumboExAngular/src/app/store/effects/task.effects.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" selection-start-line="23" selection-start-column="1" selection-end-line="24" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/handler/taskHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2055">
+          <caret line="138" column="24" selection-start-line="138" selection-start-column="24" selection-end-line="138" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/dao/taskDao.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/venv/local/lib/python2.7/site-packages/flask_rbac/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="145" column="8" selection-start-line="145" selection-start-column="8" selection-end-line="145" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/logins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/courses.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/dao/StudentDAO.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="51" column="35" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/student_page.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/handler/StudentHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="246" selection-start-line="12" selection-start-column="246" selection-end-line="12" selection-end-column="246" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/dao/CourseDao.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" lean-forward="true" selection-end-line="45" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/handler/MessageHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="30" lean-forward="true" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/dao/ProgramDao.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="44" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/handler/ProgramHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="62" lean-forward="true" selection-start-line="25" selection-start-column="62" selection-end-line="25" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="155" column="20" selection-start-line="155" selection-start-column="20" selection-end-line="155" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

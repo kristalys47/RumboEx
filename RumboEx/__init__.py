@@ -1,17 +1,8 @@
 from flask import Flask, request, render_template, jsonify
 from flask_login import LoginManager, login_required, current_user
 from flask_sqlalchemy import SQLAlchemy
+from RumboEx.config.dbconfig import pg_config
 
-# why do we need this
-# from RumboEx.dao.StudentDAO import StudentDAO
-# from RumboEx.dao.taskDao import TaskDAO
-# from RumboEx.dao.CourseDao import CourseDAO
-
-# Handlers from Rest API
-from RumboEx.handler.taskHandler import TaskHandler
-from RumboEx.handler.StudentHandler import StudentHandler
-from RumboEx.handler.CourseHandler import CourseHandler
-from RumboEx.handler.MessageHandler import MessageHandler
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -19,23 +10,33 @@ from flask_rbac import RBAC
 from flask_cors import CORS, cross_origin
 # from flask_jwt_extended import JWTManager
 
+
+# Handlers from Rest API
+from RumboEx.handler import ProgramHandler
+from RumboEx.handler.taskHandler import TaskHandler
+from RumboEx.handler.StudentHandler import StudentHandler
+from RumboEx.handler.CourseHandler import CourseHandler
+from RumboEx.handler.MessageHandler import MessageHandler
+
+
 # This code must be un once two create the tables in the DataBase
 # User.metadata.create_all(engine)
 # Role.metadata.create_all(engine)
 # db.create.all()
+
 
 # Staring Flask
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
 # Set RBAC to negative logic(All roles are block unless allowed or exempt)
-app.config['RBAC_USE_WHITE'] = True
+# app.config['RBAC_USE_WHITE'] = True
 app.debug = True
 CORS(app)
 
 # DB info
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ivbustqhsmsaps:7a8951928430c500e432dbf97728f42f5033648c052a5befce59295cabd987c5@ec2-23-21-216-174.compute-1.amazonaws.com:5432/d9t2kdqh5u8ekk'
-engine = create_engine('postgres://ivbustqhsmsaps:7a8951928430c500e432dbf97728f42f5033648c052a5befce59295cabd987c5@ec2-23-21-216-174.compute-1.amazonaws.com:5432/d9t2kdqh5u8ekk', echo=True)
+app.config['SQLALCHEMY_DATABASE_URI'] = pg_config['url']
+engine = create_engine(pg_config['url'], echo=True)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 Session = sessionmaker(bind=engine)
@@ -50,17 +51,12 @@ from RumboEx.model.user import User
 # NPI
 # jwt = JWTManager(app)
 
-
-rbac = RBAC(app)
+# Starting RBAC
+rbac = RBAC()
+rbac.init_app(app)
 rbac.set_user_loader(lambda: current_user)
 rbac.set_user_model(User)
 rbac.set_role_model(Role)
-
-# Blueprints to import. Need to be after rbac
-from RumboEx.Blueprints.logins import logins
-from RumboEx.Blueprints.tasks import tasks
-from RumboEx.Blueprints.courses import courses
-from RumboEx.Blueprints.student_page import student_page
 
 
 login_manager = LoginManager()
@@ -79,6 +75,12 @@ rbacDummy = User(roles=[start])
 # To use this variable write global before the name in the methods
 current_user = rbacDummy
 
+
+# Blueprints to import. Need to be after rbac
+from RumboEx.Blueprints.logins import logins
+from RumboEx.Blueprints.tasks import tasks
+from RumboEx.Blueprints.courses import courses
+from RumboEx.Blueprints.student_page import student_page
 
 # Register blueprints
 app.register_blueprint(logins)
@@ -99,7 +101,7 @@ def hello_world():
 def current():
     global current_user
     return jsonify(current_user.object())
-    return "esta en al pantalla de python el current user"
+    # return "esta en al pantalla de python el current user"
 
 
 @app.route('/register', methods=['POST', 'GET', 'OPTIONS'])
@@ -147,3 +149,8 @@ def flash_errors(form):
 @rbac.allow(['student', 'mentor', 'counselor', 'psychologist'], ['GET'], with_children=False)
 def get_messages_by_user_id(user_id):
     return MessageHandler().get_chats_by_user_id(user_id)
+
+@app.route('/faculties', methods=['GET'])
+@rbac.exempt
+def get_faculties():
+    return ProgramHandler.get_faculties_and_programs()

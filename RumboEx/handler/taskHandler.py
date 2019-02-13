@@ -136,6 +136,7 @@ class TaskHandler():
 
     def insert_personal_task(self, user_id, form):
         print('form', form)
+        print(len(form))
         if len(form) is not 4:
             return jsonify(Error="Malformed post request"), 400
         else:
