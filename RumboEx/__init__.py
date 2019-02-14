@@ -12,7 +12,7 @@ from flask_cors import CORS, cross_origin
 
 
 # Handlers from Rest API
-from RumboEx.handler import ProgramHandler
+from RumboEx.handler.ProgramHandler import ProgramHandler
 from RumboEx.handler.taskHandler import TaskHandler
 from RumboEx.handler.StudentHandler import StudentHandler
 from RumboEx.handler.CourseHandler import CourseHandler
@@ -108,13 +108,14 @@ def current():
 @rbac.allow(['admin'], ['GET', 'POST', 'OPTIONS'], with_children=False)
 def createStudent():
     if request.method == 'POST':
-        cred = request.form
+        cred = request.get_json()
         print(cred)
-        username = cred['email'].split('@')[0]
+        # username = cred['email'].split('@')[0]
+        username = cred['username']
         email = cred['email']
         name = cred['name']
         lastname = cred['lastname']
-        program = cred['program']
+        program = cred['program_num']
         password = cred['password']
         student_num = cred['student_num']
         student = StudentHandler()
@@ -150,7 +151,8 @@ def flash_errors(form):
 def get_messages_by_user_id(user_id):
     return MessageHandler().get_chats_by_user_id(user_id)
 
+
 @app.route('/faculties', methods=['GET'])
 @rbac.exempt
 def get_faculties():
-    return ProgramHandler.get_faculties_and_programs()
+    return ProgramHandler().get_faculties_and_programs()

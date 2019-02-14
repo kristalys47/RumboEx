@@ -2,7 +2,7 @@ from flask import jsonify
 from RumboEx.dao.MessageDao import MessageDAO
 
 
-class MessageHandler():
+class MessageHandler:
 
     def get_chats_by_user_id(self, user_id):
         dao = MessageDAO()
