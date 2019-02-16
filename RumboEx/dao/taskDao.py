@@ -113,10 +113,15 @@ class TaskDAO:
             return None
         return result
 
-    def get_study_tasks_by_user_id_and_course_id(self, user_id, course_id):
+    def get_study_tasks_by_user_id_and_course_id(self, enrolled_id):
         cursor = self.conn.cursor()
-        query = "select * from task inner join course_task using (task_id) natural inner join student_tasks where user_id = %s and course_id = %s;"
-        cursor.execute(query, (user_id, course_id,))
+        query = "select " \
+                "t.task_id, t.task_name, t.task_description, t.start_time, t.end_time, t.finished " \
+                "from " \
+                "task as t inner join study_task using (task_id) " \
+                "natural inner join enrolled " \
+                "where study_task.enrolled_id=%s;"
+        cursor.execute(query, (enrolled_id,))
         result = []
         for row in cursor:
             result.append(row)
