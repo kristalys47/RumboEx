@@ -14,10 +14,12 @@ def get_personal_tasks(student_id):
     global current_user
     if request.method == 'GET':
         return TaskHandler().get_personal_task_by_user_id(student_id)
-    # why do i have to put options instead of post
     elif request.method == 'OPTIONS':
-        print('request', request, request.data, request.form, request.get_json())
-        return TaskHandler().insert_personal_task(student_id, request.data)
+        pass
+    # why do i have to put options instead of post
+    elif request.method == 'POST':
+        print('request', request.form)
+        return TaskHandler().insert_personal_task(student_id, request.form)
 
 
 # get study tasks by user id

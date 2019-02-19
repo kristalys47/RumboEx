@@ -30,9 +30,18 @@ class StudentDAO:
 
     def getallstudent(self):
         cursor = self.conn.cursor()
-        query = 'select  u.name, u.lastname, u.username, u.id as user_id, u.email, u.password, s.student_num, s.enrolled_program, r.name as role_name, r.id as role_id, p.name as program_name, d.name as department_name, p.department_num ' \
-                'from  users_roles as ur  inner join "user" as u  on u.id=ur.user_id  inner join "role" as r on r.id=ur.role_id inner join student as s on s.user_id=u.id inner join student_enrolled as se on se.student_num=s.student_num ' \
-                'inner join "program" as p on p.program_num=s.enrolled_program inner join department as d on d.department_num=p.department_num where r.id=1 order by u.lastname;'
+        query = 'select ' \
+                'u.id, u.username, u.name, u.lastname, u.email, u.password, ' \
+                's.student_num, s.enrolled_program as program_num, ' \
+                'p.name as program_name, ' \
+                'f.faculty_num, f.name as faculty_name, ' \
+                'r.id as role_id, r.name as role_name ' \
+                'from ' \
+                '"user" as u inner join student as s on u.id=s.user_id ' \
+                'inner join users_roles as ur on ur.user_id=u.id ' \
+                'inner join "role" as r on r.id=ur.role_id ' \
+                'inner join program as p on p.program_num=s.enrolled_program ' \
+                'inner join faculty as f on f.faculty_num=p.faculty_num;'
         cursor.execute(query)
         student = []
         for user in cursor:
@@ -41,8 +50,18 @@ class StudentDAO:
 
     def getStudent(self, user_id):
         cursor = self.conn.cursor()
-        query = 'select  u.name, u.lastname, u.username, u.id as user_id, u.email, u.password, s.student_num, s.enrolled_program, r.name as role_name, r.id as role_id, p.name as program_name, d.name as department_name, p.department_num ' \
-                'from  users_roles as ur  inner join "user" as u  on u.id=ur.user_id  inner join "role" as r on r.id=ur.role_id inner join student as s on s.user_id=u.id inner join student_enrolled as se on se.student_num=s.student_num ' \
-                'inner join "program" as p on p.program_num=s.enrolled_program inner join department as d on d.department_num=p.department_num where r.id=1 and u.id=%s;'
+        query = 'select ' \
+                'u.id, u.username, u.name, u.lastname, u.email, u.password, ' \
+                's.student_num, ' \
+                's.enrolled_program as program_num, p.name as program_name, ' \
+                'f.faculty_num, f.name as faculty_name, ' \
+                'r.id as role_id, r.name as role_name ' \
+                'from ' \
+                '"user" as u inner join student as s on u.id=s.user_id ' \
+                'inner join users_roles as ur on ur.user_id=u.id ' \
+                'inner join "role" as r on r.id=ur.role_id ' \
+                'inner join program as p on p.program_num=s.enrolled_program ' \
+                'inner join faculty as f on f.faculty_num=p.faculty_num ' \
+                'where u.id=%s;'
         cursor.execute(query, (user_id,))
         return cursor.fetchone()

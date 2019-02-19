@@ -109,7 +109,7 @@
             var eventObject = {
                 title: $.trim($(this).text()) // use the element's text as the event title
             };
-            // store the Event Object in the DOM element so we can get to it later
+            // store2 the Event Object in the DOM element so we can get to it later
             $(this).data('eventObject', eventObject);
             // make the event draggable using jQuery UI
             $(this).draggable({

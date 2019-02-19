@@ -1997,7 +1997,7 @@ rangy.createModule("DomUtil", function(api, module) {
                 To get round the problem presented by the final fact above, we can use the fact that TextRange's
                 moveStart() and moveEnd() methods return the actual number of characters moved, which is not necessarily
                 the same as the number of characters it was instructed to move. The simplest approach is to use this to
-                store the characters moved when moving both the start and end of the range to the start of the document
+                store2 the characters moved when moving both the start and end of the range to the start of the document
                 body and subtracting the start offset from the end offset (the "move-negative-gazillion" method).
                 However, this is extremely slow when the document is large and the range is near the end of it. Clearly
                 doing the mirror image (i.e. moving the range boundaries to the end of the document) has the same
@@ -5582,7 +5582,7 @@ wysihtml5.dom.replaceWithChildNodes = function(node) {
  *    - div[contentEditable] elements don't support it
  *    - older browsers (such as IE8 and Firefox 3.6) don't support it at all
  *
- * @param {Object} parent Instance of main wysihtml5.Editor class
+ * @param {Object} parent Instance of studentmain wysihtml5.Editor class
  * @param {Element} view Instance of wysihtml5.views.* class
  * @param {String} placeholderText
  *

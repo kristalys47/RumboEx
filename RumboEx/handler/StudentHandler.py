@@ -10,8 +10,9 @@ class StudentHandler:
         return {'user_id': user[0], 'username': user[1], 'name': user[2], 'lastname': user[3]}
 
     def dicStudent(self, student):
-        return {'name': student[0], 'lastname': student[1], 'username': student[2], 'user_id': student[3], 'email': student[4], 'password': student[5], 'student_num': student[6], 'enrolled_program': student[7], 'role_name': student[8], 'role_id': student[9], 'program_name': student[10], 'department_name': student[11], 'department_num': student[12]}
+        return {'user_id': student[0], 'username': student[1], 'name': student[2], 'lastname': student[3], 'email': student[4], 'password': student[5], 'student_num': student[6], 'program_num': student[7], 'program_name': student[8], 'faculty_num': student[9], 'faculty_name': student[10], 'role_num': student[11], 'role_name': student[12]}
 
+    # why we have this double??
     def dicUser(self, user):
         return {'user_id': user[0], 'username': user[1], 'name': user[2], 'lastname': user[3]}
 
