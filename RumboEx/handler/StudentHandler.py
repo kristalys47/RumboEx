@@ -2,6 +2,7 @@ from RumboEx.dao.StudentDAO import StudentDAO
 from RumboEx.dao.CourseDao import CourseDAO
 from RumboEx.dao.taskDao import TaskDAO
 from RumboEx.handler.CourseHandler import CourseHandler
+from RumboEx.handler.taskHandler import TaskHandler
 from flask import jsonify
 
 class StudentHandler:
@@ -74,11 +75,24 @@ class StudentHandler:
         result = []
         if not students:
             return jsonify(Error="NOT FOUND"), 404
-        handler = CourseHandler()
+        course_handler = CourseHandler()
+        task_handler = TaskHandler()
         for s in students:
             student = self.dicStudent(s)
-            # courses = handler.get_courses_with_grades_by_student_id(student['id'])
-            # if courses
+
+            # get student's courses
+            # handler will return a tuple, first element is the response, second element is response status
+            courses = course_handler.get_courses_with_grades_by_student_id(student['user_id'])
+            # if response status is 200 it means there is a result, otherwise no result was found and will be ignored
+            if courses[1] is 200:
+                # response is jsonified, need to get json
+                student['courses'] = courses[0].get_json()
+
+            # get student's tasks
+            tasks = task_handler.get_all_tasks_by_user_id(student['user_id'])
+            if tasks[1] is 200:
+                student['tasks'] = tasks[0].get_json()
+
             result.append(student)
         return jsonify(result), 200
 
