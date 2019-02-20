@@ -52,10 +52,11 @@ class StudentDAO:
         cursor = self.conn.cursor()
         query = 'select ' \
                 'u.id, u.username, u.name, u.lastname, u.email, u.password, ' \
-                's.student_num, ' \
+                'nullif(s.student_num, null) as student_num, ' \
                 's.enrolled_program as program_num, p.name as program_name, ' \
                 'f.faculty_num, f.name as faculty_name, ' \
-                'r.id as role_id, r.name as role_name ' \
+                'r.id as role_id, r.name as role_name,' \
+                'nullif(s.phone_num, null) as phone_num ' \
                 'from ' \
                 '"user" as u inner join student as s on u.id=s.user_id ' \
                 'inner join users_roles as ur on ur.user_id=u.id ' \
@@ -65,3 +66,26 @@ class StudentDAO:
                 'where u.id=%s;'
         cursor.execute(query, (user_id,))
         return cursor.fetchone()
+
+    def getStudentsByMentorId(self, mentor_id):
+        cursor = self.conn.cursor()
+        query = 'select ' \
+                'u.id, u.username, u.name, u.lastname, u.email, u.password, ' \
+                'nullif(s.student_num, null) as student_num, ' \
+                's.enrolled_program as program_num, p.name as program_name, ' \
+                'f.faculty_num, f.name as faculty_name, ' \
+                'r.id as role_id, r.name as role_name, ' \
+                'nullif(s.phone_num, null) as phone_num ' \
+                'from ' \
+                '"user" as u inner join student as s on u.id=s.user_id ' \
+                'inner join users_roles as ur on ur.user_id=u.id ' \
+                'inner join "role" as r on r.id=ur.role_id ' \
+                'inner join program as p on p.program_num=s.enrolled_program ' \
+                'inner join faculty as f on f.faculty_num=p.faculty_num ' \
+                'inner join mentors_students as m on (u.id=m.student_id) ' \
+                'where m.mentor_id=%s;'
+        cursor.execute(query, (mentor_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

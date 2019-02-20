@@ -3,6 +3,7 @@ from RumboEx.dao.CourseDao import CourseDAO
 from RumboEx.dao.taskDao import TaskDAO
 from RumboEx.handler.taskHandler import TaskHandler
 
+
 class CourseHandler():
 
     def get_courses_by_student_id(self, student_id):
@@ -46,8 +47,6 @@ class CourseHandler():
             # get tasks of course
             dao2 = TaskDAO()
             tasks = dao2.get_study_tasks_by_user_id_and_course_id(student_id, course['course_id'])
-            # taskHandler = TaskHandler()
-            # tasks = taskHandler.get_study_task_by_user_id_and_course_id(student_id, course['course_id'])
             if tasks:
                 for t in tasks:
                     course['tasks'].append(self.mapToTaskDict(t))
@@ -100,7 +99,8 @@ class CourseHandler():
             'course_id': row[0],
             'name': row[1],
             'codification': row[2],
-            'section_num': row[3]
+            'credits': row[3],
+            'section_num': row[4]
         }
 
     # ???
@@ -114,10 +114,12 @@ class CourseHandler():
 
     def mapToGradeDict(self, row):
         return {
-            'name': row[0],
-            'grade': row[1],
-            'total': row[2],
-            'weight': row[3]
+            'grade_id': row[0],
+            'name': row[1],
+            'grade': row[2],
+            'total': row[3],
+            'weight': row[4],
+            'date': row[5]
         }
 
     def mapToTimeDict(self, row):

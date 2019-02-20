@@ -1,17 +1,16 @@
-# local db (development) credentials
-
+# credentials: local db (development)
 pg_config = {
-    'hostname': 'irixa',
+    'hostname': 'localhost',
     'user': 'irixa',
     'password': 'H2OKT',
     'dbname': 'rumboex',
-    'host': '136.145.116.87',
-    'url': ''
+    'host': 'localhost',
+    'port': '5432',
+    'url': 'postgresql://irixa:H2OKT@localhost:5432/rumboex'
 }
+# end credentials
 
-
-# production db credentials
-
+# credentials: vm db (production)
 # pg_config = {
 #     'hostname': 'rumboexadmin',
 #     'user': 'rumboexadmin',
@@ -20,16 +19,17 @@ pg_config = {
 #     'port': '5432',
 #     'host': '136.145.58.163'
 # }
+# end credentials
 
 
-# heroku credentials
-
-#pg_config = {
+# credentials: heroku
+# pg_config = {
 #    'hostname': 'ec2-23-21-216-174.compute-1.amazonaws.com',
-#   'user': 'ivbustqhsmsaps',
+#    'user': 'ivbustqhsmsaps',
 #    'password': '7a8951928430c500e432dbf97728f42f5033648c052a5befce59295cabd987c5',
 #    'dbname': 'd9t2kdqh5u8ekk',
 #    'port': '5432',
 #    'host': 'ec2-23-21-216-174.compute-1.amazonaws.com',
 #    'url': 'postgres://ivbustqhsmsaps:7a8951928430c500e432dbf97728f42f5033648c052a5befce59295cabd987c5@ec2-23-21-216-174.compute-1.amazonaws.com:5432/d9t2kdqh5u8ekk'
-#}
+# }
+# end credentials

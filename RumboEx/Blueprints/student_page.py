@@ -25,18 +25,22 @@ rbacDummy = User(roles=[start])
 current_user = rbacDummy
 
 
-
+# get a student by user id
 @student_page.route('/student/<int:user_id>', methods=['GET'])
 @rbac.allow(['student'], ['GET'], with_children=False)
 def get_student(user_id):
-    print(StudentHandler().getStudent(user_id))
     return StudentHandler().getStudent(user_id)
+
+# get students of a mentor by mentor id
+@student_page.route('/mentor/student/<int:user_id>', methods=['GET'])
+def get_students(user_id):
+    return StudentHandler().get_students_by_mentor_id(user_id)
 
 
 @student_page.route('/student/course/tasks', methods=['GET'])
 @rbac.exempt
 # @rbac.allow(['counselor', 'psychologist'], ['GET'], with_children=False)
-def get_students():
+def get_students_by_mentor():
     return StudentHandler().get_students_with_courses_and_tasks()
 
 

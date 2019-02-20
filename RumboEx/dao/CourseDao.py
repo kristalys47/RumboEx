@@ -17,7 +17,7 @@ class CourseDAO:
         cursor = self.conn.cursor()
 
         query = 'select ' \
-                'c.course_id, c.name, c.codification, s.section_num, s.section_id, e.enrolled_id ' \
+                'c.course_id, c.name, c.codification, c.credits, s.section_num, s.section_id, e.enrolled_id ' \
                 'from ' \
                 'enrolled as e  ' \
                 'natural inner join course as c ' \
@@ -33,7 +33,7 @@ class CourseDAO:
 
     def get_course_by_course_id(self, course_id):
         cursor = self.conn.cursor()
-        query = "select * from course where codification = %s;"
+        query = "select * from course where course_id = %s;"
         cursor.execute(query, (course_id,))
         result = cursor.fetchone()
         if not result:
@@ -57,7 +57,7 @@ class CourseDAO:
     def get_grades_by_course_id(self, enrolled_id):
         cursor = self.conn.cursor()
         query = 'select ' \
-                'g.name, g.grade, g.total, g.weight ' \
+                'g.grade_id, g.name, g.grade, g.total, g.weight, g.date ' \
                 'from ' \
                 'grades as g natural inner join enrolled ' \
                 'where enrolled.enrolled_id=%s;'
