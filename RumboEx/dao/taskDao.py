@@ -73,7 +73,9 @@ class TaskDAO:
     def get_personal_tasks_by_user_id(self, user_id):
         cursor = self.conn.cursor()
         # el natural inner join for some reason no lo coje entre task t personal_task
-        query = "select * from task inner join personal_task using(task_id) natural inner join student_tasks where user_id = %s;"
+        query = "select t.task_id, t.task_name, t.task_description, t.start_time, t.end_time, t.finished " \
+                "from task  as t inner join " \
+                "personal_task using(task_id) natural inner join student_tasks where user_id = %s;"
         cursor.execute(query, (user_id,))
         result = []
         for row in cursor:
@@ -82,7 +84,11 @@ class TaskDAO:
 
     def get_study_tasks_by_user_id(self, user_id):
         cursor = self.conn.cursor()
-        query = "select * from task inner join study_task using(task_id) natural inner join student_tasks where user_id = %s;"
+        query = 'select ' \
+                't.task_id, t.task_name, t.task_description, t.start_time, t.end_time, t.finished ' \
+                'from ' \
+                'task as t inner join study_task using(task_id) ' \
+                'natural inner join student_tasks where user_id = %s;'
         cursor.execute(query, (user_id,))
         result = []
         for row in cursor:
@@ -93,7 +99,10 @@ class TaskDAO:
 
     def get_course_tasks_by_user_id(self, user_id):
         cursor = self.conn.cursor()
-        query = "select * from task inner join course_task using (task_id) natural inner join student_tasks where user_id = %s;"
+        query = "select " \
+                "t.task_id, t.task_name, t.task_description, t.start_time, t.end_time, t.finished " \
+                "from task as t " \
+                "inner join course_task using (task_id) natural inner join student_tasks where user_id = %s;"
         cursor.execute(query, (user_id,))
         result = []
         for row in cursor:
@@ -104,7 +113,9 @@ class TaskDAO:
 
     def get_appointment_tasks_by_user_id(self, user_id):
         cursor = self.conn.cursor()
-        query = "select * from task inner join appointment_task using (task_id) natural inner join student_tasks where user_id = %s;"
+        query = "select t.task_id, t.task_name, t.task_description, t.start_time, t.end_time, t.finished " \
+                "from task as t inner join appointment_task " \
+                "using (task_id) natural inner join student_tasks where user_id = %s;"
         cursor.execute(query, (user_id,))
         result = []
         for row in cursor:
@@ -113,15 +124,15 @@ class TaskDAO:
             return None
         return result
 
-    def get_study_tasks_by_user_id_and_course_id(self, enrolled_id):
+    def get_study_tasks_by_user_id_and_course_id(self, user_id, course_id):
         cursor = self.conn.cursor()
         query = "select " \
                 "t.task_id, t.task_name, t.task_description, t.start_time, t.end_time, t.finished " \
                 "from " \
                 "task as t inner join study_task using (task_id) " \
-                "natural inner join enrolled " \
-                "where study_task.enrolled_id=%s;"
-        cursor.execute(query, (enrolled_id,))
+                "natural inner join student_tasks " \
+                "where user_id = %s and course_id=%s;"
+        cursor.execute(query, (user_id, course_id,))
         result = []
         for row in cursor:
             result.append(row)
@@ -204,7 +215,7 @@ class TaskDAO:
     def add_task(self, name, description, start_time, end_time, status):
         cursor = self.conn.cursor()
         print(name, description, start_time, end_time, status)
-        query = "insert into task(name, description, start_time, end_time, status) values (%s, %s, %s, %s, False) returning task_id;"
+        query = "insert into task(task_name, task_description, start_time, end_time, finished) values (%s, %s, %s, %s, %s) returning task_id;"
         cursor.execute(query, (name, description, start_time, end_time, status,))
         task_id = cursor.fetchone()
         return task_id
@@ -239,7 +250,7 @@ class TaskDAO:
 
     def add_task_to_user(self, user_id, task_id):
         cursor = self.conn.cursor()
-        query = "insert into student_tasks(user_id, task_id) values (%s, %s) returning primary;"
+        query = "insert into student_tasks(user_id, task_id) values (%s, %s) returning task_id;"
         cursor.execute(query, (user_id, task_id,))
         primary_key = cursor.fetchone()
         return primary_key

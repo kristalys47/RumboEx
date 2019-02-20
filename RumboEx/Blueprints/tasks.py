@@ -6,6 +6,12 @@ from RumboEx.handler.taskHandler import TaskHandler
 tasks = Blueprint('tasks', __name__)
 
 
+# get all tasks of user by user id
+@tasks.route('/tasks/<int:user_id>', methods=['GET'])
+@rbac.allow(['student'], ['GET'], with_children=False)
+def get_all_tasks_by_user_id(user_id):
+    return TaskHandler().get_all_tasks_by_user_id(user_id)
+
 # get personal tasks by user id
 @tasks.route('/task/personal/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
 @rbac.allow(['student'], ['OPTIONS', 'POST', 'GET'], with_children=False)
@@ -19,7 +25,7 @@ def get_personal_tasks(student_id):
     # why do i have to put options instead of post
     elif request.method == 'POST':
         print('request', request.form)
-        return TaskHandler().insert_personal_task(student_id, request.form)
+        return TaskHandler().insert_personal_task(student_id, request.get_json())
 
 
 # get study tasks by user id

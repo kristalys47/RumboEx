@@ -14,6 +14,46 @@ class TaskHandler():
             mapped_result.append(self.mapToTaskDict(r))
         return jsonify(mapped_result)
 
+    def get_all_tasks_by_user_id(self, user_id):
+        dao = TaskDAO()
+        mapped_result = []
+
+        # get course tasks
+        course = dao.get_course_tasks_by_user_id(user_id)
+        if course:
+            for t in course:
+                task = self.mapToTaskDict(t)
+                task['type'] = 'course'
+                mapped_result.append(task)
+
+        # get study tasks
+        study = dao.get_study_tasks_by_user_id(user_id)
+        if study:
+            for t in study:
+                task = self.mapToTaskDict(t)
+                task['type'] = 'study'
+                mapped_result.append(task)
+
+        # get personal tasks
+        personal = dao.get_personal_tasks_by_user_id(user_id)
+        if personal:
+            for t in personal:
+                task = self.mapToTaskDict(t)
+                task['type'] = 'personal'
+                mapped_result.append(task)
+
+        # get appointment tasks
+        appointment = dao.get_appointment_tasks_by_user_id(user_id)
+        if appointment:
+            for t in appointment:
+                task = self.mapToTaskDict(t)
+                task['type'] = 'appointment'
+                mapped_result.append(task)
+
+        if not mapped_result:
+            return jsonify(Error='NOT FOUND'), 404
+
+        return jsonify(mapped_result), 200
 
     def get_personal_task_by_user_id(self, user_id):
         dao = TaskDAO()
@@ -137,7 +177,7 @@ class TaskHandler():
     def insert_personal_task(self, user_id, form):
         print('form', form)
         print(len(form))
-        if len(form) is not 4:
+        if len(form) is not (4 or 3):
             return jsonify(Error="Malformed post request"), 400
         else:
             print('form', form)
@@ -146,12 +186,12 @@ class TaskHandler():
             start_time = form['start_time']
             end_time = form['end_time']
             finished = False
-            if task_name and start_time and end_time and finished:
+            if task_name and start_time and end_time:
                 dao = TaskDAO()
                 task_id = dao.add_personal_task(task_name, task_description, start_time, end_time, finished)
                 dao.add_task_to_user(user_id, task_id)
-                result = self.mapToTaskDict([task_id, task_name, task_description, start_time, end_time, finished])
-                return jsonify(result), 201
+                # result = self.mapToTaskDict(task_id)
+                return jsonify({'task_id': task_id[0]}), 200
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
@@ -160,9 +200,9 @@ class TaskHandler():
         # Verificar orden de atributos en la tabla
         return {
             'task_id': row[0],
-            'title': row[2],
-            'description': row[3],
-            'start': row[1],
+            'title': row[1],
+            'description': row[2],
+            'start': row[3],
             'end': row[4],
             'finished': row[5]
             }

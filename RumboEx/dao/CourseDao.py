@@ -68,3 +68,16 @@ class CourseDAO:
         if not result:
             return None
         return result
+
+    # POST Methods
+
+    def insert_grade(self, name, grade, total, weight, date, student_id, course_id):
+        cursor = self.conn.cursor()
+        query1 = 'select e.enrolled_id from enrolled as e natural inner join section as s ' \
+                 'where e.student_id=%s and s.course_id=%s;'
+        cursor.execute(query1, (student_id, course_id, ))
+        enrolled_id = cursor.fetchone
+        query2 = 'insert into grades(name, grade, total, weight, date, enrolled_id) values (%s,%s,%s,%s,%s,%s) returning grade_id;'
+        cursor.execute(query2, (name, grade, total, weight, date, enrolled_id, ))
+        grade_id = cursor.fetchone
+        return grade_id
