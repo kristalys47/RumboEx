@@ -149,14 +149,14 @@ class TaskHandler():
         dao = TaskDAO()
         result = dao.get_course_task_count_by_user_id(user_id)
         if not result:
-            return jsonify(Error = "NOT FOUND"),404
+            return jsonify(Error="NOT FOUND"),404
         print(result)
         return jsonify(result)
 
     def insert_study_task(self, user_id, form):
         print('form', form)
         print(form['task_name'])
-        if len(form) != 5:
+        if len(form) is not (5 or 4):
             return jsonify(Error="Malformed post request"), 400
         else:
             task_name = form['task_name']
@@ -165,12 +165,11 @@ class TaskHandler():
             end_time = form['end_time']
             course_id = form['course_id']
             finished = False
-            if task_name and start_time and end_time and course_id and finished:
+            if task_name and start_time and end_time and course_id:
                 dao = TaskDAO()
                 task_id = dao.add_study_task(task_name, task_description, start_time, end_time, finished, course_id)
                 dao.add_task_to_user(user_id, task_id)
-                result = self.mapToTaskDict([task_id, task_name, task_description, start_time, end_time, finished])
-                return jsonify(result), 201
+                return jsonify({'task_id': task_id}), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
@@ -197,7 +196,6 @@ class TaskHandler():
 
 
     def mapToTaskDict(self, row):
-        # Verificar orden de atributos en la tabla
         return {
             'task_id': row[0],
             'title': row[1],

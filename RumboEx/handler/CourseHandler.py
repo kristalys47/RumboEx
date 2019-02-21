@@ -73,26 +73,40 @@ class CourseHandler():
 
 
     def insert_grade(self, user_id, form):
-        print('form', form)
-        print(len(form))
         if len(form) is not (6 or 5):
             return jsonify(Error="Malformed post request"), 400
         else:
-            print('form', form)
             name = form['name']
             grade = form['grade']
             total = form['total']
             weight = form['weight']
             date = form['date']
             course_id = form['course_id']
-            if name and grade and total and date and course_id:
+            if name and grade and total and course_id:
                 dao = CourseDAO()
                 grade_id = dao.insert_grade(name, grade, total, weight, date, user_id, course_id)
                 # result = self.mapToTaskDict(task_id)
-                return jsonify({'task_id': grade[0]}), 200
+                return jsonify({'task_id': grade_id[0]}), 200
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
+    def insert_course(self, user_id, form):
+        codification = form['codification']
+        section = form['section_num']
+        name = ''
+        credits = 0
+        professor_id = None
+        if codification and section:
+            dao = CourseDAO()
+            # add course to db
+            course_id = dao.insert_course(name, codification, credits, professor_id)
+            # add section to db
+            section_id = dao.insert_section(section, course_id)
+            # enroll student in section
+            enrolled_id = dao.add_course_to_student(section_id, user_id)
+            return jsonify({'course_id': course_id, 'section_id': section_id, 'enrolled_id': enrolled_id}), 200
+        else:
+            return jsonify(Error="Unexpected attributes in post request"), 400
 
     def mapToCourseDict(self, row):
         return {

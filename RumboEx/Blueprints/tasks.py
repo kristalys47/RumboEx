@@ -34,7 +34,7 @@ def get_personal_tasks(student_id):
 def get_study_tasks(student_id):
     if request.method == 'GET':
         return TaskHandler().get_study_task_by_user_id(student_id)
-    elif request.method == 'OPTIONS':
+    elif request.method == 'POST':
         print('json:', request.get_json())
         print('request:', request)
         print('data:', request.data)

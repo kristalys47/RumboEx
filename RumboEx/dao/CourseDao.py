@@ -57,7 +57,7 @@ class CourseDAO:
     def get_grades_by_course_id(self, enrolled_id):
         cursor = self.conn.cursor()
         query = 'select ' \
-                'g.grade_id, g.name, g.grade, g.total, g.weight, g.date ' \
+                'g.grade_id, g.g_name, g.grade, g.total, g.weight, g.g_date ' \
                 'from ' \
                 'grades as g natural inner join enrolled ' \
                 'where enrolled.enrolled_id=%s;'
@@ -76,8 +76,38 @@ class CourseDAO:
         query1 = 'select e.enrolled_id from enrolled as e natural inner join section as s ' \
                  'where e.student_id=%s and s.course_id=%s;'
         cursor.execute(query1, (student_id, course_id, ))
-        enrolled_id = cursor.fetchone
-        query2 = 'insert into grades(name, grade, total, weight, date, enrolled_id) values (%s,%s,%s,%s,%s,%s) returning grade_id;'
+        enrolled_id = cursor.fetchone()[0]
+        if not enrolled_id:
+            return None
+        # if date is None:
+        #     date = 'null'
+        print(enrolled_id, name, grade, total, weight, date, student_id, course_id)
+        query2 = 'insert into grades (g_name, grade, total, weight, g_date, enrolled_id) values (%s, %s, %s, %s, %s, %s) returning grade_id;'
         cursor.execute(query2, (name, grade, total, weight, date, enrolled_id, ))
-        grade_id = cursor.fetchone
+        grade_id = cursor.fetchone()
+        self.conn.commit()
         return grade_id
+
+    def insert_course(self, name, codification, credits, professor_id):
+        cursor = self.conn.cursor()
+        query = 'insert into course (name, codification, credits, professor_id) values (%s, %s, %s, %s) returning course_id;'
+        cursor.execute(query, (name, codification, credits, professor_id, ))
+        course_id = cursor.fetchone()
+        self.conn.commit()
+        return course_id
+
+    def insert_section(self, section_num, course_id):
+        cursor = self.conn.cursor()
+        query = 'insert into section (section_num, course_id) values (%s, %s) returning section_id;'
+        cursor.execute(query, (section_num, course_id,))
+        section_id = cursor.fetchone()
+        self.conn.commit()
+        return section_id
+
+    def add_course_to_student(self, section_id, user_id):
+        cursor = self.conn.cursor()
+        query = 'insert into enrolled (student_id, section_id) values (%s, %s) returning enrolled_id;'
+        cursor.execute(query, (user_id, section_id,))
+        enrolled_id = cursor.fetchone()
+        self.conn.commit()
+        return enrolled_id

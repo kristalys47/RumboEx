@@ -220,6 +220,7 @@ class TaskDAO:
         query = "insert into task(task_name, task_description, start_time, end_time, finished) values (%s, %s, %s, %s, %s) returning task_id;"
         cursor.execute(query, (name, description, start_time, end_time, status,))
         task_id = cursor.fetchone()
+        self.conn.commit()
         return task_id
 
     def add_personal_task(self, name, description, start_time, end_time, status):
@@ -227,6 +228,7 @@ class TaskDAO:
         task_id = self.add_task(name, description, start_time, end_time, status)
         query = "insert into personal_task(task_id) values (%s);"
         cursor.execute(query, (task_id,))
+        self.conn.commit()
         return task_id
 
     def add_study_task(self, name, description, start_time, end_time, status, course_id):
@@ -234,6 +236,7 @@ class TaskDAO:
         task_id = self.add_task(name, description, start_time, end_time, status)
         query = "insert into study_task(task_id, course_id) values (%s, %s);"
         cursor.execute(query, (task_id, course_id,))
+        self.conn.commit()
         return task_id
 
     def add_course_task(self, name, description, start_time, end_time, status, course_id):
@@ -241,6 +244,7 @@ class TaskDAO:
         task_id = self.add_task(name, description, start_time, end_time, status)
         query = "insert into course_task(task_id, course_id) values (%s, %s);"
         cursor.execute(query, (task_id, course_id,))
+        self.conn.commit()
         return task_id
 
     def add_appointment_task(self, name, description, start_time, end_time, status):
@@ -248,6 +252,7 @@ class TaskDAO:
         task_id = self.add_task(name, description, start_time, end_time, status)
         query = "insert into appointment_task(task_id) values (%s);"
         cursor.execute(query, (task_id,))
+        self.conn.commit()
         return task_id
 
     def add_task_to_user(self, user_id, task_id):
@@ -255,5 +260,6 @@ class TaskDAO:
         query = "insert into student_tasks(user_id, task_id) values (%s, %s) returning task_id;"
         cursor.execute(query, (user_id, task_id,))
         primary_key = cursor.fetchone()
+        self.conn.commit()
         return primary_key
 
