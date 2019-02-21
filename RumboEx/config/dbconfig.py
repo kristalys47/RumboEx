@@ -1,24 +1,24 @@
 # credentials: local db (development)
-pg_config = {
-    'hostname': 'localhost',
-    'user': 'irixa',
-    'password': 'H2OKT',
-    'dbname': 'rumboex',
-    'host': 'localhost',
-    'port': '5432',
-    'url': 'postgresql://irixa:H2OKT@localhost:5432/rumboex'
-}
+# pg_config = {
+#     'hostname': 'localhost',
+#     'user': 'irixa',
+#     'password': 'H2OKT',
+#     'dbname': 'rumboex',
+#     'host': 'localhost',
+#     'port': '5432',
+#     'url': 'postgresql://irixa:H2OKT@localhost:5432/rumboex'
+# }
 # end credentials
 
 # credentials: vm db (production)
-# pg_config = {
-#     'hostname': 'rumboexadmin',
-#     'user': 'rumboexadmin',
-#     'password': 'pee0Laeg',
-#     'dbname': 'mystudycoach',
-#     'port': '5432',
-#     'host': '136.145.58.163'
-# }
+pg_config = {
+    'hostname': 'rumboexadmin',
+    'user': 'rumboexadmin',
+    'password': 'pee0Laeg',
+    'dbname': 'mystudycoach',
+    'port': '5432',
+    'host': '136.145.58.163'
+}
 # end credentials
 
 
