@@ -156,11 +156,15 @@ class TaskHandler():
     def insert_study_task(self, user_id, form):
         print('form', form)
         print(form['task_name'])
-        if len(form) is not (5 or 4):
+        if len(form) is not 5 and len(form) is not 4:
             return jsonify(Error="Malformed post request"), 400
         else:
             task_name = form['task_name']
-            task_description = form['task_description']
+            # task_description = form['task_description'] if form['task_description'] else None
+            if form['task_description']:
+                task_description = form['task_description']
+            else:
+                task_description = None
             start_time = form['start_time']
             end_time = form['end_time']
             course_id = form['course_id']
@@ -169,19 +173,22 @@ class TaskHandler():
                 dao = TaskDAO()
                 task_id = dao.add_study_task(task_name, task_description, start_time, end_time, finished, course_id)
                 dao.add_task_to_user(user_id, task_id)
-                return jsonify({'task_id': task_id}), 201
+                return jsonify({'task_id': task_id[0]}), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
     def insert_personal_task(self, user_id, form):
         print('form', form)
         print(len(form))
-        if len(form) is not (4 or 3):
+        if len(form) is not 4 and len(form) is not 3:
             return jsonify(Error="Malformed post request"), 400
         else:
             print('form', form)
             task_name = form['task_name']
-            task_description = form['task_description']
+            if form['task_description']:
+                task_description = form['task_description']
+            else:
+                task_description = None
             start_time = form['start_time']
             end_time = form['end_time']
             finished = False

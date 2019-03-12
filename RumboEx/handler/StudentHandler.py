@@ -11,6 +11,7 @@ class StudentHandler:
         return {'user_id': user[0], 'username': user[1], 'name': user[2], 'lastname': user[3]}
 
     def dicStudent(self, student):
+        print(student)
         return {
             'user_id': student[0],
             'username': student[1],
@@ -32,8 +33,8 @@ class StudentHandler:
     def dicUser(self, user):
         return {'user_id': user[0], 'username': user[1], 'name': user[2], 'lastname': user[3]}
 
-    def insertStudent(self, username, email, password, name, lastname, program, student_num):
-        calltoInsert = StudentDAO().insertStudent(username, email, password, name, lastname, program, student_num)
+    def insertStudent(self, username, email, password, name, lastname, program, student_num, phone_num):
+        calltoInsert = StudentDAO().insertStudent(username, email, password, name, lastname, program, student_num, phone_num)
         return jsonify(result=calltoInsert), 200
 
     def getallusers(self):
@@ -62,9 +63,11 @@ class StudentHandler:
             student = self.dicStudent(s)
             courses = CourseHandler().get_courses_with_grades_by_student_id(student['user_id'])
             print(courses)
-            if courses.response is 200:
-                print(courses.status_code)
-                student['courses'] = courses.status_code
+            if courses[1] is 200:
+                student['courses'] = courses[0].get_json()
+            tasks = TaskHandler().get_all_tasks_by_user_id(student['user_id'])
+            if tasks[1] is 200:
+                student['tasks'] = tasks[0].get_json()
             # student['tasks'] = TaskDAO().get
             mapped_result.append(student)
         return jsonify(mapped_result), 200

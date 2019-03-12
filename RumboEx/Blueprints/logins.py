@@ -5,6 +5,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Length
 from RumboEx import rbac
+from RumboEx.handler.StudentHandler import StudentHandler
 
 from RumboEx.model.user import User
 from RumboEx.model.role import Role

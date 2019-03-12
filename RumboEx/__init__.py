@@ -39,9 +39,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = pg_config['url']
 engine = create_engine(pg_config['url'], echo=True)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-Session = sessionmaker(bind=engine)
-Session.configure(bind=engine)
-session = Session()
+# Session = sessionmaker(bind=engine)
+# Session.configure(bind=engine)
+# session = Session()
 
 
 # If this imports are done before a circle dependency is created and the app will not run.
@@ -64,16 +64,16 @@ login_manager.init_app(app)
 login_manager.login_view = '/login'
 
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
+# @login_manager.user_loader
+# def load_user(user_id):
+#     return User.query.get(int(user_id))
 
 # Initial role for RBAC to work
-start = Role('DUMMY')
-rbacDummy = User(roles=[start])
+# start = Role('DUMMY')
+# rbacDummy = User(roles=[start])
 
 # To use this variable write global before the name in the methods
-current_user = rbacDummy
+# current_user = rbacDummy
 
 
 # Blueprints to import. Need to be after rbac
@@ -107,6 +107,7 @@ def current():
 @app.route('/register', methods=['POST', 'GET', 'OPTIONS'])
 @rbac.allow(['admin'], ['GET', 'POST', 'OPTIONS'], with_children=False)
 def createStudent():
+    print(request)
     if request.method == 'POST':
         cred = request.get_json()
         print(cred)
@@ -118,10 +119,10 @@ def createStudent():
         program = cred['program_num']
         password = cred['password']
         student_num = cred['student_num']
+        phone_num = cred['phone_num']
         student = StudentHandler()
-        print("Entra a la ruta")
-        return student.insertStudent(username, email, password, name, lastname, program, student_num)
-    print("Entra a la ruta")
+        return student.insertStudent(username, email, password, name, lastname, program, student_num, phone_num)
+        # return CourseHandler().insert_course(user_id, cred)
     return jsonify(result="is not a Post method, but returns"), 200
 
 
@@ -156,3 +157,4 @@ def get_messages_by_user_id(user_id):
 @rbac.exempt
 def get_faculties():
     return ProgramHandler().get_faculties_and_programs()
+

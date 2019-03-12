@@ -1,9 +1,11 @@
 from flask import Blueprint, request, jsonify
 from RumboEx import rbac
+from flask_cors import CORS, cross_origin
 from RumboEx.handler.taskHandler import TaskHandler
 
 
 tasks = Blueprint('tasks', __name__)
+CORS(tasks)
 
 
 # get all tasks of user by user id
@@ -14,14 +16,15 @@ def get_all_tasks_by_user_id(user_id):
 
 # get personal tasks by user id
 @tasks.route('/task/personal/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
+@cross_origin()
 @rbac.allow(['student'], ['OPTIONS', 'POST', 'GET'], with_children=False)
 def get_personal_tasks(student_id):
     print(request)
     global current_user
     if request.method == 'GET':
         return TaskHandler().get_personal_task_by_user_id(student_id)
-    elif request.method == 'OPTIONS':
-        pass
+    # elif request.method == 'OPTIONS':
+    #     pass
     # why do i have to put options instead of post
     elif request.method == 'POST':
         print('request', request.form)
@@ -30,6 +33,7 @@ def get_personal_tasks(student_id):
 
 # get study tasks by user id
 @tasks.route('/task/study/<int:student_id>', methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
+@cross_origin()
 @rbac.allow(['student'], ['OPTIONS', 'POST', 'GET'], with_children=False)
 def get_study_tasks(student_id):
     if request.method == 'GET':
