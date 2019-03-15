@@ -15,11 +15,16 @@ class MessageDAO:
 
     def get_chats_by_user_id(self, user_id):
         cursor = self.conn.cursor()
-        query = 'select UC.chat_id, u.name as receipient_name, u.lastname as reciepient_lastname ' \
+        query = 'select UC.chat_id, u.id, u.username, u.name, u.lastname, u.email ' \
                 'from "user" as u inner join ' \
-                '(select U1.chat_id, U2.user_id from user_chat as U1 inner join user_chat as U2 on U1.chat_id=U2.chat_id ' \
+                '(select U1.chat_id, U2.user_id ' \
+                'from user_chat as U1 ' \
+                'inner join user_chat as U2 on U1.chat_id=U2.chat_id ' \
                 'and U1.user_id = %s and not U1.user_id = U2.user_id) as UC ' \
-                'on UC.user_id = u.id;'
+                'on UC.user_id = u.id ' \
+                'inner join ' \
+                '(select max(date) as date, chat_id from message group by chat_id) as M on M.chat_id=UC.chat_id ' \
+                'order by M.date desc;'
         cursor.execute(query, (user_id,))
         result = []
         for row in cursor:
@@ -30,7 +35,7 @@ class MessageDAO:
 
     def get_messages_by_chat_id(self, chat_id):
         cursor = self.conn.cursor()
-        query = 'select * from message where chat_id = %s order by date desc, m_id desc;'
+        query = 'select m_id, sent_by, sent_to, date, text, seen from message where chat_id = %s order by date desc, m_id desc;'
         cursor.execute(query, (chat_id,))
         result = []
         for row in cursor:

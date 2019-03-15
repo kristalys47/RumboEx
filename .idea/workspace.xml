@@ -3,16 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="4d1d2948-75c8-4801-9adb-524cb490fd34" name="Default" comment="changed side bar to have hidden tabs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RumboEx/Blueprints/courses.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/Blueprints/courses.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RumboEx/Blueprints/logins.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/Blueprints/logins.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RumboEx/Blueprints/student_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/Blueprints/student_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RumboEx/Blueprints/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/Blueprints/tasks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RumboEx/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RumboEx/config/dbconfig.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/config/dbconfig.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RumboEx/dao/StudentDAO.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/dao/StudentDAO.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RumboEx/handler/CourseHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/handler/CourseHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RumboEx/handler/StudentHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/handler/StudentHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RumboEx/handler/taskHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/handler/taskHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/dao/MessageDao.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/dao/MessageDao.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RumboEx/handler/MessageHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/RumboEx/handler/MessageHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RumboExAngular/src/app/components/studentPages/course-detail/course-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../RumboExAngular/src/app/components/studentPages/course-detail/course-detail.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RumboExAngular/src/app/services/services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../RumboExAngular/src/app/services/services.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -102,18 +97,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="taskHandler.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RumboEx/handler/taskHandler.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2835">
-              <caret line="190" column="39" selection-start-line="190" selection-start-column="39" selection-end-line="190" selection-end-column="39" />
-              <folding>
-                <element signature="e#0#34#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="courses.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/courses.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -129,7 +112,7 @@
       <file leaf-file-name="student_page.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/student_page.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
+            <state relative-caret-position="583">
               <caret line="51" column="36" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
@@ -138,7 +121,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CourseHandler.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CourseHandler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RumboEx/handler/CourseHandler.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="415">
@@ -150,14 +133,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProgramHandler.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RumboEx/handler/ProgramHandler.py">
+      <file leaf-file-name="MessageDao.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/RumboEx/dao/MessageDao.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="26" column="62" selection-start-line="26" selection-start-column="62" selection-end-line="26" selection-end-column="62" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="360">
+              <caret line="25" column="104" selection-start-line="25" selection-start-column="104" selection-end-line="25" selection-end-column="104" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MessageHandler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RumboEx/handler/MessageHandler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="25" column="24" lean-forward="true" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -165,10 +154,22 @@
       <file leaf-file-name="logins.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/logins.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
+            <state relative-caret-position="510">
               <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RumboEx/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-584">
+              <caret line="67" column="21" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#58#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -207,15 +208,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StudentDAO.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RumboEx/dao/StudentDAO.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="735">
-              <caret line="50" column="28" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -234,7 +226,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/professorlogin/professorlogin.component.html" />
         <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/mentorlogin/mentorlogin.component.html" />
         <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/login/login.component.html" />
         <option value="$PROJECT_DIR$/../RumboExAngular/src/app/components/logins/counselorlogin/counselorlogin.component.html" />
@@ -270,14 +261,12 @@
         <option value="$PROJECT_DIR$/../RumboExAngular/src/app/store/effects/task.effects.ts" />
         <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/RumboEx/dao/ProgramDao.py" />
-        <option value="$PROJECT_DIR$/RumboEx/handler/MessageHandler.py" />
         <option value="$PROJECT_DIR$/RumboEx/handler/ProgramHandler.py" />
         <option value="$PROJECT_DIR$/RumboEx/dao/taskDao.py" />
         <option value="$PROJECT_DIR$/RumboEx/dao/CourseDao.py" />
         <option value="$PROJECT_DIR$/RumboEx/Blueprints/tasks.py" />
         <option value="$PROJECT_DIR$/RumboEx/handler/taskHandler.py" />
         <option value="$PROJECT_DIR$/RumboEx/model/role.py" />
-        <option value="$PROJECT_DIR$/RumboEx/__init__.py" />
         <option value="$PROJECT_DIR$/RumboEx/config/dbconfig.py" />
         <option value="$PROJECT_DIR$/RumboEx/Blueprints/student_page.py" />
         <option value="$PROJECT_DIR$/RumboEx/dao/StudentDAO.py" />
@@ -285,6 +274,9 @@
         <option value="$PROJECT_DIR$/RumboEx/Blueprints/logins.py" />
         <option value="$PROJECT_DIR$/RumboEx/Blueprints/courses.py" />
         <option value="$PROJECT_DIR$/RumboEx/handler/CourseHandler.py" />
+        <option value="$PROJECT_DIR$/RumboEx/__init__.py" />
+        <option value="$PROJECT_DIR$/RumboEx/handler/MessageHandler.py" />
+        <option value="$PROJECT_DIR$/RumboEx/dao/MessageDao.py" />
       </list>
     </option>
   </component>
@@ -299,9 +291,9 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="380" />
-    <option name="y" value="-4" />
+    <option name="y" value="6" />
     <option name="width" value="928" />
-    <option name="height" value="1047" />
+    <option name="height" value="1075" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -309,6 +301,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -349,7 +342,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -933,7 +925,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1855" height="1084" extended-state="7" />
+    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.48488122" side_tool="true" weight="0.4364035" />
@@ -941,8 +934,8 @@
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5536388" weight="0.24487706" />
       <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.5124378" weight="0.27405858" />
       <window_info anchor="bottom" id="Python Console" order="14" weight="0.3294979" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.5151188" visible="true" weight="0.20251836" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18684356" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.5151188" weight="0.30220357" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19845219" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="4" weight="0.32946378" />
@@ -961,28 +954,28 @@
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19845219" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5536388" weight="0.24487706" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18463239" />
+      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.5124378" weight="0.27405858" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="4" weight="0.32946378" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="TypeScript" order="9" weight="0.3294979" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4954178" weight="0.32894737" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Messages" order="13" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.5151188" visible="true" weight="0.27072403" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.48488122" side_tool="true" weight="0.4364035" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.5124378" weight="0.27405858" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="bottom" id="TypeScript" order="9" weight="0.3294979" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5536388" weight="0.24487706" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4954178" weight="0.32894737" />
       <window_info anchor="bottom" id="Python Console" order="14" weight="0.3294979" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.5151188" weight="0.30220357" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.48488122" side_tool="true" weight="0.4364035" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Messages" order="13" />
+      <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1250,20 +1243,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RumboEx/handler/MessageHandler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RumboEx/dao/MessageDao.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="21" column="39" lean-forward="true" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RumboEx/dao/ProgramDao.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
@@ -1308,16 +1287,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RumboEx/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="58" column="8" lean-forward="true" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#58#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RumboEx/handler/taskHandler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2835">
@@ -1332,16 +1301,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="735">
           <caret line="50" column="28" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/student_page.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="51" column="36" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1372,12 +1331,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/courses.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="48" column="32" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/student_page.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="583">
+          <caret line="51" column="36" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/logins.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
+        <state relative-caret-position="510">
           <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/handler/CourseHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="88" column="62" lean-forward="true" selection-start-line="88" selection-start-column="62" selection-end-line="88" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1392,23 +1381,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RumboEx/Blueprints/courses.py">
+    <entry file="file://$PROJECT_DIR$/RumboEx/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="48" column="32" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
+        <state relative-caret-position="-584">
+          <caret line="67" column="21" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#0#58#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RumboEx/handler/CourseHandler.py">
+    <entry file="file://$PROJECT_DIR$/RumboEx/handler/MessageHandler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="88" column="62" lean-forward="true" selection-start-line="88" selection-start-column="62" selection-end-line="88" selection-end-column="62" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="360">
+          <caret line="25" column="24" lean-forward="true" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RumboEx/dao/MessageDao.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="25" column="104" selection-start-line="25" selection-start-column="104" selection-end-line="25" selection-end-column="104" />
         </state>
       </provider>
     </entry>
