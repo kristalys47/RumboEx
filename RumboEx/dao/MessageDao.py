@@ -43,3 +43,32 @@ class MessageDAO:
         if not result:
             return None
         return result
+
+    # POST Methods
+
+    def insert_message(self, sent_by, sent_to, date, text, seen):
+        cursor = self.conn.cursor()
+        query = 'select chat_id ' \
+                'from user_chat as C1 inner join user_chat as C2 using(chat_id) ' \
+                'where C1.user_id=%s and C2.user_id=%s and not C1.user_id=C2.user_id;'
+        cursor.execute(query, (sent_by, sent_to,))
+        chat_id = cursor.fetchone()[0]
+        if not chat_id:
+            chat_id = self.insert_chat(sent_by, sent_to)
+        query2 = 'insert into message (chat_id, sent_by, sent_to, date, text, seen) ' \
+                 'values (%s,%s,%s,%s,%s,%s) returning m_id;'
+        cursor.execute(query2, (chat_id, sent_by, sent_to, date, text, seen,))
+        m_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return m_id
+
+    def insert_chat(self, user1, user2):
+        cursor = self.conn.cursor()
+        query = 'insert into chat default values returning chat_id;'
+        cursor.execute(query,)
+        chat_id = cursor.fetchone()[0]
+        query1 = 'insert into user_chat(chat_id, user_id) values (%s, %s);'
+        cursor.execute(query1, (chat_id, user1,))
+        cursor.execute(query1, (chat_id, user2,))
+        self.conn.commit()
+        return chat_id
