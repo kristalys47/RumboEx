@@ -17,8 +17,8 @@ pg_config = {
 #     'password': 'pee0Laeg',
 #     'dbname': 'mystudycoach',
 #     'port': '5432',
-#     'host': '136.145.58.163',
-#     'url': 'postgresql://rumboexadmin:pee0Laeg@mystudycoach.uprm.edu:5422/mystudycoach'
+#     'host': 'localhost',
+#     'url': 'postgresql://rumboexadmin:pee0Laeg@localhost:5432/mystudycoach'
 # }
 # end credentials
 

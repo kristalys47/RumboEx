@@ -15,7 +15,8 @@ class StudentDAO:
         user_id = cursor.fetchone()[0]
         self.conn.commit()
         query2= 'insert into student(student_num, enrolled_program, user_id, phone_num) values(%s, %s, %s, %s); ' \
-                'insert into users_roles(user_id, role_id) values (%s, 1);'
+                'insert into users_roles(user_id, role_id) values (%s, ' \
+                '(select id from role where name="student"));'
                 # 'insert into mentors_students(mentor_id, student_id) values(%s, %s), (%s, %s), (%s, %s); ' \
         cursor.execute(query2, (student_num, program, user_id, phone_num, user_id))
         self.conn.commit()

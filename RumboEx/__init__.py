@@ -17,6 +17,7 @@ from RumboEx.handler.taskHandler import TaskHandler
 from RumboEx.handler.StudentHandler import StudentHandler
 from RumboEx.handler.CourseHandler import CourseHandler
 from RumboEx.handler.MessageHandler import MessageHandler
+from RumboEx.handler.UserHandler import UserHandler
 
 
 # This code must be un once two create the tables in the DataBase
@@ -122,6 +123,44 @@ def createStudent():
         phone_num = cred['phone_num']
         student = StudentHandler()
         return student.insertStudent(username, email, password, name, lastname, program, student_num, phone_num)
+        # return CourseHandler().insert_course(user_id, cred)
+    return jsonify(result="is not a Post method, but returns"), 200
+
+
+@app.route('/register-counselor', methods=['POST', 'GET', 'OPTIONS'])
+@rbac.allow(['admin'], ['GET', 'POST', 'OPTIONS'], with_children=False)
+def createCounselor():
+    print(request)
+    if request.method == 'POST':
+        cred = request.get_json()
+        print(cred)
+        # username = cred['email'].split('@')[0]
+        username = cred['username']
+        email = cred['email']
+        name = cred['name']
+        lastname = cred['lastname']
+        password = cred['password']
+        user = UserHandler()
+        return user.insertCounselor(username, email, password, name, lastname)
+        # return CourseHandler().insert_course(user_id, cred)
+    return jsonify(result="is not a Post method, but returns"), 200
+
+
+@app.route('/register-psychologist', methods=['POST', 'GET', 'OPTIONS'])
+@rbac.allow(['admin'], ['GET', 'POST', 'OPTIONS'], with_children=False)
+def createPsychologist():
+    print(request)
+    if request.method == 'POST':
+        cred = request.get_json()
+        print(cred)
+        # username = cred['email'].split('@')[0]
+        username = cred['username']
+        email = cred['email']
+        name = cred['name']
+        lastname = cred['lastname']
+        password = cred['password']
+        user = UserHandler()
+        return user.insertPsychologist(username, email, password, name, lastname)
         # return CourseHandler().insert_course(user_id, cred)
     return jsonify(result="is not a Post method, but returns"), 200
 

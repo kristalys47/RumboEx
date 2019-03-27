@@ -35,7 +35,7 @@ class MessageDAO:
 
     def get_messages_by_chat_id(self, chat_id):
         cursor = self.conn.cursor()
-        query = 'select m_id, sent_by, sent_to, date, text, seen from message where chat_id = %s order by date desc, m_id desc;'
+        query = 'select m_id, sent_by, sent_to, date, text, seen from message where chat_id = %s order by date, m_id;'
         cursor.execute(query, (chat_id,))
         result = []
         for row in cursor:
@@ -43,6 +43,18 @@ class MessageDAO:
         if not result:
             return None
         return result
+
+    def get_message_by_message_id(self, m_id):
+        cursor = self.conn.cursor()
+        query = 'select m_id, date, text, seen, ' \
+                'sent_by as sent_by_id, S.username as sent_by_username, S.name as sent_by_name, S.lastname as sent_by_lastname, S.email as sent_by_email, ' \
+                'sent_to as sent_to_id, R.username as sent_to_username, R.name as sent_to_name, R.lastname as sent_to_lastname, R.email as sent_to_email ' \
+                'from message ' \
+                'inner join "user" as S on S.id=sent_by ' \
+                'inner join "user" as R on R.id=sent_to ' \
+                'where m_id=%s;'
+        cursor.execute(query, (m_id,))
+        return cursor.fetchone()
 
     # POST Methods
 
