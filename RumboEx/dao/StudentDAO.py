@@ -8,16 +8,19 @@ class StudentDAO:
         pg_config['dbname'], pg_config['user'], pg_config['password'], pg_config['host'], pg_config['port'])
         self.conn = psycopg2.connect(connection_url)
 
-    def insertStudent(self, username, email, password, name, lastname, program, student_num):
+    def insertStudent(self, username, email, password, name, lastname, program, student_num, phone_num):
         cursor = self.conn.cursor()
         query = 'insert into "user"(username, email, password, name, lastname) values(%s, %s, %s, %s, %s) returning id;'
         cursor.execute(query, (username, email, password, name, lastname))
         user_id = cursor.fetchone()[0]
         self.conn.commit()
-        query2= 'insert into student(student_num, enrolled_program, user_id) values(%s, %s, %s); insert into student_enrolled(student_num) values(%s); insert into users_roles(user_id, role_id) values (%s, 1);'
-        cursor.execute(query2, (student_num, program, user_id, student_num, user_id))
+        query2= 'insert into student(student_num, enrolled_program, user_id, phone_num) values(%s, %s, %s, %s); ' \
+                'insert into users_roles(user_id, role_id) values (%s, ' \
+                '(select id from role where name="student"));'
+                # 'insert into mentors_students(mentor_id, student_id) values(%s, %s), (%s, %s), (%s, %s); ' \
+        cursor.execute(query2, (student_num, program, user_id, phone_num, user_id))
         self.conn.commit()
-        return "Inserted"
+        return user_id
 
     def getallusers(self):
         cursor = self.conn.cursor()
@@ -32,10 +35,11 @@ class StudentDAO:
         cursor = self.conn.cursor()
         query = 'select ' \
                 'u.id, u.username, u.name, u.lastname, u.email, u.password, ' \
-                's.student_num, s.enrolled_program as program_num, ' \
-                'p.name as program_name, ' \
+                'nullif(s.student_num, null) as student_num, ' \
+                's.enrolled_program as program_num, p.name as program_name, ' \
                 'f.faculty_num, f.name as faculty_name, ' \
-                'r.id as role_id, r.name as role_name ' \
+                'r.id as role_id, r.name as role_name, ' \
+                'nullif(s.phone_num, null) as phone_num ' \
                 'from ' \
                 '"user" as u inner join student as s on u.id=s.user_id ' \
                 'inner join users_roles as ur on ur.user_id=u.id ' \

@@ -8,21 +8,21 @@ from RumboEx.handler.StudentHandler import StudentHandler
 
 student_page = Blueprint('student_page', __name__)
 
-from RumboEx.model.role import Role
-from RumboEx.model.user import User
+# from RumboEx.model.role import Role
+# from RumboEx.model.user import User
 
 # failed attempt of creating rbac here
 rbac = RBAC()
-rbac.set_user_loader(lambda: current_user)
-rbac.set_user_model(User)
-rbac.set_role_model(Role)
+# rbac.set_user_loader(lambda: current_user)
+# rbac.set_user_model(User)
+# rbac.set_role_model(Role)
 #
 # # Initial role for RBAC to work
-start = Role('DUMMY')
-rbacDummy = User(roles=[start])
+# start = Role('DUMMY')
+# rbacDummy = User(roles=[start])
 #
 # # To use this variable write global before the name in the methods
-current_user = rbacDummy
+# current_user = rbacDummy
 
 
 # get a student by user id
@@ -49,7 +49,7 @@ def get_students_by_mentor():
 def getallstudents():
     print(rbac)
     handler = StudentHandler()
-    return handler.getallstudent()
+    return handler.get_students_with_courses_and_tasks()
 
 
 @student_page.route('/users')

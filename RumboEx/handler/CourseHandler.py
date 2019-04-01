@@ -86,14 +86,14 @@ class CourseHandler():
                 dao = CourseDAO()
                 grade_id = dao.insert_grade(name, grade, total, weight, date, user_id, course_id)
                 # result = self.mapToTaskDict(task_id)
-                return jsonify({'task_id': grade_id[0]}), 200
+                return jsonify({'grade_id': grade_id[0]}), 200
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
     def insert_course(self, user_id, form):
         codification = form['codification']
         section = form['section_num']
-        name = ''
+        name = codification
         credits = 0
         professor_id = None
         if codification and section:

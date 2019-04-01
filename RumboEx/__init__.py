@@ -19,12 +19,13 @@ from RumboEx.handler.CourseHandler import CourseHandler
 from RumboEx.handler.MessageHandler import MessageHandler
 from RumboEx.handler.AppointmentHandler import AppointmentHandler
 
+from RumboEx.handler.UserHandler import UserHandler
 
 
 # This code must be un once two create the tables in the DataBase
-#User.metadata.create_all(engine)
-#Role.metadata.create_all(engine)
-#db.create.all()
+# User.metadata.create_all(engine)
+# Role.metadata.create_all(engine)
+# db.create.all()
 
 
 # Staring Flask
@@ -111,6 +112,7 @@ def current():
 @app.route('/register', methods=['POST', 'GET', 'OPTIONS'])
 @rbac.allow(['admin'], ['GET', 'POST', 'OPTIONS'], with_children=False)
 def createStudent():
+    print(request)
     if request.method == 'POST':
         cred = request.get_json()
         print(cred)
@@ -122,10 +124,48 @@ def createStudent():
         program = cred['program_num']
         password = cred['password']
         student_num = cred['student_num']
+        phone_num = cred['phone_num']
         student = StudentHandler()
-        print("Entra a la ruta")
-        return student.insertStudent(username, email, password, name, lastname, program, student_num)
-    print("Entra a la ruta")
+        return student.insertStudent(username, email, password, name, lastname, program, student_num, phone_num)
+        # return CourseHandler().insert_course(user_id, cred)
+    return jsonify(result="is not a Post method, but returns"), 200
+
+
+@app.route('/register-counselor', methods=['POST', 'GET', 'OPTIONS'])
+@rbac.allow(['admin'], ['GET', 'POST', 'OPTIONS'], with_children=False)
+def createCounselor():
+    print(request)
+    if request.method == 'POST':
+        cred = request.get_json()
+        print(cred)
+        # username = cred['email'].split('@')[0]
+        username = cred['username']
+        email = cred['email']
+        name = cred['name']
+        lastname = cred['lastname']
+        password = cred['password']
+        user = UserHandler()
+        return user.insertCounselor(username, email, password, name, lastname)
+        # return CourseHandler().insert_course(user_id, cred)
+    return jsonify(result="is not a Post method, but returns"), 200
+
+
+@app.route('/register-psychologist', methods=['POST', 'GET', 'OPTIONS'])
+@rbac.allow(['admin'], ['GET', 'POST', 'OPTIONS'], with_children=False)
+def createPsychologist():
+    print(request)
+    if request.method == 'POST':
+        cred = request.get_json()
+        print(cred)
+        # username = cred['email'].split('@')[0]
+        username = cred['username']
+        email = cred['email']
+        name = cred['name']
+        lastname = cred['lastname']
+        password = cred['password']
+        user = UserHandler()
+        return user.insertPsychologist(username, email, password, name, lastname)
+        # return CourseHandler().insert_course(user_id, cred)
     return jsonify(result="is not a Post method, but returns"), 200
 
 
@@ -153,12 +193,16 @@ def flash_errors(form):
 # @rbac.exempt
 @rbac.allow(['student', 'mentor', 'counselor', 'psychologist'], ['GET'], with_children=False)
 def get_messages_by_user_id(user_id):
-    return MessageHandler().get_chats_by_user_id(user_id)
+    if request.method == 'GET':
+        return MessageHandler().get_chats_by_user_id(user_id)
+    elif request.method == 'POST':
+        return MessageHandler().insert_message(request.get_json())
 
 
 @app.route('/faculties', methods=['GET'])
 @rbac.exempt
 def get_faculties():
     return ProgramHandler().get_faculties_and_programs()
+
 
 

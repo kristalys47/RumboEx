@@ -12,13 +12,13 @@
 
 # credentials: vm db (production)
 # pg_config = {
-#     'hostname': 'rumboexadmin',
+#     'hostname': 'mystudycoach.uprm.edu',
 #     'user': 'rumboexadmin',
 #     'password': 'pee0Laeg',
 #     'dbname': 'mystudycoach',
 #     'port': '5432',
-#     'host': '136.145.58.163',
-#     'url': 'postgres://ivbustqhsmsaps:7a8951928430c500e432dbf97728f42f5033648c052a5befce59295cabd987c5@ec2-23-21-216-174.compute-1.amazonaws.com:5432/d9t2kdqh5u8ekk'
+#     'host': 'localhost',
+#     'url': 'postgresql://rumboexadmin:pee0Laeg@localhost:5432/mystudycoach'
 # }
 # end credentials
 

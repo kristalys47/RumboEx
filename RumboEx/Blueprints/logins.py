@@ -6,11 +6,13 @@ from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Length
 from RumboEx import rbac
 from flask_cors import cross_origin
+from RumboEx.handler.StudentHandler import StudentHandler
+
 from RumboEx.model.user import User
 from RumboEx.model.role import Role
 
-logins = Blueprint('logins', __name__)
 
+logins = Blueprint('logins', __name__)
 
 
 class UserLoginForm(FlaskForm):
@@ -258,3 +260,4 @@ def login():
                 return jsonify(result="Invalid password"), 401
         return jsonify(result="User object null"), 401
     return jsonify(result="is not a Post method, but returns"), 200
+
