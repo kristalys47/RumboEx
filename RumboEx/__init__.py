@@ -17,6 +17,8 @@ from RumboEx.handler.taskHandler import TaskHandler
 from RumboEx.handler.StudentHandler import StudentHandler
 from RumboEx.handler.CourseHandler import CourseHandler
 from RumboEx.handler.MessageHandler import MessageHandler
+from RumboEx.handler.AppointmentHandler import AppointmentHandler
+
 from RumboEx.handler.UserHandler import UserHandler
 
 
@@ -34,15 +36,16 @@ app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
 # app.config['RBAC_USE_WHITE'] = True
 app.debug = True
 CORS(app)
+#CORS(app, support_credentials=True)
 
 # DB info
 app.config['SQLALCHEMY_DATABASE_URI'] = pg_config['url']
 engine = create_engine(pg_config['url'], echo=True)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-# Session = sessionmaker(bind=engine)
-# Session.configure(bind=engine)
-# session = Session()
+#Session = sessionmaker(bind=engine) COMMENTED THIS ON MARCH 24 !!!!!!!!!!!!!!!!!!!!!!
+#Session.configure(bind=engine)
+#session = Session()
 
 
 # If this imports are done before a circle dependency is created and the app will not run.
@@ -82,13 +85,14 @@ from RumboEx.Blueprints.logins import logins
 from RumboEx.Blueprints.tasks import tasks
 from RumboEx.Blueprints.courses import courses
 from RumboEx.Blueprints.student_page import student_page
+from RumboEx.Blueprints.appointments import appointments
 
 # Register blueprints
 app.register_blueprint(logins)
 app.register_blueprint(tasks)
 app.register_blueprint(courses)
 app.register_blueprint(student_page)
-
+app.register_blueprint(appointments)
 
 @app.route('/')
 @rbac.exempt
@@ -98,7 +102,7 @@ def hello_world():
 
 @app.route('/current')
 # @rbac.allow(['admin'], ['GET'], with_children=False)
-@rbac.exempt
+#@rbac.exempt
 def current():
     global current_user
     return jsonify(current_user.object())
@@ -185,9 +189,9 @@ def flash_errors(form):
             ))
 
 
-@app.route('/messages/<int:user_id>', methods=['GET', 'POST'])
+@app.route('/messages/<int:user_id>', methods=['GET'])
 # @rbac.exempt
-@rbac.allow(['student', 'mentor', 'counselor', 'psychologist'], ['GET', 'POST'], with_children=False)
+@rbac.allow(['student', 'mentor', 'counselor', 'psychologist'], ['GET'], with_children=False)
 def get_messages_by_user_id(user_id):
     if request.method == 'GET':
         return MessageHandler().get_chats_by_user_id(user_id)
@@ -199,4 +203,6 @@ def get_messages_by_user_id(user_id):
 @rbac.exempt
 def get_faculties():
     return ProgramHandler().get_faculties_and_programs()
+
+
 

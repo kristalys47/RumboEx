@@ -5,6 +5,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Length
 from RumboEx import rbac
+from flask_cors import cross_origin
 from RumboEx.handler.StudentHandler import StudentHandler
 
 from RumboEx.model.user import User
@@ -28,7 +29,9 @@ def logout():
 
 
 @logins.route('/adminlogin', methods=['POST', 'GET'])
+@cross_origin(supports_credentials=True)
 @rbac.exempt
+
 def adminlogin():
     if request.method == 'POST':
         credential = request.get_json()
@@ -57,6 +60,7 @@ def adminlogin():
 
 
 @logins.route('/studentlogin', methods=['POST', 'GET'])
+@cross_origin(supports_credentials=True)
 @rbac.exempt
 def studentlogin():
     if request.method == 'POST':
@@ -85,6 +89,7 @@ def studentlogin():
 
 
 @logins.route('/counselorlogin', methods=['POST', 'GET'])
+@cross_origin(supports_credentials=True)
 @rbac.exempt
 def counselorlogin():
     if request.method == 'POST':
@@ -113,6 +118,7 @@ def counselorlogin():
 
 
 @logins.route('/psychologistlogin', methods=['POST', 'GET'])
+@cross_origin(supports_credentials=True)
 @rbac.exempt
 def psychologistlogin():
     if request.method == 'POST':
@@ -141,6 +147,7 @@ def psychologistlogin():
 
 
 @logins.route('/mentorlogin', methods=['POST', 'GET'])
+@cross_origin(supports_credentials=True)
 @rbac.exempt
 def mentorlogin():
     if request.method == 'POST':
@@ -170,6 +177,7 @@ def mentorlogin():
 
 
 @logins.route('/professorlogin', methods=['POST', 'GET'])
+@cross_origin(supports_credentials=True)
 @rbac.exempt
 def professorlogin():
     if request.method == 'POST':
@@ -198,6 +206,7 @@ def professorlogin():
 
 
 @logins.route('/advisorlogin', methods=['POST', 'GET'])
+@cross_origin(supports_credentials=True)
 @rbac.exempt
 def advisorlogin():
     if request.method == 'POST':
@@ -227,6 +236,7 @@ def advisorlogin():
 
 # This will be the standard login
 @logins.route('/login', methods=['POST', 'GET'])
+@cross_origin(supports_credentials=True)
 @rbac.exempt
 def login():
     if request.method == 'POST':

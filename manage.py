@@ -1,7 +1,8 @@
+from RumboEx import app as application
 from flask_script import Manager, Server
-from RumboEx import app
 
-manager = Manager(app)
+
+manager = Manager(application)
 
 manager.add_command("runserver", Server(
     use_debugger=True,
