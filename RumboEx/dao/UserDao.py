@@ -8,6 +8,8 @@ class UserDAO:
         pg_config['dbname'], pg_config['user'], pg_config['password'], pg_config['host'], pg_config['port'])
         self.conn = psycopg2.connect(connection_url)
 
+    # POST Methods
+
     def insertCounselor(self, username, email, password, name, lastname):
         cursor = self.conn.cursor()
         query = 'insert into "user"(username, email, password, name, lastname) values(%s, %s, %s, %s, %s) returning id;'
@@ -46,3 +48,24 @@ class UserDAO:
         cursor.execute(query2, (user_id, user_id))
         self.conn.commit()
         return user_id
+
+    # PUT Methods
+
+    def changeEmail(self, user_id, email):
+        cursor = self.conn.cursor()
+        query = 'update "user" set email = %s where id = %s;'
+        cursor.execute(query,(email,user_id,))
+        self.conn.commit()
+
+    def changeUsername(self, username, email):
+        cursor = self.conn.cursor()
+        query = 'update "user" set username = %s where id = %s;'
+        cursor.execute(query,(email,username,))
+        self.conn.commit()
+
+    def changePassword(self, password, email):
+        cursor = self.conn.cursor()
+        query = 'update "user" set password = %s where id = %s;'
+        cursor.execute(query,(email,password,))
+        self.conn.commit()
+

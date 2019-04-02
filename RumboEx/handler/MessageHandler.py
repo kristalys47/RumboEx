@@ -46,16 +46,17 @@ class MessageHandler:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
     # Method to send an email through sendgrid
+    # An email is sent every time a user receives a new message
 
     def send_mail(self, m_id):
         dao = MessageDAO()
         msg = dao.get_message_by_message_id(m_id)
         msg = self.mapToLongMessageDict(msg)
         sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
-        from_email = Email(msg['sent_by_email'])
-        # from_email = Email('irixa.vales@upr.edu')
-        to_email = Email(msg['sent_to_email'])
-        # to_email = Email('irixa.vales@upr.edu')
+        # from_email = Email(msg['sent_by_email'])
+        from_email = Email('irixa.vales@upr.edu')
+        # to_email = Email(msg['sent_to_email'])
+        to_email = Email('irixa.vales@upr.edu')
         subject = "My Study Coach: New message from %s" % (msg['sent_by_name'] + ' ' + msg['sent_by_lastname'])
         content = Content("text/plain", msg['text'])
         mail = Mail(from_email, subject, to_email, content)

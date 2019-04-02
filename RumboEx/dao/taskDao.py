@@ -263,3 +263,34 @@ class TaskDAO:
         self.conn.commit()
         return primary_key
 
+    # PUT Methods
+
+    def change_task_name(self, task_id, task_name):
+        cursor = self.conn.cursor()
+        query = 'update task set task_name = %s where task_id = %s;'
+        cursor.execute(query,(task_name,task_id,))
+        self.conn.commit()
+
+    def change_task_description(self, task_id, task_description):
+        cursor = self.conn.cursor()
+        query = 'update task set task_description = %s where task_id = %s;'
+        cursor.execute(query,(task_description,task_id,))
+        self.conn.commit()
+
+    def change_task_start_time(self, task_id, task_start_time):
+        cursor = self.conn.cursor()
+        query = 'update task set start_time = %s where task_id = %s;'
+        cursor.execute(query,(task_start_time,task_id,))
+        self.conn.commit()
+
+    def change_task_end_time(self, task_id, task_end_time):
+        cursor = self.conn.cursor()
+        query = 'update task set end_time = %s where task_id = %s;'
+        cursor.execute(query,(task_end_time,task_id,))
+        self.conn.commit()
+
+    def change_task_finished(self, task_id, finished):
+        cursor = self.conn.cursor()
+        query = 'update task set finished = %s where task_id = %s;'
+        cursor.execute(query,(finished,task_id,))
+        self.conn.commit()

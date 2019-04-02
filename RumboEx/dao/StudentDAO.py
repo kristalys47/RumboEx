@@ -93,3 +93,23 @@ class StudentDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    # PUT Methods
+
+    def changePhoneNumber(self, phone, user_id):
+        cursor = self.conn.cursor()
+        query = 'update student set phone_num = %s where user_id = %s;'
+        cursor.execute(query,(phone,user_id,))
+        self.conn.commit()
+
+    def changeStundentNumber(self, studentNum, user_id):
+        cursor = self.conn.cursor()
+        query = 'update student set student_num = %s where user_id = %s;'
+        cursor.execute(query,(studentNum,user_id,))
+        self.conn.commit()
+
+    def changeProgram(self, program, user_id):
+        cursor = self.conn.cursor()
+        query = 'update student set enrolled_program = %s where user_id = %s;'
+        cursor.execute(query,(program,user_id,))
+        self.conn.commit()

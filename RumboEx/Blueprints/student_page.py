@@ -32,7 +32,7 @@ def get_student(user_id):
     return StudentHandler().getStudent(user_id)
 
 # get students of a mentor by mentor id
-@student_page.route('/mentor/student/<int:user_id>', methods=['GET'])
+@student_page.route('/studentlist/<int:user_id>', methods=['GET'])
 def get_students(user_id):
     return StudentHandler().get_students_by_mentor_id(user_id)
 
@@ -44,12 +44,19 @@ def get_students_by_mentor():
     return StudentHandler().get_students_with_courses_and_tasks()
 
 
-@student_page.route('/student', methods=['POST', 'GET'])
+@student_page.route('/studentlist', methods=['POST', 'GET'])
 @rbac.allow(['admin', 'counselor', 'advisor', 'mentor'], ['GET'], with_children=False)
 def getallstudents():
     print(rbac)
     handler = StudentHandler()
     return handler.get_students_with_courses_and_tasks()
+
+# @student_page.route('/studentlist/<int:mentorid>', methods=['POST', 'GET'])
+# @rbac.allow(['admin', 'counselor', 'advisor', 'mentor'], ['GET'], with_children=False)
+# def get_students_by_mentor_id():
+#     print(rbac)
+#     handler = StudentHandler()
+#     return handler.get_students_with_courses_and_tasks()
 
 
 @student_page.route('/users')

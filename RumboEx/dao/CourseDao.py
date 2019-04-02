@@ -111,3 +111,35 @@ class CourseDAO:
         enrolled_id = cursor.fetchone()
         self.conn.commit()
         return enrolled_id
+
+    # PUT Methods
+
+    def change_grade_name(self, grade_id, grade_name):
+        cursor = self.conn.cursor()
+        query = 'update grades set g_name = %s where g_id = %s;'
+        cursor.execute(query,(grade_name,grade_id,))
+        self.conn.commit()
+
+    def change_grade_grade(self, grade_id, grade):
+        cursor = self.conn.cursor()
+        query = 'update grades set grade = %s where g_id = %s;'
+        cursor.execute(query,(grade,grade_id,))
+        self.conn.commit()
+
+    def change_grade_weight(self, grade_id, weight):
+        cursor = self.conn.cursor()
+        query = 'update grades set weight = %s where g_id = %s;'
+        cursor.execute(query,(weight,grade_id,))
+        self.conn.commit()
+
+    def change_grade_total(self, grade_id, total):
+        cursor = self.conn.cursor()
+        query = 'update grades set total = %s where g_id = %s;'
+        cursor.execute(query,(total,grade_id,))
+        self.conn.commit()
+
+    def change_grade_date(self, grade_id, date):
+        cursor = self.conn.cursor()
+        query = 'update grades set g_date = %s where g_id = %s;'
+        cursor.execute(query,(date,grade_id,))
+        self.conn.commit()
