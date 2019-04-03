@@ -43,7 +43,21 @@ def get_grades_by_course_id(course_id):
     print(course_id)
     return CourseHandler().get_grades_by_course_id(course_id)
 
-@courses.route('/grade/<int:student_id>', methods=['OPTIONS', 'POST'])
+@courses.route('/grade/<int:student_id>', methods=['OPTIONS', 'POST', 'PUT'])
 @cross_origin()
 def insert_grade(student_id):
-    return CourseHandler().insert_grade(student_id, request.get_json())
+    if request.method == 'POST':
+        return CourseHandler().insert_grade(student_id, request.get_json())
+    elif request.method == 'PUT':
+        cred = request.get_json()
+        grade_id = cred['g_id']
+        if 'g_name' in cred:
+            return CourseHandler().changeGradeName(grade_id, cred['g_name'])
+        if 'grade' in cred:
+            return CourseHandler().changeGradeGrade(grade_id, cred['grade'])
+        if 'weight' in cred:
+            return CourseHandler().changeGradeWeight(grade_id, cred['weight'])
+        if 'total' in cred:
+            return CourseHandler().changeGradeTotal(grade_id, cred['total'])
+        if 'date' in cred:
+            return CourseHandler().changeGradeTotal(grade_id, cred['date'])

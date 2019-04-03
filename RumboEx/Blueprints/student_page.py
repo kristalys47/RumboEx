@@ -26,10 +26,19 @@ rbac = RBAC()
 
 
 # get a student by user id
-@student_page.route('/student/<int:user_id>', methods=['GET'])
-@rbac.allow(['student'], ['GET'], with_children=False)
+@student_page.route('/student/<int:user_id>', methods=['GET', 'OPTIONS', 'PUT'])
+@rbac.allow(['student'], ['GET', 'OPTIONS', 'PUT'], with_children=False)
 def get_student(user_id):
-    return StudentHandler().getStudent(user_id)
+    if request.method == 'GET':
+        return StudentHandler().getStudent(user_id)
+    elif request.method == 'PUT':
+        cred = request.get_json()
+        if 'phone_num' in cred:
+            return StudentHandler().changePhoneNum(user_id, cred['phone_num'])
+        if 'student_num' in cred:
+            return StudentHandler().changeStudentNum(user_id, cred['student_num'])
+        if 'program' in cred:
+            return StudentHandler().changeProgram(user_id, cred['program'])
 
 # get students of a mentor by mentor id
 @student_page.route('/studentlist/<int:user_id>', methods=['GET'])

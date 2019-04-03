@@ -104,3 +104,26 @@ class StudentHandler:
         if not student:
             return jsonify(Error='NOT FOUND'), 404
         return jsonify(self.dicStudent(student)), 200
+
+    # PUT Methods
+
+    def changePhoneNum(self, user_id, phone):
+        response = StudentDAO().changePhoneNumber(phone, user_id)
+        if not response:
+            return jsonify(Error='USER NOT FOUND'), 404
+        result = {'user_id': response[0], 'new_phone_num': response[1]}
+        return jsonify(result=result), 200
+
+    def changeStudentNum(self, user_id, student_num):
+        response = StudentDAO().changeStundentNumber(student_num, user_id)
+        if not response:
+            return jsonify(Error='USER NOT FOUND'), 404
+        result = {'user_id': response[0], 'new_phone_num': response[1]}
+        return jsonify(result=result), 200
+
+    def changeProgram(self, user_id, program):
+        response = StudentDAO().changeProgram(program, user_id)
+        if not response:
+            return jsonify(Error='USER NOT FOUND'), 404
+        result = {'user_id': response[0], 'new_phone_num': response[1]}
+        return jsonify(result=result), 200

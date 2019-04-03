@@ -86,6 +86,7 @@ from RumboEx.Blueprints.tasks import tasks
 from RumboEx.Blueprints.courses import courses
 from RumboEx.Blueprints.student_page import student_page
 from RumboEx.Blueprints.appointments import appointments
+from RumboEx.Blueprints.users import users
 
 # Register blueprints
 app.register_blueprint(logins)
@@ -93,6 +94,7 @@ app.register_blueprint(tasks)
 app.register_blueprint(courses)
 app.register_blueprint(student_page)
 app.register_blueprint(appointments)
+app.register_blueprint(users)
 
 @app.route('/')
 @rbac.exempt

@@ -53,19 +53,24 @@ class UserDAO:
 
     def changeEmail(self, user_id, email):
         cursor = self.conn.cursor()
-        query = 'update "user" set email = %s where id = %s;'
+        query = 'update "user" set email = %s where id = %s returning id, email as new_email;'
         cursor.execute(query,(email,user_id,))
+        result = cursor.fetchone()
         self.conn.commit()
+        return result
 
-    def changeUsername(self, username, email):
+    def changeUsername(self, user_id, username):
         cursor = self.conn.cursor()
-        query = 'update "user" set username = %s where id = %s;'
-        cursor.execute(query,(email,username,))
+        query = 'update "user" set username = %s where id = %s returning id, username as new_username;'
+        cursor.execute(query,(username,user_id,))
+        result = cursor.fetchone()
         self.conn.commit()
+        return result
 
-    def changePassword(self, password, email):
+    def changePassword(self, user_id, password):
         cursor = self.conn.cursor()
-        query = 'update "user" set password = %s where id = %s;'
-        cursor.execute(query,(email,password,))
+        query = 'update "user" set password = %s where id = %s returning id;'
+        cursor.execute(query,(password,user_id,))
+        result = cursor.fetchone()
         self.conn.commit()
-
+        return result

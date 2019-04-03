@@ -108,6 +108,47 @@ class CourseHandler():
         else:
             return jsonify(Error="Unexpected attributes in post request"), 400
 
+    # PUT Methods
+
+
+    def changeGradeName(self, grade_id, grade_name):
+        response = CourseDAO().change_grade_name(grade_id, grade_name)
+        if not response:
+            return jsonify(Error='GRADE NOT FOUND'), 404
+        result = {'user_id': response[0], 'new_grade_name': response[1]}
+        return jsonify(result=result), 200
+
+
+    def changeGradeGrade(self, grade_id, grade):
+        response = CourseDAO().change_grade_grade(grade_id, grade)
+        if not response:
+            return jsonify(Error='GRADE NOT FOUND'), 404
+        result = {'user_id': response[0], 'new_grade_grade': response[1]}
+        return jsonify(result=result), 200
+
+    def changeGradeWeight(self, grade_id, grade_weight):
+        response = CourseDAO().change_grade_weight(grade_id, grade_weight)
+        if not response:
+            return jsonify(Error='GRADE NOT FOUND'), 404
+        result = {'user_id': response[0], 'new_grade_weight': response[1]}
+        return jsonify(result=result), 200
+
+    def changeGradeTotal(self, grade_id, grade_total):
+        response = CourseDAO().change_grade_total(grade_id, grade_total)
+        if not response:
+            return jsonify(Error='GRADE NOT FOUND'), 404
+        result = {'user_id': response[0], 'new_grade_total': response[1]}
+        return jsonify(result=result), 200
+
+    def changeGradeDate(self, grade_id, grade_date):
+        response = CourseDAO().change_grade_date(grade_id, grade_date)
+        if not response:
+            return jsonify(Error='GRADE NOT FOUND'), 404
+        result = {'user_id': response[0], 'new_grade_date': response[1]}
+        return jsonify(result=result), 200
+
+    # Map to Dictionaries
+
     def mapToCourseDict(self, row):
         return {
             'course_id': row[0],

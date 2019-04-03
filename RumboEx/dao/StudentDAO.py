@@ -98,18 +98,21 @@ class StudentDAO:
 
     def changePhoneNumber(self, phone, user_id):
         cursor = self.conn.cursor()
-        query = 'update student set phone_num = %s where user_id = %s;'
+        query = 'update student set phone_num = %s where user_id = %s returning user_id, phone_num as new_phone_num;'
         cursor.execute(query,(phone,user_id,))
         self.conn.commit()
+        return cursor.fetchone()
 
     def changeStundentNumber(self, studentNum, user_id):
         cursor = self.conn.cursor()
-        query = 'update student set student_num = %s where user_id = %s;'
+        query = 'update student set student_num = %s where user_id = %s returning user_id, student_num as new_student_num;'
         cursor.execute(query,(studentNum,user_id,))
         self.conn.commit()
+        return cursor.fetchone()
 
     def changeProgram(self, program, user_id):
         cursor = self.conn.cursor()
-        query = 'update student set enrolled_program = %s where user_id = %s;'
+        query = 'update student set enrolled_program = %s where user_id = %s returning user_id, enrolled_program as enrolled_program;'
         cursor.execute(query,(program,user_id,))
         self.conn.commit()
+        return cursor.fetchone()
