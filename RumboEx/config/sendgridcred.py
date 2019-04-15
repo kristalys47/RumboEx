@@ -1,1 +1,0 @@
-SENDGRID_API_KEY = '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'
