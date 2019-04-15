@@ -38,7 +38,7 @@ class MessageHandler:
                 dao = MessageDAO()
                 m_id = dao.insert_message(sent_by, sent_to, date, text, seen)
                 # result = self.mapToTaskDict(task_id)
-                EmailHandler().send_mail(m_id)
+                EmailHandler().send_mail_after_message(m_id)
                 return jsonify({'msg_id': m_id}), 200
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400

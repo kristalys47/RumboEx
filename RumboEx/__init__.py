@@ -191,9 +191,9 @@ def flash_errors(form):
             ))
 
 
-@app.route('/messages/<int:user_id>', methods=['GET'])
+@app.route('/messages/<int:user_id>', methods=['GET', 'POST'])
 # @rbac.exempt
-@rbac.allow(['student', 'mentor', 'counselor', 'psychologist'], ['GET'], with_children=False)
+@rbac.allow(['student', 'mentor', 'counselor', 'psychologist'], ['GET', 'POST'], with_children=False)
 def get_messages_by_user_id(user_id):
     if request.method == 'GET':
         return MessageHandler().get_chats_by_user_id(user_id)

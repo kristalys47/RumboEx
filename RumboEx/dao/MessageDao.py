@@ -64,7 +64,7 @@ class MessageDAO:
                 'from user_chat as C1 inner join user_chat as C2 using(chat_id) ' \
                 'where C1.user_id=%s and C2.user_id=%s and not C1.user_id=C2.user_id;'
         cursor.execute(query, (sent_by, sent_to,))
-        chat_id = cursor.fetchone()[0]
+        chat_id = cursor.fetchone()
         if not chat_id:
             chat_id = self.insert_chat(sent_by, sent_to)
         query2 = 'insert into message (chat_id, sent_by, sent_to, date, text, seen) ' \
