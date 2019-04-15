@@ -1,5 +1,6 @@
 from flask import jsonify
 from RumboEx.dao.UserDao import UserDAO
+from RumboEx.handler.emails import EmailHandler
 
 
 class UserHandler:
@@ -8,10 +9,12 @@ class UserHandler:
 
     def insertCounselor(self, username, email, password, name, lastname):
         calltoInsert = UserDAO().insertCounselor(username, email, password, name, lastname)
+        EmailHandler().send_mail_after_register(calltoInsert)
         return jsonify(result=calltoInsert), 200
 
     def insertPsychologist(self, username, email, password, name, lastname):
         calltoInsert = UserDAO().insertPsychologist(username, email, password, name, lastname)
+        EmailHandler().send_mail_after_register(calltoInsert)
         return jsonify(result=calltoInsert), 200
 
     # PUT Methods
@@ -37,3 +40,16 @@ class UserHandler:
             return jsonify(Error='USER NOT FOUND'), 404
         result = {'user_id': response[0]}
         return jsonify(result=result), 200
+
+    # Map to dictionaries
+
+    def mapToUserDict(self, row):
+        return {
+            'id': row[0],
+            'username': row[1],
+            'name': row[2],
+            'lastname': row[3],
+            'email': row[4],
+            'password': row[5]
+        }
+

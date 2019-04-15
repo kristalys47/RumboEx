@@ -12,7 +12,7 @@ class ProgramHandler:
         mapped_result = []
         for f in faculties:
             faculty_num = f[0]
-            programs = dao.get_programs(faculty_num)
+            programs = dao.get_programs_by_faculty(faculty_num)
             programs_arr = []
             if programs:
                 for p in programs:
@@ -24,4 +24,4 @@ class ProgramHandler:
         return {'faculty_num': row[0], 'faculty_name': row[1], 'programs': row[2]}
 
     def mapToProgramDict(self, row):
-        return {'program_name': row[0], 'program_num': row[1]}
+        return {'program_num': row[0], 'program_name': row[1]}

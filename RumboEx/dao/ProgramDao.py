@@ -16,7 +16,7 @@ class ProgramDAO:
 
     def get_faculties(self):
         cursor = self.conn.cursor()
-        query = "select * from faculty"
+        query = "select faculty_num, name from faculty order by name;"
         cursor.execute(query, )
         result = []
         for row in cursor:
@@ -25,9 +25,9 @@ class ProgramDAO:
             return None
         return result
 
-    def get_programs(self, faculty_num):
+    def get_programs_by_faculty(self, faculty_num):
         cursor = self.conn.cursor()
-        query = "select * from program where faculty_num=%s"
+        query = "select program_num, name, faculty_num from program where faculty_num=%s order by program_name;"
         cursor.execute(query, (faculty_num, ))
         result = []
         for row in cursor:

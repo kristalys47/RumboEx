@@ -4,6 +4,8 @@ from RumboEx.dao.taskDao import TaskDAO
 from RumboEx.handler.CourseHandler import CourseHandler
 from RumboEx.handler.taskHandler import TaskHandler
 from flask import jsonify
+from RumboEx.handler.emails import EmailHandler
+
 
 class StudentHandler:
 
@@ -35,6 +37,7 @@ class StudentHandler:
 
     def insertStudent(self, username, email, password, name, lastname, program, student_num, phone_num):
         calltoInsert = StudentDAO().insertStudent(username, email, password, name, lastname, program, student_num, phone_num)
+        EmailHandler().send_mail_after_register(calltoInsert)
         return jsonify(result=calltoInsert), 200
 
     def getallusers(self):

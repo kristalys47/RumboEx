@@ -8,6 +8,17 @@ class UserDAO:
         pg_config['dbname'], pg_config['user'], pg_config['password'], pg_config['host'], pg_config['port'])
         self.conn = psycopg2.connect(connection_url)
 
+    # GET Methods
+
+    def getUser(self, user_id):
+        cursor = self.conn.cursor()
+        query = 'select id, username, name, lastname, email, password from "user" where id=%s;'
+        cursor.execute(query, (user_id,))
+        result = cursor.fetchone()
+        if not result:
+            return None
+        return result
+
     # POST Methods
 
     def insertCounselor(self, username, email, password, name, lastname):
@@ -18,8 +29,8 @@ class UserDAO:
         # self.conn.commit()
         query2 = 'insert into counselor(user_id) values(%s); ' \
                  'insert into users_roles(user_id, role_id) values (%s, ' \
-                 '(select id from role where name="counselor"));'
-        cursor.execute(query2, (user_id, user_id))
+                 '(select id from role where name=%s));'
+        cursor.execute(query2, (user_id, user_id, 'counselor'))
         self.conn.commit()
         return user_id
 
@@ -31,8 +42,8 @@ class UserDAO:
         # self.conn.commit()
         query2 = 'insert into psychologist(user_id) values(%s); ' \
                  'insert into users_roles(user_id, role_id) values (%s, ' \
-                 '(select id from role where name="psychologist"));'
-        cursor.execute(query2, (user_id, user_id))
+                 '(select id from role where name=%s));'
+        cursor.execute(query2, (user_id, user_id, 'psychologist'))
         self.conn.commit()
         return user_id
 
@@ -44,8 +55,8 @@ class UserDAO:
         # self.conn.commit()
         query2 = 'insert into advisor(user_id) values(%s); ' \
                  'insert into users_roles(user_id, role_id) values (%s, ' \
-                 '(select id from role where name="advisor"));'
-        cursor.execute(query2, (user_id, user_id))
+                 '(select id from role where name=%s));'
+        cursor.execute(query2, (user_id, user_id, 'advisor'))
         self.conn.commit()
         return user_id
 

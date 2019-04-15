@@ -1,8 +1,6 @@
 from flask import jsonify
+from RumboEx.handler.emails import EmailHandler
 from RumboEx.dao.MessageDao import MessageDAO
-import sendgrid
-import os
-from sendgrid.helpers.mail import *
 
 
 class MessageHandler:
@@ -40,7 +38,7 @@ class MessageHandler:
                 dao = MessageDAO()
                 m_id = dao.insert_message(sent_by, sent_to, date, text, seen)
                 # result = self.mapToTaskDict(task_id)
-                self.send_mail(m_id)
+                EmailHandler().send_mail(m_id)
                 return jsonify({'msg_id': m_id}), 200
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
@@ -48,22 +46,22 @@ class MessageHandler:
     # Method to send an email through sendgrid
     # An email is sent every time a user receives a new message
 
-    def send_mail(self, m_id):
-        dao = MessageDAO()
-        msg = dao.get_message_by_message_id(m_id)
-        msg = self.mapToLongMessageDict(msg)
-        sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
-        # from_email = Email(msg['sent_by_email'])
-        from_email = Email('irixa.vales@upr.edu')
-        # to_email = Email(msg['sent_to_email'])
-        to_email = Email('irixa.vales@upr.edu')
-        subject = "My Study Coach: New message from %s" % (msg['sent_by_name'] + ' ' + msg['sent_by_lastname'])
-        content = Content("text/plain", msg['text'])
-        mail = Mail(from_email, subject, to_email, content)
-        response = sg.client.mail.send.post(request_body=mail.get())
-        print(response.status_code)
-        print(response.body)
-        print(response.headers)
+    # def send_mail(self, m_id):
+    #     dao = MessageDAO()
+    #     msg = dao.get_message_by_message_id(m_id)
+    #     msg = self.mapToLongMessageDict(msg)
+    #     sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
+    #     # from_email = Email(msg['sent_by_email'])
+    #     from_email = Email('irixa.vales@upr.edu')
+    #     # to_email = Email(msg['sent_to_email'])
+    #     to_email = Email('irixa.vales@upr.edu')
+    #     subject = "My Study Coach: New message from %s" % (msg['sent_by_name'] + ' ' + msg['sent_by_lastname'])
+    #     content = Content("text/plain", msg['text'])
+    #     mail = Mail(from_email, subject, to_email, content)
+    #     response = sg.client.mail.send.post(request_body=mail.get())
+    #     print(response.status_code)
+    #     print(response.body)
+    #     print(response.headers)
 
     # Map to Dictionaries
 
