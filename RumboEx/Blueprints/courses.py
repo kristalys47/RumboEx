@@ -15,15 +15,21 @@ def get_student_courses(student_id):
     print(request)
     print(request.get_json())
     if request.method == 'GET':
-        return CourseHandler().get_courses_by_student_id(student_id)
+        return CourseHandler().get_course(student_id)
     # elif request.method == 'OPTIONS':
     #     return
     elif request.method == 'POST':
         print(request.get_json())
         return CourseHandler().insert_course(student_id, request.get_json())
 
+@courses.route('/course/<int:course_id>/<int:student_id>', methods=['GET'])
+@cross_origin()
+def get_course(course_id,student_id):
+    if request.method == 'GET':
+        return CourseHandler().get_course_by_course_id(course_id, student_id)
 
-# get courses a student is enrolled in with grades bu user id
+
+# get courses a student is enrolled in with grades by user id
 @courses.route('/courses/<int:student_id>', methods=['GET'])
 @rbac.allow(['student'], ['GET'], with_children=False)
 def get_student_courses_with_grades(student_id):
@@ -60,4 +66,10 @@ def insert_grade(student_id):
         if 'total' in cred:
             return CourseHandler().changeGradeTotal(grade_id, cred['total'])
         if 'date' in cred:
-            return CourseHandler().changeGradeTotal(grade_id, cred['date'])
+            return CourseHandler().changeGradeDate(grade_id, cred['date'])
+
+@courses.route('/grade/<int:student_id>/<int:grade_id>', methods=['DELETE'])
+@cross_origin()
+def delete_grade(student_id, grade_id):
+    if request.method == 'DELETE':
+        return CourseHandler().deleteGrade(student_id, grade_id)

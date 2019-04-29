@@ -37,7 +37,8 @@ class StudentHandler:
 
     def insertStudent(self, username, email, password, name, lastname, program, student_num, phone_num):
         calltoInsert = StudentDAO().insertStudent(username, email, password, name, lastname, program, student_num, phone_num)
-        EmailHandler().send_mail_after_register(calltoInsert)
+        # todo: fix this method
+        # EmailHandler().send_mail_after_register(calltoInsert)
         return jsonify(result=calltoInsert), 200
 
     def getallusers(self):

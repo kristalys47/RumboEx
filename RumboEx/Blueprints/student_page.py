@@ -1,4 +1,5 @@
 from flask import jsonify, request, Blueprint
+from flask_cors import cross_origin
 from flask_rbac import RBAC
 
 # from RumboEx import rbac, Role, User
@@ -28,6 +29,7 @@ rbac = RBAC()
 # get a student by user id
 @student_page.route('/student/<int:user_id>', methods=['GET', 'OPTIONS', 'PUT'])
 @rbac.allow(['student'], ['GET', 'OPTIONS', 'PUT'], with_children=False)
+@cross_origin()
 def get_student(user_id):
     if request.method == 'GET':
         return StudentHandler().getStudent(user_id)

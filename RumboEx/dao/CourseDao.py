@@ -31,10 +31,16 @@ class CourseDAO:
             return None
         return result
 
-    def get_course_by_course_id(self, course_id):
+    def get_course_by_course_id(self, course_id, student_id):
         cursor = self.conn.cursor()
-        query = "select * from course where course_id = %s;"
-        cursor.execute(query, (course_id,))
+        query = "select " \
+                "course_id, name, codification, credits, section_num, section_id, enrolled_id " \
+                "from course " \
+                "natural inner join section " \
+                "natural inner join enrolled " \
+                "where course_id = %s " \
+                "and student_id = %s;"
+        cursor.execute(query, (course_id,student_id))
         result = cursor.fetchone()
         if not result:
             return None
@@ -54,13 +60,14 @@ class CourseDAO:
             return None
         return result
 
-    def get_grades_by_course_id(self, enrolled_id):
+    def get_grades_by_enrolled_id(self, enrolled_id):
         cursor = self.conn.cursor()
         query = 'select ' \
                 'g.grade_id, g.g_name, g.grade, g.total, g.weight, g.g_date ' \
                 'from ' \
                 'grades as g natural inner join enrolled ' \
-                'where enrolled.enrolled_id=%s;'
+                'where enrolled.enrolled_id=%s' \
+                'order by g_date;'
         cursor.execute(query, (enrolled_id,))
         result = []
         for row in cursor:
@@ -116,35 +123,46 @@ class CourseDAO:
 
     def change_grade_name(self, grade_id, grade_name):
         cursor = self.conn.cursor()
-        query = 'update grades set g_name = %s where g_id = %s;'
+        query = 'update grades set g_name = %s where grade_id = %s returning grade_id, g_name as new_grade_name;'
         cursor.execute(query,(grade_name,grade_id,))
         self.conn.commit()
         return cursor.fetchone()
 
     def change_grade_grade(self, grade_id, grade):
         cursor = self.conn.cursor()
-        query = 'update grades set grade = %s where g_id = %s;'
+        query = 'update grades set grade = %s where grade_id = %s returning grade_id, grade as new_grade;'
         cursor.execute(query,(grade,grade_id,))
         self.conn.commit()
         return cursor.fetchone()
 
     def change_grade_weight(self, grade_id, weight):
         cursor = self.conn.cursor()
-        query = 'update grades set weight = %s where g_id = %s;'
+        query = 'update grades set weight = %s where grade_id = %s returning grade_id, weight as new_weight;'
         cursor.execute(query,(weight,grade_id,))
         self.conn.commit()
         return cursor.fetchone()
 
     def change_grade_total(self, grade_id, total):
         cursor = self.conn.cursor()
-        query = 'update grades set total = %s where g_id = %s;'
+        query = 'update grades set total = %s where grade_id = %s returning grade_id, total as new_total;'
         cursor.execute(query,(total,grade_id,))
         self.conn.commit()
         return cursor.fetchone()
 
     def change_grade_date(self, grade_id, date):
         cursor = self.conn.cursor()
-        query = 'update grades set g_date = %s where g_id = %s;'
+        query = 'update grades set g_date = %s where grade_id = %s returning grade_id, g_date as new_date;'
         cursor.execute(query,(date,grade_id,))
+        self.conn.commit()
+        return cursor.fetchone()
+
+    # DELETE
+
+    # Use this method cautiously, irrivertible
+    def delete_grade(self, student_id, grade_id):
+        cursor = self.conn.cursor()
+        query = 'delete from grades where grade_id=%s and enrolled_id in ' \
+                '(select enrolled_id from enrolled where student_id=%s) returning grade_id;'
+        cursor.execute(query,(grade_id,student_id,))
         self.conn.commit()
         return cursor.fetchone()

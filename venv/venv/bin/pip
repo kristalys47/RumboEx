@@ -1,5 +1,4 @@
 #!/home/irixa/PycharmProjects/RumboEx/venv/venv/bin/python2
-
 # -*- coding: utf-8 -*-
 import re
 import sys

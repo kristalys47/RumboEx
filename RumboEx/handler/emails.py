@@ -38,12 +38,12 @@ class EmailHandler:
         usr = UserDAO().getUser(user_id)
         usr = UserHandler().mapToUserDict(usr)
         sg = sendgrid.SendGridAPIClient(apikey=self.apikey)
-        from_email = Email('mystudycoach@upr.edu')
+        from_email = Email('mystudycoach.uprm.edu')
         to_email = Email(usr['email'])
         subject = 'My Study Coach: New account'
         content = Content("text/plain",
                           "A new account was created for %s %s.\n\n\tusername: %s\n\tpassword: %s\n\nGo to mystudycoach.uprm.edu to use My Study Coach!" %
                           (usr['name'], usr['lastname'], usr['username'], usr['password']))
-        mail = Mail(subject, from_email, to_email, content)
+        mail = Mail(from_email, subject, to_email, content)
         response = sg.client.mail.send.post(request_body=mail.get())
         print(response)

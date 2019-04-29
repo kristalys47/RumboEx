@@ -13,13 +13,18 @@ class StudentDAO:
         query = 'insert into "user"(username, email, password, name, lastname) values(%s, %s, %s, %s, %s) returning id;'
         cursor.execute(query, (username, email, password, name, lastname))
         user_id = cursor.fetchone()[0]
-        self.conn.commit()
-        query2= 'insert into student(student_num, enrolled_program, user_id, phone_num) values(%s, %s, %s, %s); ' \
-                'insert into users_roles(user_id, role_id) values (%s, ' \
-                '(select id from role where name=%s));'
+        query2 = 'insert into student(student_num, enrolled_program, user_id, phone_num) values(%s, %s, %s, %s) ' \
+                 'returning user_id;' \
+                 'insert into users_roles(user_id, role_id) values (%s, ' \
+                 '(select id from role where name=%s)) ' \
+                 'returning user_id, role_id;'
                 # 'insert into mentors_students(mentor_id, student_id) values(%s, %s), (%s, %s), (%s, %s); ' \
         cursor.execute(query2, (student_num, program, user_id, phone_num, user_id, 'student'))
-        self.conn.commit()
+        result = cursor.fetchall()
+        if result:
+            self.conn.commit()
+        else:
+            cursor.execute('rollback;',)
         return user_id
 
     def getallusers(self):
