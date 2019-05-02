@@ -23,6 +23,21 @@ class MessageHandler:
             mapped_result.append(chat)
         return jsonify(Chats=mapped_result)
 
+    def get_chat_by_chat_id(self, user_id, chat_id):
+        dao = MessageDAO()
+        result = dao.get_chat_by_chat_id(user_id, chat_id)
+        if not result:
+            return jsonify(Error='NOT FOUND'), 404
+        chat = self.mapToChatDict(result)
+        chat['messages'] = []
+        messages = dao.get_messages_by_chat_id(chat_id)
+        if messages:
+            for m in messages:
+                chat['messages'].append(self.mapToMessageDict(m))
+        return jsonify(Chat=chat), 200
+
+
+
     # Post Methods
 
     def insert_message(self, form):

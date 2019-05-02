@@ -200,6 +200,11 @@ def get_messages_by_user_id(user_id):
     elif request.method == 'POST':
         return MessageHandler().insert_message(request.get_json())
 
+@app.route('/messages/chat/<int:chat_id>', methods=['GET', 'POST'])
+def get_messages_by_chat_id(chat_id):
+    if request == 'GET':
+        return MessageHandler().get_chat_by_chat_id(chat_id)
+
 
 @app.route('/faculties', methods=['GET'])
 @rbac.exempt
