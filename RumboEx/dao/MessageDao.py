@@ -97,3 +97,13 @@ class MessageDAO:
         cursor.execute(query1, (chat_id, user2,))
         self.conn.commit()
         return chat_id
+
+    # PUT Methods
+
+    def set_message_seen(self, m_id):
+        cursor = self.conn.cursor()
+        query = 'update message set seen=true where m_id=%s returning m_id, seen;'
+        cursor.execute(query,(m_id,))
+        res = cursor.fetchone()
+        self.conn.commit()
+        return res

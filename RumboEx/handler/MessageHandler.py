@@ -59,6 +59,23 @@ class MessageHandler:
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
+    # PUT Methods
+
+    def set_message_seen(self, form):
+        if len(form) is not 1:
+            return jsonify(Error='Malformed post request'), 400
+        else:
+            m_id = form['msg_id']
+            if m_id:
+                dao = MessageDAO()
+                res = dao.set_message_seen(m_id)
+                if not res:
+                    return jsonify(Error='NOT FOUND'), 404
+                result = {'m_id': res[0], 'seen': res[1]}
+                return jsonify(result), 200
+            else:
+                return jsonify(Error='Unexpected attributes in post request'), 400
+
     # Method to send an email through sendgrid
     # An email is sent every time a user receives a new message
 
