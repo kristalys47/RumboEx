@@ -131,3 +131,38 @@ class StudentHandler:
             return jsonify(Error='USER NOT FOUND'), 404
         result = {'user_id': response[0], 'new_phone_num': response[1]}
         return jsonify(result=result), 200
+
+    def changeName(self, user_id, name):
+        response = StudentDAO().changeName(name, user_id)
+        if not response:
+            return jsonify(Error='USER NOT FOUND'), 404
+        result = {'user_id': response[0], 'new_name': response[1]}
+        return jsonify(result=result), 200
+
+    def changeLastname(self, user_id, lastname):
+        response = StudentDAO().changeLastname(lastname, user_id)
+        if not response:
+            return jsonify(Error='USER NOT FOUND'), 404
+        result = {'user_id': response[0], 'new_lastname': response[1]}
+        return jsonify(result=result), 200
+
+    def changeUsername(self, user_id, username):
+        response = StudentDAO().changeUsername(username, user_id)
+        if not response:
+            return jsonify(Error='USER NOT FOUND'), 404
+        result = {'user_id': response[0], 'new_username': response[1]}
+        return jsonify(result=result), 200
+
+    def changeEmail(self, user_id, email):
+        response = StudentDAO().changeEmail(email, user_id)
+        if not response:
+            return jsonify(Error='USER NOT FOUND'), 404
+        result = {'user_id': response[0], 'new_email': response[1]}
+        return jsonify(result=result), 200
+
+    def changePassword(self, user_id, password):
+        response = StudentDAO().changePassword(password, user_id)
+        if not response:
+            return jsonify(Error='USER NOT FOUND'), 404
+        result = {'user_id': response[0]}
+        return jsonify(result=result), 200

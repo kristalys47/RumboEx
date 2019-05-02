@@ -105,19 +105,70 @@ class StudentDAO:
         cursor = self.conn.cursor()
         query = 'update student set phone_num = %s where user_id = %s returning user_id, phone_num as new_phone_num;'
         cursor.execute(query,(phone,user_id,))
-        self.conn.commit()
-        return cursor.fetchone()
+        res = cursor.fetchone()
+        if res:
+            self.conn.commit()
+        return res
 
     def changeStundentNumber(self, studentNum, user_id):
         cursor = self.conn.cursor()
         query = 'update student set student_num = %s where user_id = %s returning user_id, student_num as new_student_num;'
         cursor.execute(query,(studentNum,user_id,))
-        self.conn.commit()
-        return cursor.fetchone()
+        res = cursor.fetchone()
+        if res:
+            self.conn.commit()
+        return res
 
     def changeProgram(self, program, user_id):
         cursor = self.conn.cursor()
         query = 'update student set enrolled_program = %s where user_id = %s returning user_id, enrolled_program as enrolled_program;'
         cursor.execute(query,(program,user_id,))
-        self.conn.commit()
-        return cursor.fetchone()
+        res = cursor.fetchone()
+        if res:
+            self.conn.commit()
+        return res
+
+    def changeName(self, name, user_id):
+        cursor = self.conn.cursor()
+        query = 'update "user" set name=%s where id=%s returning id, name as new_name;'
+        cursor.execute(query,(name,user_id,))
+        res = cursor.fetchone()
+        if res:
+            self.conn.commit()
+        return res
+
+    def changeLastname(self, lastname, user_id):
+        cursor = self.conn.cursor()
+        query = 'update "user" set lastname=%s where id=%s returning id, lastname as new_lastname;'
+        cursor.execute(query,(lastname,user_id,))
+        res = cursor.fetchone()
+        if res:
+            self.conn.commit()
+        return res
+
+    def changeUsername(self, username, user_id):
+        cursor = self.conn.cursor()
+        query = 'update "user" set username=%s where id=%s returning id, username as new_username;'
+        cursor.execute(query,(username,user_id,))
+        res = cursor.fetchone()
+        if res:
+            self.conn.commit()
+        return res
+
+    def changeEmail(self, email, user_id):
+        cursor = self.conn.cursor()
+        query = 'update "user" set email=%s where id=%s returning id, email as new_email;'
+        cursor.execute(query,(email,user_id,))
+        res = cursor.fetchone()
+        if res:
+            self.conn.commit()
+        return res
+
+    def changePassword(self, password, user_id):
+        cursor = self.conn.cursor()
+        query = 'update "user" set password=%s where id=%s returning id;'
+        cursor.execute(query,(password,user_id,))
+        res = cursor.fetchone()
+        if res:
+            self.conn.commit()
+        return res

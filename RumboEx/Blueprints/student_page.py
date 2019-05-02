@@ -41,6 +41,16 @@ def get_student(user_id):
             return StudentHandler().changeStudentNum(user_id, cred['student_num'])
         if 'program' in cred:
             return StudentHandler().changeProgram(user_id, cred['program'])
+        if 'name' in cred:
+            return StudentHandler().changeName(user_id, cred['name'])
+        if 'lastname' in cred:
+            return StudentHandler().changeLastname(user_id, cred['lastname'])
+        if 'username' in cred:
+            return StudentHandler().changeUsername(user_id, cred['username'])
+        if 'email' in cred:
+            return StudentHandler().changeEmail(user_id, cred['email'])
+        if 'password' in cred:
+            return StudentHandler().changePassword(user_id, cred['password'])
 
 # get students of a mentor by mentor id
 @student_page.route('/studentlist/<int:user_id>', methods=['GET'])
