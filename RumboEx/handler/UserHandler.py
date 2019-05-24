@@ -5,6 +5,19 @@ from RumboEx.handler.emails import EmailHandler
 
 class UserHandler:
 
+
+    # GET Methods
+
+    def getMnetorsByStudentId(self, student_id):
+        dao = UserDAO()
+        result = dao.getMentorsByStudentId(student_id)
+        if not result:
+            return jsonify(Error='NOT FOUND'), 404
+        mapped_result = []
+        for row in result:
+            mapped_result.append(self.mapToUserLongDict(row))
+        return jsonify(Mentors=mapped_result), 200
+
     # POST Methods
 
     def insertCounselor(self, username, email, password, name, lastname):
@@ -51,5 +64,16 @@ class UserHandler:
             'lastname': row[3],
             'email': row[4],
             'password': row[5]
+        }
+
+    def mapToUserLongDict(self, row):
+        return {
+            'id': row[0],
+            'username': row[1],
+            'name': row[2],
+            'lastname': row[3],
+            'email': row[4],
+            'role_id': row[5],
+            'role_name': row[6]
         }
 

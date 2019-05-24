@@ -19,6 +19,20 @@ class UserDAO:
             return None
         return result
 
+    def getMentorsByStudentId(self, student_id):
+        cursor = self.conn.cursor()
+        query = 'select u.id, u.username, u.name, u.lastname, u.email, ' \
+                'r.id as role_id, r.name as role_name ' \
+                'from "user" as u inner join mentors_students as m on u.id=m.mentor_id ' \
+                'inner join users_roles as ur on ur.user_id=u.id ' \
+                'inner join role as r on r.id=ur.role_id ' \
+                'where m.student_id=%s;'
+        cursor.execute(query,(student_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
     # POST Methods
 
     def insertCounselor(self, username, email, password, name, lastname):

@@ -17,3 +17,9 @@ def get_user(user_id):
             return UserHandler().changeUsername(user_id, cred['username'])
         if 'password' in cred:
             return UserHandler().changePassword(user_id, cred['password'])
+
+@users.route('/mentors/<int:student_id>', methods=['GET'])
+@cross_origin()
+def get_mentors_by_studemt_id(student_id):
+    if request.method == 'GET':
+        return UserHandler().getMnetorsByStudentId(student_id)
