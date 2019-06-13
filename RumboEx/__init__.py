@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, jsonify
 from flask_login import LoginManager, login_required, current_user
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import check_password_hash, generate_password_hash
 from RumboEx.config.dbconfig import pg_config
 
 
@@ -124,7 +125,7 @@ def createStudent():
         name = cred['name']
         lastname = cred['lastname']
         program = cred['program_num']
-        password = cred['password']
+        password = generate_password_hash(cred['password'], method='sha256') # stores hashed password into db
         student_num = cred['student_num']
         phone_num = cred['phone_num']
         student = StudentHandler()
@@ -145,7 +146,7 @@ def createCounselor():
         email = cred['email']
         name = cred['name']
         lastname = cred['lastname']
-        password = cred['password']
+        password = generate_password_hash(cred['password'], method='sha256')
         user = UserHandler()
         return user.insertCounselor(username, email, password, name, lastname)
         # return CourseHandler().insert_course(user_id, cred)
@@ -164,7 +165,7 @@ def createPsychologist():
         email = cred['email']
         name = cred['name']
         lastname = cred['lastname']
-        password = cred['password']
+        password = generate_password_hash(cred['password'], method='sha256')
         user = UserHandler()
         return user.insertPsychologist(username, email, password, name, lastname)
         # return CourseHandler().insert_course(user_id, cred)

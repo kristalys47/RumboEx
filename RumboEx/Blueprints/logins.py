@@ -41,8 +41,7 @@ def adminlogin():
         if user:
             if user.object()['roles'][0] == 'admin':
                 global current_user
-                hashed_password = generate_password_hash(user.password, method='sha256')
-                if check_password_hash(hashed_password, credential['password']):
+                if check_password_hash(user.password, credential['password']):
                     print(user.object())
                     try:
                         remember = credential['remember']
@@ -67,11 +66,13 @@ def studentlogin():
         credential = request.get_json()
         print(credential)
         user = User.query.filter_by(username=credential['username']).first()
+        # a user with that username was found in db
         if user:
+            # the user is a student
             if user.object()['roles'][0] == 'student':
                 global current_user
-                hashed_password = generate_password_hash(user.password, method='sha256')
-                if check_password_hash(hashed_password, credential['password']):
+                # checks hashed password from db with password provided by user to login
+                if check_password_hash(user.password, credential['password']):
                     print(user.object())
                     try:
                         remember = credential['remember']
@@ -99,8 +100,7 @@ def counselorlogin():
         if user:
             if user.object()['roles'][0] == 'counselor':
                 global current_user
-                hashed_password = generate_password_hash(user.password, method='sha256')
-                if check_password_hash(hashed_password, credential['password']):
+                if check_password_hash(user.password, credential['password']):
                     print(user.object())
                     try:
                         remember = credential['remember']
@@ -128,8 +128,7 @@ def psychologistlogin():
         if user:
             if user.object()['roles'][0] == 'psychologist':
                 global current_user
-                hashed_password = generate_password_hash(user.password, method='sha256')
-                if check_password_hash(hashed_password, credential['password']):
+                if check_password_hash(user.password, credential['password']):
                     print(user.object())
                     try:
                         remember = credential['remember']
@@ -158,8 +157,7 @@ def mentorlogin():
             print(user.object()['roles'])
             if user.object()['roles'][0] == 'mentor':
                 global current_user
-                hashed_password = generate_password_hash(user.password, method='sha256')
-                if check_password_hash(hashed_password, credential['password']):
+                if check_password_hash(user.password, credential['password']):
                     print(user.object())
                     try:
                         remember = credential['remember']
@@ -187,8 +185,7 @@ def professorlogin():
         if user:
             if user.object()['roles'][0] == 'professor':
                 global current_user
-                hashed_password = generate_password_hash(user.password, method='sha256')
-                if check_password_hash(hashed_password, credential['password']):
+                if check_password_hash(user.password, credential['password']):
                     print(user.object())
                     try:
                         remember = credential['remember']
@@ -216,8 +213,7 @@ def advisorlogin():
         if user:
             if user.object()['roles'][0] == 'advisor':
                 global current_user
-                hashed_password = generate_password_hash(user.password, method='sha256')
-                if check_password_hash(hashed_password, credential['password']):
+                if check_password_hash(user.password, credential['password']):
                     print(user.object())
                     try:
                         remember = credential['remember']
@@ -245,8 +241,7 @@ def login():
         user = User.query.filter_by(username=credential['username']).first()
         if user:
             global current_user
-            hashed_password = generate_password_hash(user.password, method='sha256')
-            if check_password_hash(hashed_password, credential['password']):
+            if check_password_hash(user.password, credential['password']):
                 print(user.object())
                 try:
                     remember = credential['remember']
