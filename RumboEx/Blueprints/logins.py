@@ -28,231 +28,105 @@ def logout():
     return jsonify(result="Successful"), 200
 
 
-@logins.route('/adminlogin', methods=['POST', 'GET'])
+@logins.route('/adminlogin', methods=['POST'])
 @cross_origin(supports_credentials=True)
 @rbac.exempt
-
 def adminlogin():
-    if request.method == 'POST':
-        credential = request.get_json()
-        print(request)
-        print(credential)
-        user = User.query.filter_by(username=credential['username']).first()
-        if user:
-            if user.object()['roles'][0] == 'admin':
-                global current_user
-                if check_password_hash(user.password, credential['password']):
-                    print(user.object())
-                    try:
-                        remember = credential['remember']
-                    except:
-                        remember = False
-                    ret = login_user(user, remember)
-                    print(ret)
-                    current_user = user
-                    return jsonify(result=user.object()), 200
-                else:
-                    return jsonify(result="Invalid password"), 401
-            return jsonify(result="Role not valid"), 401
-        return jsonify(result="User object null"), 401
-    return jsonify(result="is not a Post method, but returns"), 200
+    return login(request, 'admin')
 
 
-@logins.route('/studentlogin', methods=['POST', 'GET'])
+@logins.route('/studentlogin', methods=['POST'])
 @cross_origin(supports_credentials=True)
 @rbac.exempt
 def studentlogin():
-    if request.method == 'POST':
-        credential = request.get_json()
-        print(credential)
-        user = User.query.filter_by(username=credential['username']).first()
-        # a user with that username was found in db
-        if user:
-            # the user is a student
-            if user.object()['roles'][0] == 'student':
-                global current_user
-                # checks hashed password from db with password provided by user to login
-                if check_password_hash(user.password, credential['password']):
-                    print(user.object())
-                    try:
-                        remember = credential['remember']
-                    except:
-                        remember = False
-                    ret = login_user(user, remember)
-                    print(ret)
-                    current_user = user
-                    return jsonify(result=user.object()), 200
-                else:
-                    return jsonify(result="Invalid password"), 401
-            return jsonify(result="Role not valid"), 401
-        return jsonify(result="User object null"), 401
-    return jsonify(result="is not a Post method, but returns"), 200
+    return login(request, 'student')
 
 
-@logins.route('/counselorlogin', methods=['POST', 'GET'])
+@logins.route('/counselorlogin', methods=['POST'])
 @cross_origin(supports_credentials=True)
 @rbac.exempt
 def counselorlogin():
-    if request.method == 'POST':
-        credential = request.get_json()
-        print(credential)
-        user = User.query.filter_by(username=credential['username']).first()
-        if user:
-            if user.object()['roles'][0] == 'counselor':
-                global current_user
-                if check_password_hash(user.password, credential['password']):
-                    print(user.object())
-                    try:
-                        remember = credential['remember']
-                    except:
-                        remember = False
-                    ret = login_user(user, remember)
-                    print(ret)
-                    current_user = user
-                    return jsonify(result=user.object()), 200
-                else:
-                    return jsonify(result="Invalid password"), 401
-            return jsonify(result="Role not valid"), 401
-        return jsonify(result="User object null"), 401
-    return jsonify(result="is not a Post method, but returns"), 200
+    return login(request, 'counselor')
 
 
-@logins.route('/psychologistlogin', methods=['POST', 'GET'])
+@logins.route('/psychologistlogin', methods=['POST'])
 @cross_origin(supports_credentials=True)
 @rbac.exempt
 def psychologistlogin():
-    if request.method == 'POST':
-        credential = request.get_json()
-        print(credential)
-        user = User.query.filter_by(username=credential['username']).first()
-        if user:
-            if user.object()['roles'][0] == 'psychologist':
-                global current_user
-                if check_password_hash(user.password, credential['password']):
-                    print(user.object())
-                    try:
-                        remember = credential['remember']
-                    except:
-                        remember = False
-                    ret = login_user(user, remember)
-                    print(ret)
-                    current_user = user
-                    return jsonify(result=user.object()), 200
-                else:
-                    return jsonify(result="Invalid password"), 401
-            return jsonify(result="Role not valid"), 401
-        return jsonify(result="User object null"), 401
-    return jsonify(result="is not a Post method, but returns"), 200
+    return login(request, 'psychologist')
 
 
-@logins.route('/mentorlogin', methods=['POST', 'GET'])
+@logins.route('/mentorlogin', methods=['POST'])
 @cross_origin(supports_credentials=True)
 @rbac.exempt
 def mentorlogin():
-    if request.method == 'POST':
-        credential = request.get_json()
-        print(credential)
-        user = User.query.filter_by(username=credential['username']).first()
-        if user:
-            print(user.object()['roles'])
-            if user.object()['roles'][0] == 'mentor':
-                global current_user
-                if check_password_hash(user.password, credential['password']):
-                    print(user.object())
-                    try:
-                        remember = credential['remember']
-                    except:
-                        remember = False
-                    ret = login_user(user, remember)
-                    print(ret)
-                    current_user = user
-                    return jsonify(result=user.object()), 200
-                else:
-                    return jsonify(result="Invalid password"), 401
-            return jsonify(result="Role not valid"), 401
-        return jsonify(result="User object null"), 401
-    return jsonify(result="is not a Post method, but returns"), 200
+    return login(request, 'mentor')
 
 
-@logins.route('/professorlogin', methods=['POST', 'GET'])
+@logins.route('/professorlogin', methods=['POST'])
 @cross_origin(supports_credentials=True)
 @rbac.exempt
 def professorlogin():
-    if request.method == 'POST':
-        credential = request.get_json()
-        print(credential)
-        user = User.query.filter_by(username=credential['username']).first()
-        if user:
-            if user.object()['roles'][0] == 'professor':
-                global current_user
-                if check_password_hash(user.password, credential['password']):
-                    print(user.object())
-                    try:
-                        remember = credential['remember']
-                    except:
-                        remember = False
-                    ret = login_user(user, remember)
-                    print(ret)
-                    current_user = user
-                    return jsonify(result=user.object()), 200
-                else:
-                    return jsonify(result="Invalid password"), 401
-            return jsonify(result="Role not valid"), 401
-        return jsonify(result="User object null"), 401
-    return jsonify(result="is not a Post method, but returns"), 200
+    return login(request, 'professor')
 
 
-@logins.route('/advisorlogin', methods=['POST', 'GET'])
+@logins.route('/advisorlogin', methods=['POST'])
 @cross_origin(supports_credentials=True)
 @rbac.exempt
 def advisorlogin():
-    if request.method == 'POST':
-        credential = request.get_json()
-        print(credential)
-        user = User.query.filter_by(username=credential['username']).first()
-        if user:
-            if user.object()['roles'][0] == 'advisor':
-                global current_user
-                if check_password_hash(user.password, credential['password']):
-                    print(user.object())
-                    try:
-                        remember = credential['remember']
-                    except:
-                        remember = False
-                    ret = login_user(user, remember)
-                    print(ret)
-                    current_user = user
-                    return jsonify(result=user.object()), 200
-                else:
-                    return jsonify(result="Invalid password"), 401
-            return jsonify(result="Role not valid"), 401
-        return jsonify(result="User object null"), 401
-    return jsonify(result="is not a Post method, but returns"), 200
+    return login(request, 'advisor')
 
 
-# This will be the standard login
-@logins.route('/login', methods=['POST', 'GET'])
+# This will be the standard login. Should not be used.
+@logins.route('/login', methods=['POST'])
 @cross_origin(supports_credentials=True)
 @rbac.exempt
-def login():
+def loginuser():
     if request.method == 'POST':
         credential = request.get_json()
-        print(credential)
+        # Queries for user in database. Since usernames are unique, if it exists in db it should be the first appearance
+        # TODO: consider login options with other fields other that username (ex: email)
         user = User.query.filter_by(username=credential['username']).first()
+        print(user.object())
         if user:
             global current_user
+            # Check if password is valid
             if check_password_hash(user.password, credential['password']):
-                print(user.object())
                 try:
                     remember = credential['remember']
                 except:
+                    # If remember field is null, set default to false
                     remember = False
-                ret = login_user(user, remember)
-                print(ret)
-                current_user = user
+                login_user(user, remember)
                 return jsonify(result=user.object()), 200
-            else:
-                return jsonify(result="Invalid password"), 401
-        return jsonify(result="User object null"), 401
-    return jsonify(result="is not a Post method, but returns"), 200
 
+            return jsonify(result="Invalid password"), 401
+        return jsonify(result="User not found"), 401
+    return jsonify(result="Is not a Post method, but returns"), 200
+
+
+def login(request, role):
+    if request.method == 'POST':
+        credential = request.get_json()
+        # Queries for user in database. Since usernames are unique, if it exists in db it should be the first appearance
+        # TODO: consider login options with other fields other that username (ex: email)
+        user = User.query.filter_by(username=credential['username']).first()
+        print(user.object())
+        if user:
+            # Check if user role matches with the page trying to login to
+            if user.object()['roles'][0] == role:
+                global current_user
+                # Check if password is valid
+                if check_password_hash(user.password, credential['password']):
+                    try:
+                        remember = credential['remember']
+                    except:
+                        # If remember field is null, set default to false
+                        remember = False
+                    login_user(user, remember)
+                    return jsonify(result=user.object()), 200
+
+                return jsonify(result="Invalid password"), 401
+            return jsonify(result="User trying to login to unathorized page"), 401
+        return jsonify(result="User not found"), 401
+    return jsonify(result="Is not a Post method, but returns"), 200

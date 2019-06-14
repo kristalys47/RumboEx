@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, jsonify
-from flask_login import LoginManager, login_required, current_user
+from flask_login import LoginManager, login_required, current_user, login_user
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 from RumboEx.config.dbconfig import pg_config
@@ -74,11 +74,11 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 # Initial role for RBAC to work
-start = Role('DUMMY')
-rbacDummy = User(roles=[start])
+# start = Role('DUMMY')
+# rbacDummy = User(roles=[start])
 
 # To use this variable write global before the name in the methods
-current_user = rbacDummy
+# current_user = rbacDummy
 
 
 # Blueprints to import. Need to be after rbac
@@ -97,17 +97,23 @@ app.register_blueprint(student_page)
 app.register_blueprint(appointments)
 app.register_blueprint(users)
 
+# from RumboEx.decorators.authorization import authorize
+
 @app.route('/')
 @rbac.exempt
+# @authorize
 def hello_world():
     return 'Bienvenidos a RumboEx ToDo'
 
 
 @app.route('/current')
+@login_required
 # @rbac.allow(['admin'], ['GET'], with_children=False)
 #@rbac.exempt
+# @authorize
 def current():
     global current_user
+    print(current_user)
     return jsonify(current_user.object())
     # return "esta en al pantalla de python el current user"
 
@@ -179,7 +185,7 @@ def createPsychologist():
 def calendar():
     global current_user
     print(current_user.object())
-    current_user = rbacDummy
+    # current_user = rbacDummy
     return render_template('calendar.html')
 
 
@@ -216,4 +222,28 @@ def get_faculties():
     return ProgramHandler().get_faculties_and_programs()
 
 
-
+# @app.route('/login', methods=['POST', 'GET'])
+# @cross_origin(supports_credentials=True)
+# @rbac.exempt
+# def login():
+#     if request.method == 'POST':
+#         credential = request.get_json()
+#         print(credential)
+#         user = User.query.filter_by(username=credential['username']).first()
+#         if user:
+#             global current_user
+#             if check_password_hash(user.password, credential['password']):
+#                 print(user.object())
+#                 try:
+#                     remember = credential['remember']
+#                 except:
+#                     remember = False
+#                 login_user(user, remember)
+#                 print(current_user)
+#                 # current_user = user
+#                 print(current_user)
+#                 return jsonify(result=user.object()), 200
+#             else:
+#                 return jsonify(result="Invalid password"), 401
+#         return jsonify(result="User object null"), 401
+#     return jsonify(result="is not a Post method, but returns"), 200
