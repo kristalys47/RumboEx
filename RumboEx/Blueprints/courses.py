@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from flask_cors import CORS, cross_origin
 from RumboEx import rbac
+from RumboEx.decorators.authorization import authorize
 from RumboEx.handler.CourseHandler import CourseHandler
 
 
@@ -9,8 +10,7 @@ CORS(courses)
 
 # get courses a student is enrolled in by user id
 @courses.route('/course/<int:student_id>', methods=['POST', 'GET', 'OPTIONS'])
-@cross_origin()
-@rbac.allow(['student'], ['GET', 'POST', 'OPTIONS'], with_children=False)
+@authorize(['student'])
 def get_student_courses(student_id):
     print(request)
     print(request.get_json())
@@ -23,7 +23,7 @@ def get_student_courses(student_id):
         return CourseHandler().insert_course(student_id, request.get_json())
 
 @courses.route('/course/<int:course_id>/<int:student_id>', methods=['GET'])
-@cross_origin()
+@authorize('student')
 def get_course(course_id,student_id):
     if request.method == 'GET':
         return CourseHandler().get_course_by_course_id(course_id, student_id)
@@ -31,7 +31,7 @@ def get_course(course_id,student_id):
 
 # get courses a student is enrolled in with grades by user id
 @courses.route('/courses/<int:student_id>', methods=['GET'])
-@rbac.allow(['student'], ['GET'], with_children=False)
+@authorize(['student'])
 def get_student_courses_with_grades(student_id):
     return CourseHandler().get_courses_with_grades_by_student_id(student_id)
 
@@ -44,13 +44,13 @@ def get_student_courses_with_grades(student_id):
 
 # get grades of a course by course id
 @courses.route('/course/<int:course_id>/grades', methods=['GET'])
-@rbac.allow(['student'], ['GET'], with_children=False)
+@authorize(['student'])
 def get_grades_by_course_id(course_id):
     print(course_id)
     return CourseHandler().get_grades_by_course_id(course_id)
 
 @courses.route('/grade/<int:student_id>', methods=['OPTIONS', 'POST', 'PUT'])
-@cross_origin()
+@authorize(['student'])
 def insert_grade(student_id):
     if request.method == 'POST':
         return CourseHandler().insert_grade(student_id, request.get_json())
@@ -69,7 +69,7 @@ def insert_grade(student_id):
             return CourseHandler().changeGradeDate(grade_id, cred['date'])
 
 @courses.route('/grade/<int:student_id>/<int:grade_id>', methods=['DELETE'])
-@cross_origin()
+@authorize(['student'])
 def delete_grade(student_id, grade_id):
     if request.method == 'DELETE':
         return CourseHandler().deleteGrade(student_id, grade_id)

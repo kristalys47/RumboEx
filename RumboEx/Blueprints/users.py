@@ -3,11 +3,12 @@ from flask_rbac import RBAC
 from flask_cors import CORS, cross_origin
 from RumboEx.handler.UserHandler import UserHandler
 
+from RumboEx.decorators.authorization import authorize
+
 users = Blueprint('user_page', __name__)
 CORS(users)
 
 @users.route('/user/<int:user_id>', methods=['OPTIONS', 'PUT'])
-@cross_origin()
 def get_user(user_id):
     if request.method == 'PUT':
         cred = request.get_json()
@@ -20,6 +21,7 @@ def get_user(user_id):
 
 @users.route('/mentors/<int:student_id>', methods=['GET'])
 @cross_origin()
-def get_mentors_by_studemt_id(student_id):
+@authorize(['student'])
+def get_mentors_by_student_id(student_id):
     if request.method == 'GET':
         return UserHandler().getMnetorsByStudentId(student_id)
