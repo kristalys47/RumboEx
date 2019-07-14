@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 from RumboEx.config.dbconfig import pg_config
 
+from RumboEx.decorators.authorization import authorize
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -100,7 +101,7 @@ app.register_blueprint(users)
 # from RumboEx.decorators.authorization import authorize
 
 @app.route('/')
-@rbac.exempt
+# @rbac.exempt
 # @authorize
 def hello_world():
     return 'Bienvenidos a RumboEx ToDo'
@@ -119,7 +120,7 @@ def current():
 
 
 @app.route('/register', methods=['POST', 'GET', 'OPTIONS'])
-@rbac.allow(['admin'], ['GET', 'POST', 'OPTIONS'], with_children=False)
+# @rbac.allow(['admin'], ['GET', 'POST', 'OPTIONS'], with_children=False)
 def createStudent():
     print(request)
     if request.method == 'POST':
@@ -141,7 +142,7 @@ def createStudent():
 
 
 @app.route('/register-counselor', methods=['POST', 'GET', 'OPTIONS'])
-@rbac.allow(['admin'], ['GET', 'POST', 'OPTIONS'], with_children=False)
+# @rbac.allow(['admin'], ['GET', 'POST', 'OPTIONS'], with_children=False)
 def createCounselor():
     print(request)
     if request.method == 'POST':
@@ -160,7 +161,7 @@ def createCounselor():
 
 
 @app.route('/register-psychologist', methods=['POST', 'GET', 'OPTIONS'])
-@rbac.allow(['admin'], ['GET', 'POST', 'OPTIONS'], with_children=False)
+# @rbac.allow(['admin'], ['GET', 'POST', 'OPTIONS'], with_children=False)
 def createPsychologist():
     print(request)
     if request.method == 'POST':
@@ -180,8 +181,8 @@ def createPsychologist():
 
 # esto es del ui viejo
 @app.route('/calendar')
-@rbac.allow(['student'], ['GET'])
-@login_required
+# @rbac.allow(['student'], ['GET'])
+# @login_required
 def calendar():
     global current_user
     print(current_user.object())
@@ -199,9 +200,10 @@ def flash_errors(form):
 
 
 @app.route('/messages/<int:user_id>', methods=['GET', 'POST', 'PUT'])
+@authorize(['student', 'mentor', 'counselor', 'psychologist'])
 # @rbac.exempt
-@rbac.allow(['student', 'mentor', 'counselor', 'psychologist'], ['GET', 'POST', 'PUT'], with_children=False)
-@cross_origin()
+# @rbac.allow(['student', 'mentor', 'counselor', 'psychologist'], ['GET', 'POST', 'PUT'], with_children=False)
+# @cross_origin()
 def get_messages_by_user_id(user_id):
     if request.method == 'GET':
         return MessageHandler().get_chats_by_user_id(user_id)
@@ -217,7 +219,7 @@ def get_messages_by_user_id(user_id):
 
 
 @app.route('/faculties', methods=['GET'])
-@rbac.exempt
+# @rbac.exempt
 def get_faculties():
     return ProgramHandler().get_faculties_and_programs()
 

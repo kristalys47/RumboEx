@@ -27,50 +27,50 @@ def logout():
 
 
 @logins.route('/adminlogin', methods=['POST'])
-@cross_origin(supports_credentials=True)
+# @cross_origin(supports_credentials=True)
 def adminlogin():
     return login(request, Role('admin'))
 
 
 @logins.route('/studentlogin', methods=['POST'])
-@cross_origin(supports_credentials=True)
+# @cross_origin(supports_credentials=True)
 def studentlogin():
     return login(request, Role('student'))
 
 
 @logins.route('/counselorlogin', methods=['POST'])
-@cross_origin(supports_credentials=True)
+# @cross_origin(supports_credentials=True)
 def counselorlogin():
     return login(request, Role('counselor'))
 
 
 @logins.route('/psychologistlogin', methods=['POST'])
-@cross_origin(supports_credentials=True)
+# @cross_origin(supports_credentials=True)
 def psychologistlogin():
     return login(request, Role('psychologist'))
 
 
 @logins.route('/mentorlogin', methods=['POST'])
-@cross_origin(supports_credentials=True)
+# @cross_origin(supports_credentials=True)
 def mentorlogin():
     return login(request, Role('mentor'))
 
 
 @logins.route('/professorlogin', methods=['POST'])
-@cross_origin(supports_credentials=True)
+# @cross_origin(supports_credentials=True)
 def professorlogin():
     return login(request, Role('professor'))
 
 
 @logins.route('/advisorlogin', methods=['POST'])
-@cross_origin(supports_credentials=True)
+# @cross_origin(supports_credentials=True)
 def advisorlogin():
     return login(request, Role('advisor'))
 
 
 # This will be the standard login. Should not be used.
 @logins.route('/login', methods=['POST'])
-@cross_origin(supports_credentials=True)
+# @cross_origin(supports_credentials=True)
 def loginuser():
     if request.method == 'POST':
         credential = request.get_json()

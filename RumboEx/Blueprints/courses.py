@@ -6,7 +6,7 @@ from RumboEx.handler.CourseHandler import CourseHandler
 
 
 courses = Blueprint('courses', __name__)
-CORS(courses)
+
 
 # get courses a student is enrolled in by user id
 @courses.route('/course/<int:student_id>', methods=['POST', 'GET', 'OPTIONS'])
@@ -21,6 +21,7 @@ def get_student_courses(student_id):
     elif request.method == 'POST':
         print(request.get_json())
         return CourseHandler().insert_course(student_id, request.get_json())
+
 
 @courses.route('/course/<int:course_id>/<int:student_id>', methods=['GET'])
 @authorize('student')
@@ -49,6 +50,7 @@ def get_grades_by_course_id(course_id):
     print(course_id)
     return CourseHandler().get_grades_by_course_id(course_id)
 
+
 @courses.route('/grade/<int:student_id>', methods=['OPTIONS', 'POST', 'PUT'])
 @authorize(['student'])
 def insert_grade(student_id):
@@ -67,6 +69,7 @@ def insert_grade(student_id):
             return CourseHandler().changeGradeTotal(grade_id, cred['total'])
         if 'date' in cred:
             return CourseHandler().changeGradeDate(grade_id, cred['date'])
+
 
 @courses.route('/grade/<int:student_id>/<int:grade_id>', methods=['DELETE'])
 @authorize(['student'])

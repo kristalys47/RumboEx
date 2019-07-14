@@ -38,6 +38,7 @@ def get_student(user_id):
 
 # get students of a mentor by mentor id
 @student_page.route('/studentlist/<int:user_id>', methods=['GET'])
+@authorize(['mentor', 'psychologist', 'advisor', 'counselor'])
 def get_students(user_id):
     return StudentHandler().get_students_by_mentor_id(user_id)
 
@@ -49,9 +50,8 @@ def get_students_by_mentor():
 
 
 @student_page.route('/studentlist', methods=['POST', 'GET'])
-@rbac.allow(['admin', 'counselor', 'advisor', 'mentor'], ['GET'], with_children=False)
+@authorize(['counselor', 'advisor', 'mentor'])
 def getallstudents():
-    print(rbac)
     handler = StudentHandler()
     return handler.get_students_with_courses_and_tasks()
 
@@ -64,7 +64,7 @@ def getallstudents():
 
 
 @student_page.route('/users')
-@rbac.allow(['admin'], ['GET'], with_children=False)
+@authorize(["admin"])
 def getallusers():
     handler = StudentHandler()
     return handler.getallusers()

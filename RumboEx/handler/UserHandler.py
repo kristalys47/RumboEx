@@ -8,7 +8,7 @@ class UserHandler:
 
     # GET Methods
 
-    def getMnetorsByStudentId(self, student_id):
+    def getMentorsByStudentId(self, student_id):
         dao = UserDAO()
         result = dao.getMentorsByStudentId(student_id)
         if not result:

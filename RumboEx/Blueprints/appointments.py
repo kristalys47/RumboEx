@@ -1,13 +1,15 @@
 from flask import Blueprint, request
 from RumboEx import rbac
 from RumboEx.handler.AppointmentHandler import AppointmentHandler
+from RumboEx.decorators.authorization import authorize
 
 appointments = Blueprint('appointments', __name__)
 
 
 #insert appointment
 @appointments.route('/insert_appointment_form',methods = ['POST'])
-@rbac.exempt
+# @authorize([])
+# @rbac.exempt
 def insertAppointment():
     if request.method == 'POST':
         appointment_info = request.get_json()
@@ -34,6 +36,7 @@ def getAllAppointments():
         return AppointmentHandler().getAllAppointments();
 
 @appointments.route('/appointments/<int:reason_id>', methods = ['GET'])
+# @authorize([])
 #@rbac.allow(['psychologyst', 'admin','counselor','mentor'],['GET'],with_children=False)
 def getAppointmentsByReason(reason_id):
     if request.method == 'GET':

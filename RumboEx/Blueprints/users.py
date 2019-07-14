@@ -20,8 +20,8 @@ def get_user(user_id):
             return UserHandler().changePassword(user_id, cred['password'])
 
 @users.route('/mentors/<int:student_id>', methods=['GET'])
-@cross_origin()
+# @cross_origin()
 @authorize(['student'])
 def get_mentors_by_student_id(student_id):
     if request.method == 'GET':
-        return UserHandler().getMnetorsByStudentId(student_id)
+        return UserHandler().getMentorsByStudentId(student_id)
